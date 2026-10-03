@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit 2 - Đề 1: Luyện Phát Âm & Từ Vựng (My House)</title>
+    <style>
+        :root {
+            --primary-color: #1e88e5;
+            --secondary-color: #0d47a1;
+            --correct-color: #2e7d32;
+            --wrong-color: #c62828;
+            --bg-card: #ffffff;
+        }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 20px; background: #f4f6f9; color: #333; line-height: 1.6; }
+        h2, h3 { color: var(--secondary-color); margin-top: 0; }
+        .note-card {
+            background: #e3f2fd;
+            border-left: 5px solid var(--primary-color);
+            padding: 12px 16px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+        .question-card {
+            background: var(--bg-card);
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            transition: all 0.2s ease;
+        }
+        .question-card.status-correct { border-left: 6px solid var(--correct-color); background: #f1f8e9; }
+        .question-card.status-wrong { border-left: 6px solid var(--wrong-color); background: #fbe9e7; }
+        .opt-row { display: flex; align-items: center; margin: 6px 0; }
+        .opt-label { cursor: pointer; margin-right: 8px; }
+        .btn-audio {
+            background: #e3f2fd;
+            color: #1565c0;
+            border: 1px solid #bbdefb;
+            padding: 3px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+        .btn-audio:hover { background: #bbdefb; color: #0d47a1; }
+        .btn-submit-q {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 7px 16px;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 8px;
+        }
+        .btn-submit-q:hover { background: var(--secondary-color); }
+        .explanation { display: none; margin-top: 10px; padding: 12px; border-radius: 5px; font-size: 0.93rem; }
+        .explanation.correct { background: #e8f5e9; color: #1b5e20; }
+        .explanation.wrong { background: #ffebee; color: #b71c1c; }
+        .trans-line { font-style: italic; color: #555; margin: 4px 0; }
+        .input-fill { width: 80%; max-width: 500px; padding: 8px 12px; border: 1px solid #ccc; border-radius: 4px; font-size: 1rem; }
+    </style>
+</head>
+<body>
+
+    <h2>ĐỀ KIỂM TRA SỐ 1 - UNIT 2: BÀI TẬP PHÁT ÂM & TỪ VỰNG (MY HOUSE)</h2>
+
+    <div class="note-card">
+        <b>💡 Hướng dẫn:</b> Bấm vào nút <b>🔊 Nghe</b> ngay bên cạnh từng phương án A, B, C, D để nghe phát âm giọng chuẩn trước khi chọn đáp án!
+    </div>
+
+    <h3>PART 1: PHONETICS (Luyện Nghe & Chọn Phát Âm)</h3>
+    <div id="part1Quiz"></div>
+
+    <h3 style="margin-top: 30px;">PART 2: VOCABULARY & GRAMMAR (Từ Vựng & Ngữ Pháp)</h3>
+    <div id="part2Quiz"></div>
+
+    <script>
+        const part1Data = [
+            {
+                id: 1, type: "mc_audio",
+                q: "Câu 1: Choose the word whose final 's' is pronounced differently.",
+                opts: [
+                    { char: "A", text: "A. lamps", word: "lamps" },
+                    { char: "B", text: "B. desks", word: "desks" },
+                    { char: "C", text: "C. flats", word: "flats" },
+                    { char: "D", text: "D. beds", word: "beds" }
+                ],
+                ans: "D",
+                qTranslate: "Dịch câu hỏi: Chọn từ có phần đuôi 's' phát âm khác với các từ còn lại.",
+                ansTranslate: "Dịch đáp án: A. đèn bàn | B. bàn học | C. căn hộ | D. chiếc giường ( beds - /bedz/ )",
+                exp: "Đáp án D (beds) phát âm đuôi -s là /z/. Các từ A, B, C có tận cùng là âm vô thanh (/p/, /k/, /t/) nên phát âm đuôi -s là /s/."
+            },
+            {
+                id: 2, type: "mc_audio",
+                q: "Câu 2: Choose the word whose final '-es' is pronounced differently.",
+                opts: [
+                    { char: "A", text: "A. houses", word: "houses" },
+                    { char: "B", text: "B. fridges", word: "fridges" },
+                    { char: "C", text: "C. dishes", word: "dishes" },
+                    { char: "D", text: "D. clothes", word: "clothes" }
+                ],
+                ans: "D",
+                qTranslate: "Dịch câu hỏi: Chọn từ có đuôi '-es' phát âm khác với các từ còn lại.",
+                ansTranslate: "Dịch đáp án: A. ngôi nhà | B. tủ lạnh | C. đĩa ăn | D. quần áo ( clothes - /kləʊðz/ )",
+                exp: "Đáp án D (clothes) phát âm đuôi -s/es là /z/. Các từ A, B, C có âm tận cùng suýt nên đuôi -es phát âm là /ɪz/."
+            },
+            {
+                id: 3, type: "mc_audio",
+                q: "Câu 3: Choose the word with a different 'ch' sound.",
+                opts: [
+                    { char: "A", text: "A. chair", word: "chair" },
+                    { char: "B", text: "B. chest", word: "chest" },
+                    { char: "C", text: "C. kitchen", word: "kitchen" },
+                    { char: "D", text: "D. school", word: "school" }
+                ],
+                ans: "D",
+                qTranslate: "Dịch câu hỏi: Chọn từ có âm 'ch' phát âm khác.",
+                ansTranslate: "Dịch đáp án: A. ghế tựa (/tʃ/) | B. tủ ngăn kéo (/tʃ/) | C. nhà bếp (/tʃ/) | D. trường học (/k/)",
+                exp: "Đáp án D (school) phát âm 'ch' là /k/. Các từ A, B, C phát âm 'ch' là /tʃ/."
+            },
+            {
+                id: 4, type: "mc_audio",
+                q: "Câu 4: Choose the word with a different vowel sound.",
+                opts: [
+                    { char: "A", text: "A. living", word: "living" },
+                    { char: "B", text: "B. kitchen", word: "kitchen" },
+                    { char: "C", text: "C. villa", word: "villa" },
+                    { char: "D", text: "D. microwave", word: "microwave" }
+                ],
+                ans: "D",
+                qTranslate: "Dịch câu hỏi: Chọn từ có phát âm nguyên âm 'i' khác với các từ còn lại.",
+                ansTranslate: "Dịch đáp án: A. phòng khách (/ɪ/) | B. nhà bếp (/ɪ/) | C. biệt thự (/ɪ/) | D. lò vi sóng (/aɪ/)",
+                exp: "Đáp án D (microwave) phát âm chữ 'i' đầu tiên là /aɪ/. Các từ A, B, C phát âm chữ 'i' là /ɪ/."
+            },
+            {
+                id: 5, type: "mc_audio",
+                q: "Câu 5: Choose the word whose underlined part is pronounced differently.",
+                opts: [
+                    { char: "A", text: "A. attic", word: "attic" },
+                    { char: "B", text: "B. flat", word: "flat" },
+                    { char: "C", text: "C. bag", word: "bag" },
+                    { char: "D", text: "D. hall", word: "hall" }
+                ],
+                ans: "D",
+                qTranslate: "Dịch câu hỏi: Chọn từ có phát âm chữ 'a' khác với các từ còn lại.",
+                ansTranslate: "Dịch đáp án: A. gác xếp (/æ/) | B. căn hộ (/æ/) | C. túi sách (/æ/) | D. sảnh/hành lang (/ɔː/)",
+                exp: "Đáp án D (hall) phát âm chữ 'a' là /ɔː/. Các từ A, B, C phát âm chữ 'a' là /æ/."
+            }
+        ];
+
+        const part2Data = [
+            {
+                id: 6, type: "mc",
+                q: "Câu 6: Elena lives in a big _____. It has three floors and a beautiful garden in Da Nang.",
+                opts: ["A. town house", "B. country house", "C. flat", "D. stilt house"],
+                ans: "A",
+                qTranslate: "Dịch câu hỏi: Elena sống trong một _____ lớn. Nó có 3 tầng và một khu vườn đẹp ở Đà Nẵng.",
+                ansTranslate: "Dịch đáp án: A. nhà phố | B. nhà ở quê | C. căn hộ | D. nhà sàn",
+                exp: "Town house (nhà phố) phù hợp với bối cảnh sống ở thành phố Đà Nẵng có 3 tầng."
+            },
+            {
+                id: 7, type: "mc",
+                q: "Câu 7: Where is the cat? - It is sleeping _____ the table.",
+                opts: ["A. under", "B. between", "C. next", "D. in front"],
+                ans: "A",
+                qTranslate: "Dịch câu hỏi: Con mèo ở đâu? - Nó đang ngủ _____ cái bàn.",
+                ansTranslate: "Dịch đáp án: A. ở dưới | B. ở giữa (cần 'and') | C. bên cạnh (thiếu 'to') | D. phía trước (thiếu 'of')",
+                exp: "Under (ở bên dưới) đi đúng ngữ pháp và ý nghĩa. Between cần đi kèm 'and', next cần 'to', in front cần 'of'."
+            },
+            {
+                id: 8, type: "mc",
+                q: "Câu 8: This is _____ room. It has a big poster on the wall.",
+                opts: ["A. Nick", "B. Nick's", "C. Nicks'", "D. of Nick"],
+                ans: "B",
+                qTranslate: "Dịch câu hỏi: Đây là phòng của _____. Nó có một tấm áp phích lớn trên tường.",
+                ansTranslate: "Dịch đáp án: A. Nick | B. của Nick (sở hữu cách số ít) | C. của các Nicks | D. của Nick (sai cấu trúc)",
+                exp: "Sở hữu cách cho tên riêng số ít 'Nick' là Nick's."
+            },
+            {
+                id: 9, type: "fill",
+                q: "Câu 9 (Điền từ): We put leftover food in the _____ to keep it fresh.",
+                ans: "fridge",
+                qTranslate: "Dịch câu hỏi: Chúng tôi để thức ăn thừa vào trong _____ để giữ cho nó luôn tươi ngon.",
+                ansTranslate: "Dịch đáp án chuẩn: fridge (hoặc refrigerator - tủ lạnh)",
+                exp: "Fridge / refrigerator nghĩa là tủ lạnh."
+            },
+            {
+                id: 10, type: "fill",
+                q: "Câu 10 (Điền từ): There (be) _____ two bathrooms in my new flat.",
+                ans: "are",
+                qTranslate: "Dịch câu hỏi: Có hai phòng tắm trong căn hộ mới của tôi.",
+                ansTranslate: "Dịch đáp án chuẩn: are",
+                exp: "Chủ ngữ phía sau 'two bathrooms' là danh từ số nhiều nên dùng 'There are'."
+            }
+        ];
+
+        const allQuestions = [...part1Data, ...part2Data];
+
+        function speak(text) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const u = new SpeechSynthesisUtterance(text);
+                u.lang = 'en-US'; u.rate = 0.85;
+                window.speechSynthesis.speak(u);
+            }
+        }
+
+        function normalizeText(text) {
+            if (!text) return "";
+            return text.toLowerCase()
+                .replace(/[.,/#!$%^&*;:{}=\-_`~()'"?]/g, "")
+                .replace(/\s+/g, " ")
+                .trim();
+        }
+
+        function renderPart1() {
+            const container = document.getElementById('part1Quiz');
+            part1Data.forEach(item => {
+                let optsHtml = '';
+                item.opts.forEach(opt => {
+                    optsHtml += `
+                        <div class="opt-row">
+                            <label class="opt-label">
+                                <input type="radio" name="q_${item.id}" value="${opt.char}"> ${opt.text}
+                            </label>
+                            <button type="button" class="btn-audio" onclick="speak('${opt.word}')">🔊 Nghe</button>
+                        </div>
+                    `;
+                });
+                container.innerHTML += `
+                    <div class="question-card" id="card_q_${item.id}">
+                        <div style="font-weight:bold; color:#1565c0; margin-bottom:8px;">${item.q}</div>
+                        <div>${optsHtml}</div>
+                        <button type="button" class="btn-submit-q" onclick="checkQuestion(${item.id})">Nộp câu này</button>
+                        <div id="explain_q_${item.id}" class="explanation"></div>
+                    </div>
+                `;
+            });
+        }
+
+        function renderPart2() {
+            const container = document.getElementById('part2Quiz');
+            part2Data.forEach(item => {
+                let optsHtml = '';
+                if (item.type === 'mc') {
+                    item.opts.forEach(opt => {
+                        const char = opt.charAt(0);
+                        optsHtml += `<label style="display:block; margin:6px 0; cursor:pointer;"><input type="radio" name="q_${item.id}" value="${char}"> ${opt}</label>`;
+                    });
+                } else {
+                    optsHtml = `<input type="text" id="input_q_${item.id}" class="input-fill" placeholder="Nhập đáp án vào đây...">`;
+                }
+
+                container.innerHTML += `
+                    <div class="question-card" id="card_q_${item.id}">
+                        <div style="font-weight:bold; color:#1565c0; margin-bottom:8px;">${item.q}</div>
+                        <div>${optsHtml}</div>
+                        <button type="button" class="btn-submit-q" onclick="checkQuestion(${item.id})">Nộp câu này</button>
+                        <div id="explain_q_${item.id}" class="explanation"></div>
+                    </div>
+                `;
+            });
+        }
+
+        function checkQuestion(qId) {
+            const item = allQuestions.find(x => x.id === qId);
+            if (!item) return;
+
+            const card = document.getElementById(`card_q_${qId}`);
+            const explainDiv = document.getElementById(`explain_q_${qId}`);
+            explainDiv.style.display = 'block';
+
+            let isCorrect = false;
+
+            if (item.type === 'mc' || item.type === 'mc_audio') {
+                const sel = document.querySelector(`input[name="q_${qId}"]:checked`);
+                if (sel && sel.value === item.ans) isCorrect = true;
+            } else {
+                const userAns = document.getElementById(`input_q_${qId}`).value;
+                if (normalizeText(userAns) === normalizeText(item.ans) || (item.ans === "fridge" && normalizeText(userAns) === "refrigerator")) {
+                    isCorrect = true;
+                }
+            }
+
+            if (isCorrect) {
+                card.className = "question-card status-correct";
+                explainDiv.className = "explanation correct";
+                explainDiv.innerHTML = `
+                    <b>✓ CHÍNH XÁC!</b><br>
+                    <div class="trans-line">📌 <b>${item.qTranslate}</b></div>
+                    <div class="trans-line">💡 <b>${item.ansTranslate}</b></div>
+                    <br><b>Giải thích chi tiết:</b> ${item.exp}
+                `;
+            } else {
+                card.className = "question-card status-wrong";
+                explainDiv.className = "explanation wrong";
+                explainDiv.innerHTML = `
+                    <b>✗ CHƯA CHÍNH XÁC!</b> (Đáp án đúng: <b>${item.ans}</b>)<br>
+                    <div class="trans-line">📌 <b>${item.qTranslate}</b></div>
+                    <div class="trans-line">💡 <b>${item.ansTranslate}</b></div>
+                    <br><b>Giải thích chi tiết:</b> ${item.exp}
+                `;
+            }
+        }
+
+        window.onload = function() {
+            renderPart1();
+            renderPart2();
+        };
+    </script>
+</body>
+</html>

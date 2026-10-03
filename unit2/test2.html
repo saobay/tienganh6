@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit 2 - Đề 2: Bài Tập Nghe Hiểu (Listening)</title>
+    <style>
+        :root {
+            --primary-color: #1e88e5;
+            --secondary-color: #0d47a1;
+            --correct-color: #2e7d32;
+            --wrong-color: #c62828;
+            --bg-card: #ffffff;
+        }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 20px; background: #f4f6f9; color: #333; line-height: 1.6; }
+        h2 { color: var(--secondary-color); margin-top: 0; }
+        .audio-player-card {
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+            border: 2px solid #90caf9;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+        }
+        .audio-controls { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-top: 10px; }
+        .btn-audio {
+            background: var(--primary-color);
+            color: white; border: none; padding: 10px 18px;
+            font-size: 1rem; font-weight: bold; border-radius: 6px; cursor: pointer;
+            transition: background 0.2s; display: inline-flex; align-items: center; gap: 6px;
+        }
+        .btn-audio:hover { background: var(--secondary-color); }
+        .btn-pause { background: #f57c00; }
+        .btn-pause:hover { background: #e65100; }
+        .transcript-box {
+            display: none; margin-top: 15px; background: #fff; padding: 15px;
+            border-radius: 6px; border-left: 4px solid var(--primary-color); font-style: italic;
+        }
+        .question-card {
+            background: var(--bg-card); border: 1px solid #e0e0e0; border-radius: 8px;
+            padding: 18px; margin-bottom: 16px; box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+        .question-card.status-correct { border-left: 6px solid var(--correct-color); background: #f1f8e9; }
+        .question-card.status-wrong { border-left: 6px solid var(--wrong-color); background: #fbe9e7; }
+        .q-title { font-weight: bold; color: #1565c0; margin-bottom: 10px; }
+        .btn-submit-q {
+            background: var(--primary-color); color: white; border: none; padding: 7px 16px;
+            font-weight: bold; border-radius: 4px; cursor: pointer; margin-top: 10px;
+        }
+        .explanation { display: none; margin-top: 12px; padding: 12px; border-radius: 6px; font-size: 0.95rem; }
+        .explanation.correct { background: #e8f5e9; color: #1b5e20; }
+        .explanation.wrong { background: #ffebee; color: #b71c1c; }
+        .trans-line { font-style: italic; color: #555; margin: 4px 0; }
+        .input-fill { width: 60%; max-width: 300px; padding: 8px 12px; border: 1px solid #ccc; border-radius: 4px; font-size: 1rem; }
+    </style>
+</head>
+<body>
+
+    <h2>ĐỀ KIỂM TRA SỐ 2 - UNIT 2: BÀI TẬP NGHE (LISTENING SKILL)</h2>
+
+    <div class="audio-player-card">
+        <h3 style="margin:0; color:#0d47a1;">🎧 Luyện Nghe: Mi's House in Da Nang</h3>
+        <p style="margin: 6px 0 0 0; color:#444;">
+            Nhấn vào nút bên dưới để nghe bài nói của bạn Mi giới thiệu về ngôi nhà của mình.
+        </p>
+        
+        <div class="audio-controls">
+            <button class="btn-audio" onclick="playAudio()">▶️ Bật nghe đoạn văn</button>
+            <button class="btn-audio btn-pause" onclick="pauseAudio()">⏸️ Tạm dừng</button>
+            <button class="btn-audio" style="background:#616161;" onclick="toggleTranscript()">📝 Ẩn/Hiện bài đọc (Transcript)</button>
+        </div>
+
+        <div id="transcriptBox" class="transcript-box">
+            <b>Bài đọc (Audio Script):</b><br>
+            "Hi, my name is Mi. I live in a town house in Da Nang with my family. My house is big. It has three floors and six rooms. On the first floor, there is a living room, a kitchen, and a bathroom. The kitchen has a big fridge, a cupboard, and a microwave. On the second floor, there are two bedrooms and a bathroom. My bedroom is next to my parents' bedroom. It has a bed, a wardrobe, a desk, and a chair. There is a poster of my favorite singer on the wall. On the top floor, there is a small attic where we keep old things. I love my house because it is very cozy."
+        </div>
+    </div>
+
+    <div id="quizList"></div>
+
+    <script>
+        const listeningText = "Hi, my name is Mi. I live in a town house in Da Nang with my family. My house is big. It has three floors and six rooms. On the first floor, there is a living room, a kitchen, and a bathroom. The kitchen has a big fridge, a cupboard, and a microwave. On the second floor, there are two bedrooms and a bathroom. My bedroom is next to my parents' bedroom. It has a bed, a wardrobe, a desk, and a chair. There is a poster of my favorite singer on the wall. On the top floor, there is a small attic where we keep old things. I love my house because it is very cozy.";
+
+        const quizData = [
+            {
+                id: 1, type: "mc",
+                q: "Câu 1: What type of house does Mi live in?",
+                opts: ["A. Country house", "B. Town house", "C. Flat", "D. Villa"],
+                ans: "B",
+                qTranslate: "Dịch câu hỏi: Mi sống trong loại nhà nào?",
+                ansTranslate: "Dịch đáp án: A. Nhà ở quê | B. Nhà phố | C. Căn hộ | D. Biệt thự",
+                exp: "Trích bài nghe: 'I live in a town house in Da Nang with my family.'"
+            },
+            {
+                id: 2, type: "mc",
+                q: "Câu 2: How many floors are there in her house?",
+                opts: ["A. Two", "B. Three", "C. Four", "D. Six"],
+                ans: "B",
+                qTranslate: "Dịch câu hỏi: Có bao nhiêu tầng trong ngôi nhà của cô ấy?",
+                ansTranslate: "Dịch đáp án: A. 2 | B. 3 | C. 4 | D. 6",
+                exp: "Trích bài nghe: 'It has three floors and six rooms.'"
+            },
+            {
+                id: 3, type: "mc",
+                q: "Câu 3: Which room is NOT on the first floor?",
+                opts: ["A. Living room", "B. Kitchen", "C. Bathroom", "D. Bedroom"],
+                ans: "D",
+                qTranslate: "Dịch câu hỏi: Phòng nào KHÔNG ở tầng 1?",
+                ansTranslate: "Dịch đáp án: A. Phòng khách | B. Phòng bếp | C. Phòng tắm | D. Phòng ngủ",
+                exp: "Trích bài nghe: 'On the first floor, there is a living room, a kitchen, and a bathroom.' Phòng ngủ ở tầng 2."
+            },
+            {
+                id: 4, type: "mc",
+                q: "Câu 4: Where is Mi's bedroom?",
+                opts: ["A. Next to the kitchen", "B. Next to her parents' bedroom", "C. In the attic", "D. On the first floor"],
+                ans: "B",
+                qTranslate: "Dịch câu hỏi: Phòng ngủ của Mi ở đâu?",
+                ansTranslate: "Dịch đáp án: A. Bên cạnh bếp | B. Bên cạnh phòng ngủ của bố mẹ | C. Ở gác xếp | D. Ở tầng 1",
+                exp: "Trích bài nghe: 'My bedroom is next to my parents' bedroom.'"
+            },
+            {
+                id: 5, type: "mc",
+                q: "Câu 5: What is on the wall in Mi's bedroom?",
+                opts: ["A. A clock", "B. A picture of her family", "C. A poster of her favorite singer", "D. A mirror"],
+                ans: "C",
+                qTranslate: "Dịch câu hỏi: Có cái gì trên tường trong phòng ngủ của Mi?",
+                ansTranslate: "Dịch đáp án: A. Đồng hồ | B. Bức ảnh gia đình | C. Áp phích ca sĩ yêu thích | D. Cái gương",
+                exp: "Trích bài nghe: 'There is a poster of my favorite singer on the wall.'"
+            },
+            {
+                id: 6, type: "fill",
+                q: "Câu 6 (Điền từ): Mi lives in Da Nang with her _____.",
+                ans: "family",
+                qTranslate: "Dịch câu hỏi: Mi sống ở Đà Nẵng cùng với _____.",
+                ansTranslate: "Dịch đáp án chuẩn: family (gia đình)",
+                exp: "Trích bài nghe: 'I live in a town house in Da Nang with my family.'"
+            },
+            {
+                id: 7, type: "fill",
+                q: "Câu 7 (Điền số/từ): Mi's house has _____ rooms in total.",
+                ans: "six",
+                qTranslate: "Dịch câu hỏi: Nhà của Mi có tất cả _____ phòng.",
+                ansTranslate: "Dịch đáp án chuẩn: six (sáu / 6)",
+                exp: "Trích bài nghe: 'It has three floors and six rooms.'"
+            },
+            {
+                id: 8, type: "fill",
+                q: "Câu 8 (Điền từ): On the top floor, there is a small _____.",
+                ans: "attic",
+                qTranslate: "Dịch câu hỏi: Ở tầng trên cùng, có một _____ nhỏ.",
+                ansTranslate: "Dịch đáp án chuẩn: attic (gác xếp)",
+                exp: "Trích bài nghe: 'On the top floor, there is a small attic where we keep old things.'"
+            },
+            {
+                id: 9, type: "fill",
+                q: "Câu 9 (Điền từ): The kitchen has a big fridge, a cupboard, and a _____.",
+                ans: "microwave",
+                qTranslate: "Dịch câu hỏi: Phòng bếp có một tủ lạnh lớn, một tủ chạn và một _____.",
+                ansTranslate: "Dịch đáp án chuẩn: microwave (lò vi sóng)",
+                exp: "Trích bài nghe: 'The kitchen has a big fridge, a cupboard, and a microwave.'"
+            },
+            {
+                id: 10, type: "mc",
+                q: "Câu 10: Why does Mi love her house?",
+                opts: ["A. Because it is near her school", "B. Because it is very cozy", "C. Because it has a swimming pool", "D. Because it is quiet"],
+                ans: "B",
+                qTranslate: "Dịch câu hỏi: Tại sao Mi yêu ngôi nhà của mình?",
+                ansTranslate: "Dịch đáp án: A. Vì nó gần trường | B. Vì nó rất ấm cúng | C. Vì nó có hồ bơi | D. Vì nó yên tĩnh",
+                exp: "Trích câu cuối bài nghe: 'I love my house because it is very cozy.'"
+            }
+        ];
+
+        let synth = window.speechSynthesis;
+        let utterance = null;
+
+        function playAudio() {
+            if ('speechSynthesis' in window) {
+                synth.cancel();
+                utterance = new SpeechSynthesisUtterance(listeningText);
+                utterance.lang = 'en-US'; utterance.rate = 0.85;
+                synth.speak(utterance);
+            }
+        }
+
+        function pauseAudio() { if (synth.speaking) synth.cancel(); }
+        function toggleTranscript() {
+            const box = document.getElementById('transcriptBox');
+            box.style.display = (box.style.display === 'block') ? 'none' : 'block';
+        }
+
+        function normalizeText(text) {
+            if (!text) return "";
+            return text.toLowerCase()
+                .replace(/[.,/#!$%^&*;:{}=\-_`~()'"?]/g, "")
+                .replace(/\s+/g, " ")
+                .trim();
+        }
+
+        function renderQuiz() {
+            const container = document.getElementById('quizList');
+            quizData.forEach(item => {
+                let optsHtml = '';
+                if(item.type === 'mc') {
+                    item.opts.forEach(opt => {
+                        optsHtml += `<label style="display:block; margin:6px 0; cursor:pointer;"><input type="radio" name="q_${item.id}" value="${opt.charAt(0)}"> ${opt}</label>`;
+                    });
+                } else {
+                    optsHtml = `<input type="text" id="input_q_${item.id}" class="input-fill" placeholder="Nhập đáp án...">`;
+                }
+
+                container.innerHTML += `
+                    <div class="question-card" id="card_q_${item.id}">
+                        <div class="q-title">${item.q}</div>
+                        <div>${optsHtml}</div>
+                        <button type="button" class="btn-submit-q" onclick="checkQuestion(${item.id})">Nộp câu này</button>
+                        <div id="explain_q_${item.id}" class="explanation"></div>
+                    </div>
+                `;
+            });
+        }
+
+        function checkQuestion(qId) {
+            const item = quizData.find(x => x.id === qId);
+            const card = document.getElementById(`card_q_${qId}`);
+            const explainDiv = document.getElementById(`explain_q_${qId}`);
+            explainDiv.style.display = 'block';
+
+            let isCorrect = false;
+            if(item.type === 'mc') {
+                const sel = document.querySelector(`input[name="q_${qId}"]:checked`);
+                if(sel && sel.value === item.ans) isCorrect = true;
+            } else {
+                const userAns = document.getElementById(`input_q_${qId}`).value;
+                if(normalizeText(userAns) === normalizeText(item.ans) || (item.ans === "six" && normalizeText(userAns) === "6")) {
+                    isCorrect = true;
+                }
+            }
+
+            if(isCorrect) {
+                card.className = "question-card status-correct";
+                explainDiv.className = "explanation correct";
+                explainDiv.innerHTML = `
+                    <b>✓ CHÍNH XÁC!</b><br>
+                    <div class="trans-line">📌 <b>${item.qTranslate}</b></div>
+                    <div class="trans-line">💡 <b>${item.ansTranslate}</b></div>
+                    <br><b>Giải thích chi tiết:</b> ${item.exp}
+                `;
+            } else {
+                card.className = "question-card status-wrong";
+                explainDiv.className = "explanation wrong";
+                explainDiv.innerHTML = `
+                    <b>✗ CHƯA CHÍNH XÁC!</b> (Đáp án chuẩn: <b>${item.ans}</b>)<br>
+                    <div class="trans-line">📌 <b>${item.qTranslate}</b></div>
+                    <div class="trans-line">💡 <b>${item.ansTranslate}</b></div>
+                    <br><b>Giải thích chi tiết:</b> ${item.exp}
+                `;
+            }
+        }
+
+        window.onload = renderQuiz;
+    </script>
+</body>
+</html>

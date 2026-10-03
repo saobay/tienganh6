@@ -14,7 +14,6 @@
             overflow: hidden;
             background: #f4f6f9;
         }
-
         .sidebar-overlay {
             display: none;
             position: fixed;
@@ -22,7 +21,6 @@
             background: rgba(0, 0, 0, 0.5);
             z-index: 99;
         }
-
         .sidebar {
             width: 310px;
             background: #ffffff;
@@ -33,7 +31,6 @@
             z-index: 100;
             transition: transform 0.3s ease;
         }
-
         .sidebar-header {
             background: linear-gradient(135deg, #1e88e5, #0d47a1);
             color: white;
@@ -41,10 +38,8 @@
             text-align: center;
             position: relative;
         }
-
         .sidebar-header h3 { margin: 0; font-size: 1.15rem; }
         .sidebar-header span { font-size: 0.85rem; opacity: 0.9; }
-
         .close-sidebar-btn {
             display: none;
             position: absolute;
@@ -53,13 +48,11 @@
             color: white; font-size: 1.4rem;
             cursor: pointer;
         }
-
         .nav-section {
             padding: 1rem;
             overflow-y: auto;
             flex: 1;
         }
-
         .unit-title {
             font-weight: bold;
             color: #0d47a1;
@@ -68,9 +61,7 @@
             margin: 1.2rem 0 0.6rem 0;
             font-size: 0.95rem;
         }
-
         .unit-title:first-child { margin-top: 0; }
-
         .nav-item {
             display: block;
             padding: 0.65rem 0.8rem;
@@ -82,13 +73,11 @@
             font-size: 0.92rem;
             transition: all 0.2s ease;
         }
-
         .nav-item:hover, .nav-item.active {
             background: #e3f2fd;
             color: #1e88e5;
             font-weight: bold;
         }
-
         .main-content {
             flex: 1;
             display: flex;
@@ -96,7 +85,6 @@
             background: #ffffff;
             position: relative;
         }
-
         .mobile-topbar {
             display: none;
             background: #1e88e5;
@@ -106,7 +94,6 @@
             justify-content: space-between;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
-
         .mobile-toggle-btn {
             background: #0d47a1;
             color: white;
@@ -120,13 +107,11 @@
             align-items: center;
             gap: 6px;
         }
-
         iframe {
             width: 100%;
             height: 100%;
             border: none;
         }
-
         @media (max-width: 768px) {
             .mobile-topbar { display: flex; }
             .close-sidebar-btn { display: block; }
@@ -155,7 +140,7 @@
         <div class="nav-section">
             <div class="unit-title">📌 Unit 1: My New School</div>
             <div class="nav-item active" onclick="loadPage('unit1/unit1.html', this)">📖 Lý thuyết & Từ vựng</div>
-            <div class="nav-item" onclick="loadPage('unit1/test1.html', this)">✍️ Đề 1: Phát âm & Từ vựng</div>
+            <div class="nav-item" onclick="loadPage('unit1/test1.html', this)">✍️ Đề 1: Trắc nghiệm & Điền từ</div>
             <div class="nav-item" onclick="loadPage('unit1/test2.html', this)">🎧 Đề 2: Bài tập Nghe (Listening)</div>
             <div class="nav-item" onclick="loadPage('unit1/test3.html', this)">📖 Đề 3: Đọc hiểu (Reading)</div>
             <div class="nav-item" onclick="loadPage('unit1/test4.html', this)">✍️ Đề 4: Sửa lỗi sai & Luyện viết</div>
@@ -163,14 +148,20 @@
 
             <div class="unit-title">📌 Unit 2: My House</div>
             <div class="nav-item" onclick="loadPage('unit2/unit2.html', this)">📖 Lý thuyết & Từ vựng</div>
+            <div class="nav-item" onclick="loadPage('unit2/test1.html', this)">✍️ Đề 1: Trắc nghiệm & Phát âm</div>
+            <div class="nav-item" onclick="loadPage('unit2/test2.html', this)">🎧 Đề 2: Bài tập Nghe (Listening)</div>
+            <div class="nav-item" onclick="loadPage('unit2/test3.html', this)">📖 Đề 3: Đọc hiểu (Reading)</div>
+            <div class="nav-item" onclick="loadPage('unit2/test4.html', this)">✍️ Đề 4: Sửa lỗi sai & Luyện viết</div>
+            <div class="nav-item" onclick="loadPage('unit2/test5.html', this)">🗣️ Đề 5: Ngữ âm & Trọng âm</div>
         </div>
     </div>
 
     <div class="main-content">
         <div class="mobile-topbar">
             <button class="mobile-toggle-btn" onclick="openSidebar()">☰ Danh mục bài</button>
-            <span style="font-weight:bold; font-size:0.88rem;" id="mobileTitle">📖 Lý thuyết & Từ vựng</span>
+            <span style="font-weight:bold; font-size:0.88rem;" id="mobileTitle">📖 Lý thuyết Unit 1</span>
         </div>
+
         <iframe id="contentFrame" src="unit1/unit1.html"></iframe>
     </div>
 

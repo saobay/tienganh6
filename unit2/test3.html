@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit 2 - Đề 3: Đọc Hiểu (Reading Skills)</title>
+    <style>
+        :root {
+            --primary-color: #1e88e5;
+            --secondary-color: #0d47a1;
+            --correct-color: #2e7d32;
+            --wrong-color: #c62828;
+            --bg-card: #ffffff;
+        }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; padding: 20px; background: #f4f6f9; color: #333; line-height: 1.6; }
+        h2, h3 { color: var(--secondary-color); margin-top: 0; }
+        .passage-box {
+            background: #e3f2fd; border-left: 5px solid var(--primary-color);
+            padding: 16px; border-radius: 6px; margin-bottom: 20px; font-size: 1.05rem;
+        }
+        .question-card {
+            background: var(--bg-card); border: 1px solid #e0e0e0; border-radius: 8px;
+            padding: 16px; margin-bottom: 16px; box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+        .question-card.status-correct { border-left: 6px solid var(--correct-color); background: #f1f8e9; }
+        .question-card.status-wrong { border-left: 6px solid var(--wrong-color); background: #fbe9e7; }
+        .btn-submit-q {
+            background: var(--primary-color); color: white; border: none; padding: 7px 16px;
+            font-weight: bold; border-radius: 4px; cursor: pointer; margin-top: 8px;
+        }
+        .explanation { display: none; margin-top: 10px; padding: 12px; border-radius: 5px; font-size: 0.93rem; }
+        .explanation.correct { background: #e8f5e9; color: #1b5e20; }
+        .explanation.wrong { background: #ffebee; color: #b71c1c; }
+        .trans-line { font-style: italic; color: #555; margin: 4px 0; }
+    </style>
+</head>
+<body>
+
+    <h2>ĐỀ KIỂM TRA SỐ 3 - UNIT 2: BÀI TẬP ĐỌC HIỂU (READING)</h2>
+
+    <h3>PART 1: CLOZE TEST (Đọc đoạn văn và chọn từ điền vào chỗ trống)</h3>
+    <div class="passage-box">
+        <b>Đoạn văn 1:</b> Crazy House is an unusual hotel in Da Lat, Viet Nam. It (1) _____ ten rooms, and each room is named after an animal. There is a Kangaroo room, an Eagle room, and an Ant room. The Kangaroo room is the (2) _____ room of all. There is a big Kangaroo (3) _____ the wall. In the room, there is a bed, a table, and two chairs. There (4) _____ any TV in the room because the owner wants visitors to enjoy nature. Many tourists love staying here because it is very (5) _____.
+    </div>
+    <div id="part1Quiz"></div>
+
+    <h3 style="margin-top: 30px;">PART 2: READING COMPREHENSION (Đọc đoạn văn và chọn đáp án)</h3>
+    <div class="passage-box">
+        <b>Đoạn văn 2:</b> K'Sante lives in a traditional stilt house in Tay Nguyen. His house is made of wood and bamboo. It stands on high stilts to keep safe from wild animals. In front of the house, there is a wooden ladder. Inside the house, there is a large main room where the whole family gathers. On the wall, there are traditional musical instruments. K'Sante's bedroom is small, but he has a comfortable bed and a window looking out at the green mountains.
+    </div>
+    <div id="part2Quiz"></div>
+
+    <script>
+        const part1Data = [
+            {
+                id: 1, q: "Câu 1 (Chỗ trống 1): It _____ ten rooms...",
+                opts: ["A. have", "B. has", "C. is", "D. are"], ans: "B",
+                qTranslate: "Dịch câu hỏi: Khách sạn Crazy House có 10 phòng...",
+                ansTranslate: "Dịch đáp án: A. có (số nhiều) | B. có (số ít) | C. là | D. là",
+                exp: "Chủ ngữ 'It' (số ít) đi với động từ 'has'."
+            },
+            {
+                id: 2, q: "Câu 2 (Chỗ trống 2): The Kangaroo room is the _____ room of all.",
+                opts: ["A. big", "B. bigger", "C. biggest", "D. the biggest"], ans: "C",
+                qTranslate: "Dịch câu hỏi: Phòng Kangaroo là phòng lớn nhất trong tất cả các phòng.",
+                ansTranslate: "Dịch đáp án: A. lớn | B. lớn hơn | C. lớn nhất | D. thừa từ 'the'",
+                exp: "Cấu trúc so sánh nhất của tính từ ngắn 'the + Adj-est' -> 'the biggest'."
+            },
+            {
+                id: 3, q: "Câu 3 (Chỗ trống 3): There is a big Kangaroo _____ the wall.",
+                opts: ["A. in", "B. on", "C. under", "D. behind"], ans: "B",
+                qTranslate: "Dịch câu hỏi: Có một hình con chuột túi lớn trên tường.",
+                ansTranslate: "Dịch đáp án: A. trong | B. trên mặt | C. dưới | D. sau",
+                exp: "Giới từ 'on' dùng cho bề mặt tường (on the wall)."
+            },
+            {
+                id: 4, q: "Câu 4 (Chỗ trống 4): There _____ any TV in the room...",
+                opts: ["A. isn't", "B. aren't", "C. is", "D. are"], ans: "A",
+                qTranslate: "Dịch câu hỏi: Không có chiếc TV nào trong phòng...",
+                ansTranslate: "Dịch đáp án: A. không có (danh từ số ít) | B. không có (danh từ số nhiều) | C. có | D. có",
+                exp: "TV là danh từ số ít, kết hợp với từ 'any' trong câu phủ định dùng 'There isn't'."
+            },
+            {
+                id: 5, q: "Câu 5 (Chỗ trống 5): ...because it is very _____.",
+                opts: ["A. boring", "B. strange and interesting", "C. noisy", "D. dark"], ans: "B",
+                qTranslate: "Dịch câu hỏi: ...bởi vì nó rất độc đáo và thú vị.",
+                ansTranslate: "Dịch đáp án: A. nhàm chán | B. độc đáo & thú vị | C. ồn ào | D. tối tăm",
+                exp: "Tính từ 'strange and interesting' miêu tả trải nghiệm độc đáo tại Crazy House."
+            }
+        ];
+
+        const part2Data = [
+            {
+                id: 6, q: "Câu 6: Where does K'Sante live?",
+                opts: ["A. In a town house in Hanoi", "B. In a stilt house in Tay Nguyen", "C. In a flat in Da Nang", "D. In a villa"], ans: "B",
+                qTranslate: "Dịch câu hỏi: K'Sante sống ở đâu?",
+                ansTranslate: "Dịch đáp án: A. Trong nhà phố ở Hà Nội | B. Trong nhà sàn ở Tây Nguyên | C. Căn hộ ở Đà Nẵng | D. Biệt thự",
+                exp: "Trích đoạn văn: 'K'Sante lives in a traditional stilt house in Tay Nguyen.'"
+            },
+            {
+                id: 7, q: "Câu 7: What is his house made of?",
+                opts: ["A. Bricks and cement", "B. Wood and bamboo", "C. Glass and steel", "D. Plastic"], ans: "B",
+                qTranslate: "Dịch câu hỏi: Ngôi nhà của cậu ấy được làm bằng gì?",
+                ansTranslate: "Dịch đáp án: A. Gạch & xi măng | B. Gỗ & tre | C. Kính & thép | D. Nhựa",
+                exp: "Trích đoạn văn: 'His house is made of wood and bamboo.'"
+            },
+            {
+                id: 8, q: "Câu 8: Why does the house stand on high stilts?",
+                opts: ["A. To look beautiful", "B. To keep safe from wild animals", "C. To catch wind", "D. To avoid rain"], ans: "B",
+                qTranslate: "Dịch câu hỏi: Tại sao ngôi nhà lại đứng trên cột sàn cao?",
+                ansTranslate: "Dịch đáp án: A. Cho đẹp | B. Để giữ an toàn khỏi thú dữ | C. Để đón gió | D. Tránh mưa",
+                exp: "Trích đoạn văn: 'It stands on high stilts to keep safe from wild animals.'"
+            },
+            {
+                id: 9, q: "Câu 9 (Đúng/Sai): True or False: There is a wooden ladder in front of the house.",
+                opts: ["A. True", "B. False"], ans: "A",
+                qTranslate: "Dịch câu hỏi: Có một chiếc thang gỗ ở phía trước nhà (Đúng/Sai)?",
+                ansTranslate: "Dịch đáp án: A. Đúng (True) | B. Sai (False)",
+                exp: "Đúng (True). Trích đoạn văn: 'In front of the house, there is a wooden ladder.'"
+            },
+            {
+                id: 10, q: "Câu 10: What can K'Sante see from his bedroom window?",
+                opts: ["A. A big city", "B. Green mountains", "C. A river", "D. A school"], ans: "B",
+                qTranslate: "Dịch câu hỏi: K'Sante có thể nhìn thấy gì từ cửa sổ phòng ngủ?",
+                ansTranslate: "Dịch đáp án: A. Thành phố lớn | B. Những ngọn núi xanh | C. Dòng sông | D. Trường học",
+                exp: "Trích đoạn văn: '...a window looking out at the green mountains.'"
+            }
+        ];
+
+        const allQuestions = [...part1Data, ...part2Data];
+
+        function renderPart(data, containerId) {
+            const container = document.getElementById(containerId);
+            data.forEach(item => {
+                let optsHtml = '';
+                item.opts.forEach(opt => {
+                    const char = opt.charAt(0);
+                    optsHtml += `<label style="display:block; margin:6px 0; cursor:pointer;"><input type="radio" name="q_${item.id}" value="${char}"> ${opt}</label>`;
+                });
+                container.innerHTML += `
+                    <div class="question-card" id="card_q_${item.id}">
+                        <div style="font-weight:bold; color:#1565c0; margin-bottom:8px;">${item.q}</div>
+                        <div>${optsHtml}</div>
+                        <button type="button" class="btn-submit-q" onclick="checkQuestion(${item.id})">Nộp câu này</button>
+                        <div id="explain_q_${item.id}" class="explanation"></div>
+                    </div>
+                `;
+            });
+        }
+
+        function checkQuestion(qId) {
+            const item = allQuestions.find(x => x.id === qId);
+            if (!item) return;
+
+            const card = document.getElementById(`card_q_${qId}`);
+            const explainDiv = document.getElementById(`explain_q_${qId}`);
+            explainDiv.style.display = 'block';
+
+            const sel = document.querySelector(`input[name="q_${qId}"]:checked`);
+
+            if (sel && sel.value === item.ans) {
+                card.className = "question-card status-correct";
+                explainDiv.className = "explanation correct";
+                explainDiv.innerHTML = `
+                    <b>✓ CHÍNH XÁC!</b><br>
+                    <div class="trans-line">📌 <b>${item.qTranslate}</b></div>
+                    <div class="trans-line">💡 <b>${item.ansTranslate}</b></div>
+                    <br><b>Giải thích chi tiết:</b> ${item.exp}
+                `;
+            } else {
+                card.className = "question-card status-wrong";
+                explainDiv.className = "explanation wrong";
+                explainDiv.innerHTML = `
+                    <b>✗ CHƯA CHÍNH XÁC!</b> (Đáp án chuẩn: <b>${item.ans}</b>)<br>
+                    <div class="trans-line">📌 <b>${item.qTranslate}</b></div>
+                    <div class="trans-line">💡 <b>${item.ansTranslate}</b></div>
+                    <br><b>Giải thích chi tiết:</b> ${item.exp}
+                `;
+            }
+        }
+
+        window.onload = function() {
+            renderPart(part1Data, 'part1Quiz');
+            renderPart(part2Data, 'part2Quiz');
+        };
+    </script>
+</body>
+</html>
