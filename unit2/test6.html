@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit 2 - Đề 6: Kỹ Năng Nói & Viết Đoạn Văn</title>
+    <style>
+        :root { --primary: #1e88e5; --secondary: #0d47a1; --correct: #2e7d32; --wrong: #c62828; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 20px; background: #f4f6f9; color: #333; line-height: 1.6; }
+        h2, h3 { color: var(--secondary); margin-top: 0; }
+        .section-card { background: #fff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 18px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+        .prompt-box { background: #e3f2fd; border-left: 5px solid var(--primary); padding: 14px; border-radius: 6px; margin-bottom: 12px; }
+        .model-box { background: #f1f8e9; border-left: 5px solid var(--correct); padding: 14px; border-radius: 6px; margin-top: 12px; }
+        .btn-audio { background: #1e88e5; color: white; border: none; padding: 6px 14px; font-weight: bold; border-radius: 4px; cursor: pointer; margin-top: 8px; display: inline-flex; align-items: center; gap: 6px; }
+        .btn-audio:hover { background: #0d47a1; }
+        textarea { width: 100%; height: 120px; padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-family: inherit; font-size: 1rem; box-sizing: border-box; }
+        .btn-check { background: #2e7d32; color: white; border: none; padding: 8px 18px; font-weight: bold; border-radius: 4px; cursor: pointer; margin-top: 10px; }
+        .result-box { display: none; margin-top: 12px; padding: 12px; background: #fff8e1; border-left: 4px solid #ffa000; border-radius: 6px; }
+    </style>
+</head>
+<body>
+    <h2>ĐỀ KIỂM TRA SỐ 6 - UNIT 2: KỸ NĂNG NÓI & VIẾT ĐOẠN VĂN (SPEAKING & WRITING)</h2>
+
+    <div class="section-card">
+        <h3>PART 1: SPEAKING PRACTICE (Luyện Nói Theo Chủ Đề)</h3>
+        <div class="prompt-box">
+            <b>🗣️ Chủ đề nói:</b> "Describe your favorite room in your house" (Miêu tả phòng em yêu thích nhất trong nhà).<br>
+            <b>Gợi ý nội dung:</b>
+            <ul>
+                <li>Which is your favorite room? (Đó là phòng nào?)</li>
+                <li>What furniture is there in the room? (Trong phòng có đồ đạc gì?)</li>
+                <li>Why do you like this room? (Tại sao em thích phòng này?)</li>
+            </ul>
+        </div>
+        <button class="btn-audio" onclick="speakModelSpeech()">🔊 Nghe bài nói mẫu (Sample Speech)</button>
+        <div class="model-box">
+            <b>Bài nói mẫu (Sample Text):</b><br>
+            "My favorite room in my house is my bedroom. It is small but cozy. In my room, there is a comfortable bed, a wardrobe, and a study desk next to the window. On the desk, I have a desk lamp and my books. I love my bedroom because it is quiet and I can relax after school."
+        </div>
+    </div>
+
+    <div class="section-card">
+        <h3>PART 2: GUIDED PARAGRAPH WRITING (Luyện Viết Đoạn Văn 40-60 Từ)</h3>
+        <div class="prompt-box">
+            <b>✍️ Đề bài:</b> Write a short paragraph (40 - 60 words) about your dream house. (Viết một đoạn văn ngắn khoảng 40-60 từ mô tả ngôi nhà mơ ước của em).<br>
+            <b>Dàn ý gợi ý (Guided Prompts):</b>
+            <ul>
+                <li>What type of house is it? Where is it located? (Loại nhà gì? Ở đâu?)</li>
+                <li>How many rooms are there? (Có bao nhiêu phòng?)</li>
+                <li>What special appliances/things are there in your dream house? (Có thiết bị đặc biệt gì?)</li>
+            </ul>
+        </div>
+
+        <textarea id="writingInput" placeholder="Nhập đoạn văn Tiếng Anh của em vào đây..."></textarea><br>
+        <button class="btn-check" onclick="checkWriting()">Nộp bài viết & Xem nhận xét mẫu</button>
+
+        <div class="result-box" id="writingResult">
+            <b>📊 Đánh giá bài viết của em:</b><br>
+            <span id="wordCountText"></span><br><br>
+            <div class="model-box">
+                <b>💡 Đoạn văn mẫu tham khảo (Model Paragraph):</b><br>
+                "My dream house is a big villa by the sea. It has eight rooms: three bedrooms, two bathrooms, a living room, a kitchen, and a big balcony. In front of the house, there is a large swimming pool and a green garden. I would love to live there with my family because it is modern and peaceful."
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const sampleText = "My favorite room in my house is my bedroom. It is small but cozy. In my room, there is a comfortable bed, a wardrobe, and a study desk next to the window. On the desk, I have a desk lamp and my books. I love my bedroom because it is quiet and I can relax after school.";
+
+        function speakModelSpeech() {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const u = new SpeechSynthesisUtterance(sampleText);
+                u.lang = 'en-US'; u.rate = 0.85;
+                window.speechSynthesis.speak(u);
+            }
+        }
+
+        function checkWriting() {
+            const input = document.getElementById('writingInput').value.trim();
+            const resultBox = document.getElementById('writingResult');
+            const countText = document.getElementById('wordCountText');
+
+            if (!input) {
+                alert("Em vui lòng nhập đoạn văn trước khi nộp bài!");
+                return;
+            }
+
+            const words = input.split(/\s+/).filter(w => w.length > 0);
+            const count = words.length;
+
+            resultBox.style.display = 'block';
+
+            if (count >= 30 && count <= 80) {
+                countText.innerHTML = `✅ <b>Đạt yêu cầu độ dài:</b> Bài viết của em có <b>${count} từ</b> (Yêu cầu: 40 - 60 từ). Hãy đối chiếu với đoạn văn mẫu để học thêm từ vựng nhé!`;
+            } else if (count < 30) {
+                countText.innerHTML = `⚠️ <b>Bài viết hơi ngắn:</b> Bài viết có <b>${count} từ</b>. Em nên viết thêm 1-2 câu nữa để đạt độ dài chuẩn.`;
+            } else {
+                countText.innerHTML = `ℹ️ <b>Bài viết phong phú:</b> Bài viết có <b>${count} từ</b>. Em chú ý diễn đạt cô đọng hơn trong các bài thi thời gian ngắn.`;
+            }
+        }
+    </script>
+</body>
+</html>

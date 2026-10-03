@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit 3 - Đề 6: Kỹ Năng Nói & Viết Đoạn Văn</title>
+    <style>
+        :root { --primary: #1e88e5; --secondary: #0d47a1; --correct: #2e7d32; --wrong: #c62828; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 20px; background: #f4f6f9; color: #333; line-height: 1.6; }
+        h2, h3 { color: var(--secondary); margin-top: 0; }
+        .section-card { background: #fff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 18px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+        .prompt-box { background: #e3f2fd; border-left: 5px solid var(--primary); padding: 14px; border-radius: 6px; margin-bottom: 12px; }
+        .model-box { background: #f1f8e9; border-left: 5px solid var(--correct); padding: 14px; border-radius: 6px; margin-top: 12px; }
+        .btn-audio { background: #1e88e5; color: white; border: none; padding: 6px 14px; font-weight: bold; border-radius: 4px; cursor: pointer; margin-top: 8px; display: inline-flex; align-items: center; gap: 6px; }
+        .btn-audio:hover { background: #0d47a1; }
+        textarea { width: 100%; height: 120px; padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-family: inherit; font-size: 1rem; box-sizing: border-box; }
+        .btn-check { background: #2e7d32; color: white; border: none; padding: 8px 18px; font-weight: bold; border-radius: 4px; cursor: pointer; margin-top: 10px; }
+        .result-box { display: none; margin-top: 12px; padding: 12px; background: #fff8e1; border-left: 4px solid #ffa000; border-radius: 6px; }
+    </style>
+</head>
+<body>
+    <h2>ĐỀ KIỂM TRA SỐ 6 - UNIT 3: KỸ NĂNG NÓI & VIẾT ĐOẠN VĂN (SPEAKING & WRITING)</h2>
+
+    <div class="section-card">
+        <h3>PART 1: SPEAKING PRACTICE (Luyện Nói Theo Chủ Đề)</h3>
+        <div class="prompt-box">
+            <b>🗣️ Chủ đề nói:</b> "Describe your best friend" (Hãy miêu tả về người bạn thân nhất của em).<br>
+            <b>Gợi ý nội dung:</b>
+            <ul>
+                <li>Who is your best friend? What does he/she look like? (Bạn tên gì? Ngoại hình thế nào?)</li>
+                <li>What is his/her personality? (Tính cách bạn ấy như thế nào?)</li>
+                <li>What activities do you often do together? (Hai em thường làm gì cùng nhau?)</li>
+            </ul>
+        </div>
+        <button class="btn-audio" onclick="speakModelSpeech()">🔊 Nghe bài nói mẫu (Sample Speech)</button>
+        <div class="model-box">
+            <b>Bài nói mẫu (Sample Text):</b><br>
+            "My best friend is Minh. He is tall and thin with short black hair and big brown eyes. Minh is a very clever and kind boy. He always helps me when I have difficult math problems. In our free time, we often play basketball and ride bikes in the park together."
+        </div>
+    </div>
+
+    <div class="section-card">
+        <h3>PART 2: GUIDED PARAGRAPH WRITING (Luyện Viết Đoạn Văn 40-60 Từ)</h3>
+        <div class="prompt-box">
+            <b>✍️ Đề bài:</b> Write a short paragraph (40 - 60 words) about a close friend. (Viết một đoạn văn ngắn khoảng 40-60 từ về một người bạn thân).<br>
+            <b>Dàn ý gợi ý (Guided Prompts):</b>
+            <ul>
+                <li>What is your friend's name and age? (Tên và bao nhiêu tuổi?)</li>
+                <li>Describe his/her hair, eyes, and appearance. (Mô tả tóc, mắt và ngoại hình.)</li>
+                <li>What personality traits make him/her special? (Tính cách nổi bật là gì?)</li>
+            </ul>
+        </div>
+
+        <textarea id="writingInput" placeholder="Nhập đoạn văn Tiếng Anh của em vào đây..."></textarea><br>
+        <button class="btn-check" onclick="checkWriting()">Nộp bài viết & Xem nhận xét mẫu</button>
+
+        <div class="result-box" id="writingResult">
+            <b>📊 Đánh giá bài viết của em:</b><br>
+            <span id="wordCountText"></span><br><br>
+            <div class="model-box">
+                <b>💡 Đoạn văn mẫu tham khảo (Model Paragraph):</b><br>
+                "My close friend is Hoa. She is twelve years old. She has a round face, long black hair, and bright blue eyes. Hoa is very friendly and active. She likes playing badminton and singing in her free time. I love Hoa because she is always a good listener and very patient with everyone."
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const sampleText = "My best friend is Minh. He is tall and thin with short black hair and big brown eyes. Minh is a very clever and kind boy. He always helps me when I have difficult math problems. In our free time, we often play basketball and ride bikes in the park together.";
+
+        function speakModelSpeech() {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const u = new SpeechSynthesisUtterance(sampleText);
+                u.lang = 'en-US'; u.rate = 0.85;
+                window.speechSynthesis.speak(u);
+            }
+        }
+
+        function checkWriting() {
+            const input = document.getElementById('writingInput').value.trim();
+            const resultBox = document.getElementById('writingResult');
+            const countText = document.getElementById('wordCountText');
+
+            if (!input) {
+                alert("Em vui lòng nhập đoạn văn trước khi nộp bài!");
+                return;
+            }
+
+            const words = input.split(/\s+/).filter(w => w.length > 0);
+            const count = words.length;
+
+            resultBox.style.display = 'block';
+
+            if (count >= 30 && count <= 80) {
+                countText.innerHTML = `✅ <b>Đạt yêu cầu độ dài:</b> Bài viết của em có <b>${count} từ</b> (Yêu cầu: 40 - 60 từ). Hãy đối chiếu với đoạn văn mẫu để học thêm từ vựng nhé!`;
+            } else if (count < 30) {
+                countText.innerHTML = `⚠️ <b>Bài viết hơi ngắn:</b> Bài viết có <b>${count} từ</b>. Em nên viết thêm 1-2 câu nữa để đạt độ dài chuẩn.`;
+            } else {
+                countText.innerHTML = `ℹ️ <b>Bài viết phong phú:</b> Bài viết có <b>${count} từ</b>. Em chú ý diễn đạt cô đọng hơn trong các bài thi thời gian ngắn.`;
+            }
+        }
+    </script>
+</body>
+</html>

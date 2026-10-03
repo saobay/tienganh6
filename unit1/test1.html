@@ -3,88 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unit 1 - Đề 1: Luyện Phát Âm & Từ Vựng</title>
+    <title>Unit 1 - Đề 1: Phát Âm, Từ Vựng & Giao Tiếp</title>
     <style>
-        :root {
-            --primary-color: #1e88e5;
-            --secondary-color: #0d47a1;
-            --correct-color: #2e7d32;
-            --wrong-color: #c62828;
-            --bg-card: #ffffff;
-        }
-
-        body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            padding: 20px; 
-            background: #f4f6f9; 
-            color: #333; 
-            line-height: 1.6; 
-        }
-
-        h2, h3 { color: var(--secondary-color); margin-top: 0; }
-
-        .note-card {
-            background: #e3f2fd;
-            border-left: 5px solid var(--primary-color);
-            padding: 12px 16px;
-            border-radius: 6px;
-            margin-bottom: 20px;
-            font-size: 0.95rem;
-        }
-
-        .question-card {
-            background: var(--bg-card);
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            padding: 16px;
-            margin-bottom: 16px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-            transition: all 0.2s ease;
-        }
-
-        .question-card.status-correct { border-left: 6px solid var(--correct-color); background: #f1f8e9; }
-        .question-card.status-wrong { border-left: 6px solid var(--wrong-color); background: #fbe9e7; }
-
+        :root { --primary: #1e88e5; --secondary: #0d47a1; --correct: #2e7d32; --wrong: #c62828; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 20px; background: #f4f6f9; color: #333; line-height: 1.6; }
+        h2, h3 { color: var(--secondary); margin-top: 0; }
+        .note-card { background: #e3f2fd; border-left: 5px solid var(--primary); padding: 12px 16px; border-radius: 6px; margin-bottom: 20px; font-size: 0.95rem; }
+        .question-card { background: #fff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 16px; margin-bottom: 16px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+        .question-card.status-correct { border-left: 6px solid var(--correct); background: #f1f8e9; }
+        .question-card.status-wrong { border-left: 6px solid var(--wrong); background: #fbe9e7; }
         .opt-row { display: flex; align-items: center; margin: 6px 0; }
         .opt-label { cursor: pointer; margin-right: 8px; }
-
-        .btn-audio {
-            background: #e3f2fd;
-            color: #1565c0;
-            border: 1px solid #bbdefb;
-            padding: 3px 8px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 0.85rem;
-            transition: all 0.2s;
-        }
-        .btn-audio:hover { background: #bbdefb; color: #0d47a1; }
-
-        .btn-submit-q {
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 7px 16px;
-            font-weight: bold;
-            border-radius: 4px;
-            cursor: pointer;
-            margin-top: 8px;
-        }
-        .btn-submit-q:hover { background: var(--secondary-color); }
-
-        .explanation { display: none; margin-top: 10px; padding: 12px; border-radius: 5px; font-size: 0.93rem; line-height: 1.5; }
-        .explanation.correct { background: #e8f5e9; color: #1b5e20; }
-        .explanation.wrong { background: #ffebee; color: #b71c1c; }
-
-        .input-fill { width: 80%; max-width: 500px; padding: 8px 12px; border: 1px solid #ccc; border-radius: 4px; font-size: 1rem; }
+        .btn-audio { background: #e3f2fd; color: #1565c0; border: 1px solid #bbdefb; padding: 3px 8px; border-radius: 4px; cursor: pointer; font-size: 0.85rem; }
+        .btn-audio:hover { background: #bbdefb; }
+        .btn-submit-q { background: var(--primary); color: white; border: none; padding: 7px 16px; font-weight: bold; border-radius: 4px; cursor: pointer; margin-top: 8px; }
+        .btn-submit-q:hover { background: var(--secondary); }
+        .explanation { display: none; margin-top: 10px; padding: 12px; border-radius: 6px; font-size: 0.93rem; }
+        .explanation.correct { background: #e8f5e9; color: #1b5e20; border-left: 4px solid var(--correct); }
+        .explanation.wrong { background: #ffebee; color: #b71c1c; border-left: 4px solid var(--wrong); }
+        .trans-box { margin-top: 6px; padding: 6px 10px; background: rgba(255,255,255,0.7); border-radius: 4px; font-size: 0.9rem; }
     </style>
 </head>
 <body>
-
-    <h2>ĐỀ KIỂM TRA SỐ 1 - UNIT 1: BÀI TẬP PHÁT ÂM & TỪ VỰNG</h2>
-
+    <h2>ĐỀ KIỂM TRA SỐ 1 - UNIT 1: PHÁT ÂM, TỪ VỰNG & GIAO TIẾP</h2>
     <div class="note-card">
-        <b>💡 Hướng dẫn:</b> Bấm vào nút <b>🔊 Nghe</b> ngay bên cạnh từng phương án A, B, C, D để nghe phát âm giọng chuẩn trước khi chọn đáp án!
+        <b>💡 Hướng dẫn:</b> Bấm nút <b>🔊 Nghe</b> kế bên mỗi đáp án ở Phần 1 để nghe phát âm chuẩn giọng En-US trước khi làm bài!
     </div>
 
     <h3>PART 1: PHONETICS (Luyện Nghe & Chọn Phát Âm)</h3>
@@ -93,151 +36,33 @@
     <h3 style="margin-top: 30px;">PART 2: VOCABULARY & GRAMMAR (Từ Vựng & Ngữ Pháp)</h3>
     <div id="part2Quiz"></div>
 
+    <h3 style="margin-top: 30px;">PART 3: COMMUNICATION & FUNCTIONAL DIALOGUE (Tình Huống Giao Tiếp)</h3>
+    <div id="part3Quiz"></div>
+
     <script>
         const part1Data = [
-            {
-                id: 1,
-                type: "mc_audio",
-                q: "Câu 1: Choose the word whose underlined part is pronounced differently (-s / -es).",
-                qTrans: "Chọn từ có phần gạch chân phát âm khác với các từ còn lại.",
-                opts: [
-                    { char: "A", text: "A. books", word: "books" },
-                    { char: "B", text: "B. lamps", word: "lamps" },
-                    { char: "C", text: "C. hats", word: "hats" },
-                    { char: "D", text: "D. bags", word: "bags" }
-                ],
-                ans: "D",
-                ansTrans: "D. bags (những chiếc cặp sách)",
-                exp: "Đáp án D (bags) phát âm đuôi -s là /z/. Các từ A, B, C có tận cùng là âm vô thanh (/k/, /p/, /t/) nên phát âm đuôi -s là /s/."
-            },
-            {
-                id: 2,
-                type: "mc_audio",
-                q: "Câu 2: Choose the word whose underlined part is pronounced differently (-es).",
-                qTrans: "Chọn từ có phần đuôi -es phát âm khác với các từ còn lại.",
-                opts: [
-                    { char: "A", text: "A. watches", word: "watches" },
-                    { char: "B", text: "B. pencil cases", word: "pencil cases" },
-                    { char: "C", text: "C. boxes", word: "boxes" },
-                    { char: "D", text: "D. pens", word: "pens" }
-                ],
-                ans: "D",
-                ansTrans: "D. pens (những chiếc bút mực)",
-                exp: "Đáp án D (pens) phát âm đuôi -s là /z/. Các từ A, B, C phát âm đuôi -es là /ɪz/."
-            },
-            {
-                id: 3,
-                type: "mc_audio",
-                q: "Câu 3: Choose the word with a different vowel sound.",
-                qTrans: "Chọn từ có nguyên âm phát âm khác các từ còn lại.",
-                opts: [
-                    { char: "A", text: "A. rubber", word: "rubber" },
-                    { char: "B", text: "B. compass", word: "compass" },
-                    { char: "C", text: "C. club", word: "club" },
-                    { char: "D", text: "D. ruler", word: "ruler" }
-                ],
-                ans: "D",
-                ansTrans: "D. ruler (thước kẻ)",
-                exp: "Đáp án D (ruler) phát âm 'u' là /uː/. Các từ A, B, C phát âm là /ʌ/."
-            },
-            {
-                id: 4,
-                type: "mc_audio",
-                q: "Câu 4: Choose the word whose underlined part is pronounced differently.",
-                qTrans: "Chọn từ có nguyên âm 'a' phát âm khác các từ còn lại.",
-                opts: [
-                    { char: "A", text: "A. class", word: "class" },
-                    { char: "B", text: "B. smart", word: "smart" },
-                    { char: "C", text: "C. father", word: "father" },
-                    { char: "D", text: "D. activity", word: "activity" }
-                ],
-                ans: "D",
-                ansTrans: "D. activity (hoạt động)",
-                exp: "Đáp án D (activity) phát âm 'a' là /æ/. Các từ A, B, C phát âm 'a' là /ɑː/."
-            },
-            {
-                id: 5,
-                type: "mc_audio",
-                q: "Câu 5: Choose the word with a different -s / -es pronunciation.",
-                qTrans: "Chọn từ có cách phát âm đuôi -s khác các từ còn lại.",
-                opts: [
-                    { char: "A", text: "A. students", word: "students" },
-                    { char: "B", text: "B. notebooks", word: "notebooks" },
-                    { char: "C", text: "C. cooks", word: "cooks" },
-                    { char: "D", text: "D. rubbers", word: "rubbers" }
-                ],
-                ans: "D",
-                ansTrans: "D. rubbers (những cục tẩy)",
-                exp: "Đáp án D (rubbers) phát âm đuôi -s là /z/. Các từ A, B, C phát âm đuôi -s là /s/."
-            }
+            { id: 1, type: "mc_audio", q: "Câu 1: Choose the word whose underlined part is pronounced differently (-s / -es).", opts: [{char:"A", text:"A. books", word:"books"}, {char:"B", text:"B. lamps", word:"lamps"}, {char:"C", text:"C. hats", word:"hats"}, {char:"D", text:"D. bags", word:"bags"}], ans: "D", qTrans: "Chọn từ có phần gạch chân phát âm khác (-s / -es).", ansTrans: "Đáp án D: bags (/bæɡz/). Các từ A, B, C phát âm là /s/.", exp: "bags phát âm đuôi -s là /z/ do tận cùng bằng phụ âm hữu thanh /ɡ/. Các từ còn lại tận cùng bằng âm vô thanh (/k/, /p/, /t/) nên phát âm là /s/." },
+            { id: 2, type: "mc_audio", q: "Câu 2: Choose the word whose underlined part is pronounced differently (-es).", opts: [{char:"A", text:"A. watches", word:"watches"}, {char:"B", text:"B. pencil cases", word:"pencil cases"}, {char:"C", text:"C. boxes", word:"boxes"}, {char:"D", text:"D. pens", word:"pens"}], ans: "D", qTrans: "Chọn từ có phần phát âm đuôi -es khác.", ansTrans: "Đáp án D: pens (/penz/). Các từ A, B, C phát âm là /ɪz/.", exp: "pens phát âm đuôi -s là /z/. Các từ A, B, C tận cùng bằng ch, s, x nên thêm -es phát âm là /ɪz/." },
+            { id: 3, type: "mc_audio", q: "Câu 3: Choose the word with a different vowel sound (/æ/ vs /ɑː/).", opts: [{char:"A", text:"A. class", word:"class"}, {char:"B", text:"B. smart", word:"smart"}, {char:"C", text:"C. father", word:"father"}, {char:"D", text:"D. activity", word:"activity"}], ans: "D", qTrans: "Chọn từ có nguyên âm phát âm khác.", ansTrans: "Đáp án D: activity (/ækˈtɪv.ə.ti/). Các từ còn lại là /ɑː/.", exp: "activity phát âm chữ 'a' đầu là /æ/. Các từ class, smart, father có chữ 'a' phát âm là /ɑː/." }
         ];
 
         const part2Data = [
-            {
-                id: 6,
-                type: "mc",
-                q: "Câu 6: Phong is very _____. He always invents new ideas in class.",
-                qTrans: "Phong rất _____. Cậu ấy luôn phát minh ra các ý tưởng mới trong lớp.",
-                opts: ["A. shy", "B. creative", "C. lazy", "D. quiet"],
-                ans: "B",
-                ansTrans: "B. creative (sáng tạo)",
-                exp: "Creative (sáng tạo) phù hợp với việc luôn tạo ra ý tưởng mới."
-            },
-            {
-                id: 7,
-                type: "mc",
-                q: "Câu 7: Vy and Lan _____ judo in the gym after school.",
-                qTrans: "Vy và Lan _____ môn võ judo ở phòng tập sau giờ học.",
-                opts: ["A. play", "B. do", "C. study", "D. have"],
-                ans: "B",
-                ansTrans: "B. do (tập/làm)",
-                exp: "Môn võ judo dùng kết hợp với động từ 'do' (do judo)."
-            },
-            {
-                id: 8,
-                type: "fill",
-                q: "Câu 8 (Điền từ): My sister (watch) _____ TV with our family after dinner.",
-                qTrans: "Chị gái tôi (xem) tivi với gia đình chúng tôi sau bữa tối.",
-                ans: "watches",
-                ansTrans: "watches (xem)",
-                exp: "Thì Hiện tại đơn, chủ ngữ số ít 'My sister', động từ tận cùng 'ch' thêm '-es' thành 'watches'."
-            },
-            {
-                id: 9,
-                type: "fill",
-                q: "Câu 9 (Điền từ): I forgot my _____ so I cannot calculate these difficult math problems.",
-                qTrans: "Tôi quên mang _____ nên không thể tính toán các bài toán khó này.",
-                ans: "calculator",
-                ansTrans: "calculator (máy tính cầm tay)",
-                exp: "Calculator (máy tính cầm tay) dùng để tính toán bài tập toán."
-            },
-            {
-                id: 10,
-                type: "fill",
-                q: "Câu 10 (Điền từ): Students wear their school _____ on Mondays.",
-                qTrans: "Học sinh mặc _____ trường vào các ngày Thứ Hai.",
-                ans: "uniform",
-                ansTrans: "uniform (đồng phục)",
-                exp: "Uniform (đồng phục). Cụm từ: wear school uniform."
-            }
+            { id: 4, type: "mc", q: "Câu 4: Phong is very _____. He always invents new ideas in class.", opts: ["A. shy", "B. creative", "C. lazy", "D. quiet"], ans: "B", qTrans: "Phong rất _____. Bạn ấy luôn phát minh ra các ý tưởng mới trong lớp.", ansTrans: "Phong rất sáng tạo. Bạn ấy luôn phát minh ra các ý tưởng mới trong lớp.", exp: "Creative (sáng tạo) phù hợp ngữ cảnh phát minh ý tưởng mới." },
+            { id: 5, type: "mc", q: "Câu 5: Vy and Lan _____ judo in the gym after school.", opts: ["A. play", "B. do", "C. study", "D. have"], ans: "B", qTrans: "Vy và Lan _____ môn võ judo ở phòng tập sau giờ học.", ansTrans: "Vy và Lan tập võ judo ở phòng tập sau giờ học.", exp: "Môn võ judo luôn đi với động từ 'do' (do judo)." }
         ];
 
-        const allQuestions = [...part1Data, ...part2Data];
+        const part3Data = [
+            { id: 6, type: "mc", q: "Câu 6: - Stranger: 'Excuse me, where is Sunrise Lower Secondary School?' - Student: '_____'", opts: ["A. Yes, it is very big.", "B. It's next to the city library.", "C. I go to school by bike.", "D. I love my school."], ans: "B", qTrans: "- Người lạ: 'Xin lỗi, trường THCS Sunrise ở đâu vậy?' - Học sinh: '_____' ", ansTrans: "Nó nằm bên cạnh thư viện thành phố.", exp: "Câu hỏi chỉ đường 'where is...' cần câu trả lời chỉ vị trí ('next to the city library')." },
+            { id: 7, type: "mc", q: "Câu 7: - Nick: 'Would you like to join our English club this afternoon?' - Mai: '_____' ", opts: ["A. Yes, I'd love to. Thanks!", "B. No, I am not a teacher.", "C. My English is good.", "D. I live in Ha Noi."], ans: "A", qTrans: "- Nick: 'Bạn có muốn tham gia CLB Tiếng Anh của chúng mình chiều nay không?' - Mai: '_____' ", ansTrans: "Vâng, mình rất thích. Cảm ơn bạn!", exp: "Cấu trúc lời mời 'Would you like to...?' được đáp lại bằng 'Yes, I'd love to' khi đồng ý." }
+        ];
 
-        function normalizeText(text) {
-            if (!text) return "";
-            return text.toLowerCase()
-                .replace(/[.,/#!$%^&*;:{}=\-_`~()'"?]/g, "")
-                .replace(/\s+/g, " ")
-                .trim();
-        }
+        const allQuestions = [...part1Data, ...part2Data, ...part3Data];
 
         function speak(text) {
             if ('speechSynthesis' in window) {
                 window.speechSynthesis.cancel();
                 const u = new SpeechSynthesisUtterance(text);
-                u.lang = 'en-US';
-                u.rate = 0.85;
+                u.lang = 'en-US'; u.rate = 0.85;
                 window.speechSynthesis.speak(u);
             }
         }
@@ -247,101 +72,47 @@
             part1Data.forEach(item => {
                 let optsHtml = '';
                 item.opts.forEach(opt => {
-                    optsHtml += `
-                        <div class="opt-row">
-                            <label class="opt-label">
-                                <input type="radio" name="q_${item.id}" value="${opt.char}"> ${opt.text}
-                            </label>
-                            <button type="button" class="btn-audio" onclick="speak('${opt.word}')">🔊 Nghe</button>
-                        </div>
-                    `;
+                    optsHtml += `<div class="opt-row"><label class="opt-label"><input type="radio" name="q_${item.id}" value="${opt.char}"> ${opt.text}</label><button type="button" class="btn-audio" onclick="speak('${opt.word}')">🔊 Nghe</button></div>`;
                 });
-
-                container.innerHTML += `
-                    <div class="question-card" id="card_q_${item.id}">
-                        <div style="font-weight:bold; color:#1565c0; margin-bottom:8px;">${item.q}</div>
-                        <div>${optsHtml}</div>
-                        <button type="button" class="btn-submit-q" onclick="checkQuestion(${item.id})">Nộp câu này</button>
-                        <div id="explain_q_${item.id}" class="explanation"></div>
-                    </div>
-                `;
+                container.innerHTML += `<div class="question-card" id="card_q_${item.id}"><div style="font-weight:bold; color:#1565c0; margin-bottom:8px;">${item.q}</div><div>${optsHtml}</div><button type="button" class="btn-submit-q" onclick="checkQuestion(${item.id})">Nộp câu này</button><div id="explain_q_${item.id}" class="explanation"></div></div>`;
             });
         }
 
-        function renderPart2() {
-            const container = document.getElementById('part2Quiz');
-            part2Data.forEach(item => {
+        function renderMC(data, containerId) {
+            const container = document.getElementById(containerId);
+            data.forEach(item => {
                 let optsHtml = '';
-                if (item.type === 'mc') {
-                    item.opts.forEach(opt => {
-                        const char = opt.charAt(0);
-                        optsHtml += `
-                            <label style="display:block; margin:6px 0; cursor:pointer;">
-                                <input type="radio" name="q_${item.id}" value="${char}"> ${opt}
-                            </label>
-                        `;
-                    });
-                } else {
-                    optsHtml = `<input type="text" id="input_q_${item.id}" class="input-fill" placeholder="Nhập đáp án vào đây...">`;
-                }
-
-                container.innerHTML += `
-                    <div class="question-card" id="card_q_${item.id}">
-                        <div style="font-weight:bold; color:#1565c0; margin-bottom:8px;">${item.q}</div>
-                        <div>${optsHtml}</div>
-                        <button type="button" class="btn-submit-q" onclick="checkQuestion(${item.id})">Nộp câu này</button>
-                        <div id="explain_q_${item.id}" class="explanation"></div>
-                    </div>
-                `;
+                item.opts.forEach(opt => {
+                    const char = opt.charAt(0);
+                    optsHtml += `<label style="display:block; margin:6px 0; cursor:pointer;"><input type="radio" name="q_${item.id}" value="${char}"> ${opt}</label>`;
+                });
+                container.innerHTML += `<div class="question-card" id="card_q_${item.id}"><div style="font-weight:bold; color:#1565c0; margin-bottom:8px;">${item.q}</div><div>${optsHtml}</div><button type="button" class="btn-submit-q" onclick="checkQuestion(${item.id})">Nộp câu này</button><div id="explain_q_${item.id}" class="explanation"></div></div>`;
             });
         }
 
         function checkQuestion(qId) {
             const item = allQuestions.find(x => x.id === qId);
             if (!item) return;
-
             const card = document.getElementById(`card_q_${qId}`);
             const explainDiv = document.getElementById(`explain_q_${qId}`);
             explainDiv.style.display = 'block';
 
-            let isCorrect = false;
-
-            if (item.type === 'mc' || item.type === 'mc_audio') {
-                const sel = document.querySelector(`input[name="q_${qId}"]:checked`);
-                if (sel && sel.value === item.ans) {
-                    isCorrect = true;
-                }
-            } else {
-                const userAns = document.getElementById(`input_q_${qId}`).value;
-                if (normalizeText(userAns) === normalizeText(item.ans)) {
-                    isCorrect = true;
-                }
-            }
-
-            if (isCorrect) {
+            const sel = document.querySelector(`input[name="q_${qId}"]:checked`);
+            if (sel && sel.value === item.ans) {
                 card.className = "question-card status-correct";
                 explainDiv.className = "explanation correct";
-                explainDiv.innerHTML = `
-                    <b>✓ CHÍNH XÁC!</b><br>
-                    📌 <b>Dịch câu hỏi:</b> ${item.qTrans}<br>
-                    💡 <b>Dịch đáp án chuẩn:</b> ${item.ansTrans}<br>
-                    📝 <b>Giải thích chi tiết:</b> ${item.exp}
-                `;
+                explainDiv.innerHTML = `<b>✓ CHÍNH XÁC!</b><div class="trans-box"><b>📌 Dịch câu hỏi:</b> ${item.qTrans}<br><b>💡 Dịch đáp án chuẩn:</b> ${item.ansTrans}</div><br><b>📝 Giải thích chi tiết:</b> ${item.exp}`;
             } else {
                 card.className = "question-card status-wrong";
                 explainDiv.className = "explanation wrong";
-                explainDiv.innerHTML = `
-                    <b>✗ CHƯA CHÍNH XÁC!</b> (Đáp án chuẩn: <b>${item.ans}</b>)<br>
-                    📌 <b>Dịch câu hỏi:</b> ${item.qTrans}<br>
-                    💡 <b>Dịch đáp án chuẩn:</b> ${item.ansTrans}<br>
-                    📝 <b>Giải thích chi tiết:</b> ${item.exp}
-                `;
+                explainDiv.innerHTML = `<b>✗ CHƯA CHÍNH XÁC!</b> (Đáp án chuẩn: <b>${item.ans}</b>)<div class="trans-box"><b>📌 Dịch câu hỏi:</b> ${item.qTrans}<br><b>💡 Dịch đáp án chuẩn:</b> ${item.ansTrans}</div><br><b>📝 Giải thích chi tiết:</b> ${item.exp}`;
             }
         }
 
         window.onload = function() {
             renderPart1();
-            renderPart2();
+            renderMC(part2Data, 'part2Quiz');
+            renderMC(part3Data, 'part3Quiz');
         };
     </script>
 </body>

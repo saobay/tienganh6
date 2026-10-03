@@ -3,258 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unit 1 - Đề 4: Sửa Lỗi Sai & Luyện Viết</title>
+    <title>Unit 1 - Đề 4: Ngữ Pháp, Chia Từ & Sửa Lỗi</title>
     <style>
-        :root {
-            --primary-color: #1e88e5;
-            --secondary-color: #0d47a1;
-            --correct-color: #2e7d32;
-            --wrong-color: #c62828;
-            --bg-card: #ffffff;
-        }
-
-        body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            padding: 20px; 
-            background: #f4f6f9; 
-            color: #333; 
-            line-height: 1.6; 
-        }
-
-        h2, h3 { color: var(--secondary-color); margin-top: 0; }
-
-        .question-card {
-            background: var(--bg-card);
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            padding: 16px;
-            margin-bottom: 16px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-            transition: all 0.2s ease;
-        }
-
-        .question-card.status-correct { border-left: 6px solid var(--correct-color); background: #f1f8e9; }
-        .question-card.status-wrong { border-left: 6px solid var(--wrong-color); background: #fbe9e7; }
-
-        .btn-submit-q {
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 7px 16px;
-            font-weight: bold;
-            border-radius: 4px;
-            cursor: pointer;
-            margin-top: 8px;
-        }
-
-        .btn-submit-q:hover { background: var(--secondary-color); }
-
-        .explanation { display: none; margin-top: 10px; padding: 12px; border-radius: 5px; font-size: 0.93rem; line-height: 1.5; }
-        .explanation.correct { background: #e8f5e9; color: #1b5e20; }
-        .explanation.wrong { background: #ffebee; color: #b71c1c; }
-
-        .input-fill { 
-            width: 90%; 
-            max-width: 600px; 
-            padding: 8px 12px; 
-            border: 1px solid #ccc; 
-            border-radius: 4px; 
-            font-size: 1rem; 
-            box-sizing: border-box; 
-        }
+        :root { --primary: #1e88e5; --secondary: #0d47a1; --correct: #2e7d32; --wrong: #c62828; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 20px; background: #f4f6f9; color: #333; line-height: 1.6; }
+        h2, h3 { color: var(--secondary); margin-top: 0; }
+        .question-card { background: #fff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 16px; margin-bottom: 16px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+        .question-card.status-correct { border-left: 6px solid var(--correct); background: #f1f8e9; }
+        .question-card.status-wrong { border-left: 6px solid var(--wrong); background: #fbe9e7; }
+        .btn-submit-q { background: var(--primary); color: white; border: none; padding: 7px 16px; font-weight: bold; border-radius: 4px; cursor: pointer; margin-top: 8px; }
+        .btn-submit-q:hover { background: var(--secondary); }
+        .explanation { display: none; margin-top: 10px; padding: 12px; border-radius: 6px; font-size: 0.93rem; }
+        .explanation.correct { background: #e8f5e9; color: #1b5e20; border-left: 4px solid var(--correct); }
+        .explanation.wrong { background: #ffebee; color: #b71c1c; border-left: 4px solid var(--wrong); }
+        .trans-box { margin-top: 6px; padding: 6px 10px; background: rgba(255,255,255,0.7); border-radius: 4px; font-size: 0.9rem; }
+        .input-fill { width: 90%; max-width: 600px; padding: 8px 12px; border: 1px solid #ccc; border-radius: 4px; font-size: 1rem; }
     </style>
 </head>
 <body>
+    <h2>ĐỀ KIỂM TRA SỐ 4 - UNIT 1: NGỮ PHÁP, CHIA DẠNG TỪ & VIẾT LẠI CÂU</h2>
 
-    <h2>ĐỀ KIỂM TRA SỐ 4 - UNIT 1: SỬA LỖI SAI & LUYỆN VIẾT (WRITING)</h2>
-
-    <h3>PART 1: ERROR CORRECTION (Tìm phần gạch chân chứa lỗi sai)</h3>
+    <h3>PART 1: VERB TENSES & WORD FORM (Chia Động Từ & Cho Dạng Đúng Của Từ)</h3>
     <div id="part1Quiz"></div>
 
-    <h3 style="margin-top: 30px;">PART 2: SENTENCE REORDERING (Sắp xếp từ bị xáo trộn thành câu hoàn chỉnh)</h3>
+    <h3 style="margin-top: 30px;">PART 2: ERROR CORRECTION (Tìm & Sửa Lỗi Sai)</h3>
     <div id="part2Quiz"></div>
 
-    <h3 style="margin-top: 30px;">PART 3: SENTENCE TRANSFORMATION (Viết lại câu giữ nguyên nghĩa)</h3>
+    <h3 style="margin-top: 30px;">PART 3: SENTENCE TRANSFORMATION & REORDERING (Viết Lại Câu & Sắp Xếp)</h3>
     <div id="part3Quiz"></div>
 
     <script>
         const part1Data = [
-            {
-                id: 1,
-                type: "mc",
-                q: "Câu 1: She <u>don't</u> (A) <u>go</u> (B) to school <u>by</u> (C) bus <u>every day</u> (D).",
-                qTrans: "Cô ấy không đi học bằng xe buýt mỗi ngày.",
-                opts: ["A. don't", "B. go", "C. by", "D. every day"],
-                ans: "A",
-                ansTrans: "A. don't ➔ sửa thành doesn't",
-                exp: "Lỗi A: Chủ ngữ 'She' (ngôi thứ 3 số ít) phải đi với trợ động từ phủ định 'doesn't', không dùng 'don't'."
-            },
-            {
-                id: 2,
-                type: "mc",
-                q: "Câu 2: My brother <u>plays</u> (A) <u>judo</u> (B) <u>in</u> (C) the gym <u>on Tuesdays</u> (D).",
-                qTrans: "Anh trai tôi tập judo ở phòng tập vào các ngày Thứ Ba.",
-                opts: ["A. plays", "B. judo", "C. in", "D. on Tuesdays"],
-                ans: "A",
-                ansTrans: "A. plays ➔ sửa thành does",
-                exp: "Lỗi A: Môn võ judo phải dùng kết hợp với động từ 'does' (does judo), không dùng 'plays'."
-            },
-            {
-                id: 3,
-                type: "mc",
-                q: "Câu 3: Look! The <u>students</u> (A) <u>wears</u> (B) <u>their</u> (C) new <u>uniforms</u> (D).",
-                qTrans: "Nhìn kìa! Các học sinh đang mặc bộ đồng phục mới của họ.",
-                opts: ["A. students", "B. wears", "C. their", "D. uniforms"],
-                ans: "B",
-                ansTrans: "B. wears ➔ sửa thành are wearing",
-                exp: "Lỗi B: Có từ nhận biết 'Look!' chỉ hành động đang diễn ra nên phải dùng thì Hiện tại tiếp diễn ('are wearing')."
-            },
-            {
-                id: 4,
-                type: "mc",
-                q: "Câu 4: Nam <u>is</u> (A) <u>always</u> (B) <u>late never</u> (C) <u>for</u> (D) school.",
-                qTrans: "Nam không bao giờ đi học muộn.",
-                opts: ["A. is", "B. always", "C. late never", "D. for"],
-                ans: "C",
-                ansTrans: "C. late never ➔ sửa thành never late",
-                exp: "Lỗi C: Trạng từ chỉ tần suất ('never') phải đứng TRƯỚC tính từ 'late' và SAU động từ 'is' ('is never late')."
-            }
+            { id: 1, type: "fill", q: "Câu 1 (Chia thì): Look! The students (wear) _____ their new school uniforms.", ans: "are wearing", qTrans: "Nhìn kìa! Các bạn học sinh đang mặc đồng phục trường mới.", ansTrans: "Look! The students are wearing their new school uniforms.", exp: "'Look!' là dấu hiệu nhận biết thì Hiện tại tiếp diễn (S + am/is/are + V-ing). Chủ ngữ số nhiều 'The students' chia 'are wearing'." },
+            { id: 2, type: "fill", q: "Câu 2 (Chia dạng từ): Linh is very (CREATE) _____. She writes poetry and paints beautiful pictures.", ans: "creative", qTrans: "Linh rất sáng tạo. Bạn ấy viết thơ và vẽ nhiều bức tranh đẹp.", ansTrans: "Linh is very creative. She writes poetry and paints beautiful pictures.", exp: "Sau động từ 'is' và trạng từ 'very' cần một tính từ. Dạng tính từ của động từ CREATE là 'creative' (sáng tạo)." },
+            { id: 3, type: "fill", q: "Câu 3 (Chia thì): My brother (not like) _____ doing homework on Saturday nights.", ans: "doesn't like", qTrans: "Anh trai tôi không thích làm bài tập về nhà vào tối thứ Bảy.", ansTrans: "My brother doesn't like doing homework on Saturday nights.", exp: "Hiện tại đơn diễn tả sở thích/thói quen. Chủ ngữ số ít 'My brother' mượn trợ động từ phủ định 'doesn't like'." }
         ];
 
         const part2Data = [
-            {
-                id: 5,
-                type: "fill",
-                q: "Câu 5: my / cycles / to / Everyday, / school / brother / .",
-                qTrans: "Sắp xếp từ thành câu: Hằng ngày, anh trai tôi đạp xe đến trường.",
-                ans: "Everyday, my brother cycles to school.",
-                ansTrans: "Everyday, my brother cycles to school.",
-                exp: "Cấu trúc chuẩn: Trạng ngữ thời gian (Everyday,) + Chủ ngữ (my brother) + Động từ (cycles) + Trạng ngữ nơi chốn (to school)."
-            },
-            {
-                id: 6,
-                type: "fill",
-                q: "Câu 6: have / lessons / Maths / We / Mondays / on / .",
-                qTrans: "Sắp xếp từ thành câu: Chúng tôi có các tiết học Toán vào Thứ Hai.",
-                ans: "We have Maths lessons on Mondays.",
-                ansTrans: "We have Maths lessons on Mondays.",
-                exp: "Cấu trúc chuẩn: S (We) + V (have) + O (Maths lessons) + Giới từ thời gian (on Mondays)."
-            }
+            { id: 4, type: "mc", q: "Câu 4: She <u>don't</u> (A) <u>go</u> (B) to school <u>by</u> (C) bus <u>every day</u> (D).", opts: ["A. don't", "B. go", "C. by", "D. every day"], ans: "A", qTrans: "Tìm lỗi sai trong câu: She don't go to school by bus every day.", ansTrans: "Lỗi ở vị trí A: sửa 'don't' thành 'doesn't'.", exp: "Chủ ngữ ngôi thứ ba số ít 'She' ở thì Hiện tại đơn phải dùng trợ động từ 'doesn't'." },
+            { id: 5, type: "mc", q: "Câu 5: My brother <u>plays</u> (A) <u>judo</u> (B) <u>in</u> (C) the gym <u>on Tuesdays</u> (D).", opts: ["A. plays", "B. judo", "C. in", "D. on Tuesdays"], ans: "A", qTrans: "Tìm lỗi sai trong câu: My brother plays judo in the gym on Tuesdays.", ansTrans: "Lỗi ở vị trí A: sửa 'plays' thành 'does'.", exp: "Môn võ judo phải dùng cấu trúc 'do judo' chứ không dùng 'play judo'." }
         ];
 
         const part3Data = [
-            {
-                id: 7,
-                type: "fill",
-                q: "Câu 7: Sunrise School has thirty classrooms.<br>➔ There are _________________________________________",
-                qTrans: "Viết lại câu: Trường Sunrise có 30 phòng học. ➔ Có...",
-                ans: "thirty classrooms in Sunrise School.",
-                ansTrans: "There are thirty classrooms in Sunrise School. (Có 30 phòng học ở Trường Sunrise.)",
-                exp: "Chuyển đổi cấu trúc tương đương: 'S + have/has + N' ➔ 'There is/are + N + in + S'."
-            },
-            {
-                id: 8,
-                type: "fill",
-                q: "Câu 8: My house is not far from my school.<br>➔ My school is near _________________________________",
-                qTrans: "Viết lại câu: Nhà tôi không xa trường học. ➔ Trường học của tôi gần...",
-                ans: "my house.",
-                ansTrans: "My school is near my house. (Trường học của tôi ở gần nhà tôi.)",
-                exp: "Chuyển đổi phủ định 'not far from' (không xa) ➔ 'near' (gần)."
-            }
+            { id: 6, type: "fill", q: "Câu 6 (Sắp xếp từ): my / cycles / to / Everyday, / school / brother / .", ans: "Everyday, my brother cycles to school.", qTrans: "Sắp xếp từ: my / cycles / to / Everyday, / school / brother / .", ansTrans: "Hàng ngày, anh trai tôi đạp xe đến trường.", exp: "Cấu trúc: Trạng từ thời gian (Everyday,) + S (my brother) + V (cycles) + Trạng ngữ chỉ nơi chốn (to school)." },
+            { id: 7, type: "fill", q: "Câu 7 (Viết lại câu): Sunrise School has thirty classrooms.<br>➔ There are _________________________________________", ans: "thirty classrooms in Sunrise School.", qTrans: "Trường Sunrise có 30 phòng học. ➔ Có...", ansTrans: "There are thirty classrooms in Sunrise School.", exp: "Chuyển đổi cấu trúc: S + have/has + N ➔ There is/are + N + in + S." }
         ];
 
         const allQuestions = [...part1Data, ...part2Data, ...part3Data];
 
         function normalizeText(text) {
             if (!text) return "";
-            return text.toLowerCase()
-                .replace(/[.,/#!$%^&*;:{}=\-_`~()'"?]/g, "")
-                .replace(/\s+/g, " ")
-                .trim();
+            return text.toLowerCase().replace(/[.,/#!$%^&*;:{}=\-_`~()'"?]/g, "").replace(/\s+/g, " ").trim();
         }
 
-        function renderPart1() {
-            const container = document.getElementById('part1Quiz');
-            part1Data.forEach(item => {
+        function renderFill(data, containerId) {
+            const container = document.getElementById(containerId);
+            data.forEach(item => {
+                container.innerHTML += `<div class="question-card" id="card_q_${item.id}"><div style="font-weight:bold; color:#1565c0; margin-bottom:8px;">${item.q}</div><div><input type="text" id="input_q_${item.id}" class="input-fill" placeholder="Gõ câu trả lời vào đây..."></div><button type="button" class="btn-submit-q" onclick="checkQuestion(${item.id})">Nộp câu này</button><div id="explain_q_${item.id}" class="explanation"></div></div>`;
+            });
+        }
+
+        function renderMC(data, containerId) {
+            const container = document.getElementById(containerId);
+            data.forEach(item => {
                 let optsHtml = '';
                 item.opts.forEach(opt => {
                     const char = opt.charAt(0);
                     optsHtml += `<label style="display:inline-block; margin-right:15px; cursor:pointer;"><input type="radio" name="q_${item.id}" value="${char}"> ${opt}</label>`;
                 });
-                container.innerHTML += `
-                    <div class="question-card" id="card_q_${item.id}">
-                        <div style="font-weight:bold; color:#1565c0; margin-bottom:8px;">${item.q}</div>
-                        <div>${optsHtml}</div>
-                        <button type="button" class="btn-submit-q" onclick="checkQuestion(${item.id})">Nộp câu này</button>
-                        <div id="explain_q_${item.id}" class="explanation"></div>
-                    </div>
-                `;
-            });
-        }
-
-        function renderFillParts(data, containerId) {
-            const container = document.getElementById(containerId);
-            data.forEach(item => {
-                container.innerHTML += `
-                    <div class="question-card" id="card_q_${item.id}">
-                        <div style="font-weight:bold; color:#1565c0; margin-bottom:8px;">${item.q}</div>
-                        <div style="margin:8px 0;">
-                            <input type="text" id="input_q_${item.id}" class="input-fill" placeholder="Gõ câu trả lời hoàn chỉnh vào đây...">
-                        </div>
-                        <button type="button" class="btn-submit-q" onclick="checkQuestion(${item.id})">Nộp câu này</button>
-                        <div id="explain_q_${item.id}" class="explanation"></div>
-                    </div>
-                `;
+                container.innerHTML += `<div class="question-card" id="card_q_${item.id}"><div style="font-weight:bold; color:#1565c0; margin-bottom:8px;">${item.q}</div><div>${optsHtml}</div><button type="button" class="btn-submit-q" onclick="checkQuestion(${item.id})">Nộp câu này</button><div id="explain_q_${item.id}" class="explanation"></div></div>`;
             });
         }
 
         function checkQuestion(qId) {
             const item = allQuestions.find(x => x.id === qId);
             if (!item) return;
-
             const card = document.getElementById(`card_q_${qId}`);
             const explainDiv = document.getElementById(`explain_q_${qId}`);
             explainDiv.style.display = 'block';
 
             let isCorrect = false;
-
             if (item.type === 'mc') {
                 const sel = document.querySelector(`input[name="q_${qId}"]:checked`);
-                if (sel && sel.value === item.ans) {
-                    isCorrect = true;
-                }
+                if (sel && sel.value === item.ans) isCorrect = true;
             } else {
                 const userAns = document.getElementById(`input_q_${qId}`).value;
-                if (normalizeText(userAns) === normalizeText(item.ans)) {
-                    isCorrect = true;
-                }
+                if (normalizeText(userAns) === normalizeText(item.ans)) isCorrect = true;
             }
 
             if (isCorrect) {
                 card.className = "question-card status-correct";
                 explainDiv.className = "explanation correct";
-                explainDiv.innerHTML = `
-                    <b>✓ CHÍNH XÁC!</b><br>
-                    📌 <b>Dịch câu hỏi:</b> ${item.qTrans}<br>
-                    💡 <b>Dịch đáp án chuẩn:</b> ${item.ansTrans}<br>
-                    📝 <b>Giải thích chi tiết:</b> ${item.exp}
-                `;
+                explainDiv.innerHTML = `<b>✓ CHÍNH XÁC!</b><div class="trans-box"><b>📌 Dịch câu hỏi:</b> ${item.qTrans}<br><b>💡 Dịch đáp án chuẩn:</b> ${item.ansTrans}</div><br><b>📝 Giải thích chi tiết:</b> ${item.exp}`;
             } else {
                 card.className = "question-card status-wrong";
                 explainDiv.className = "explanation wrong";
-                explainDiv.innerHTML = `
-                    <b>✗ CHƯA CHÍNH XÁC!</b> (Đáp án chuẩn: <b>${item.ans}</b>)<br>
-                    📌 <b>Dịch câu hỏi:</b> ${item.qTrans}<br>
-                    💡 <b>Dịch đáp án chuẩn:</b> ${item.ansTrans}<br>
-                    📝 <b>Giải thích chi tiết:</b> ${item.exp}
-                `;
+                explainDiv.innerHTML = `<b>✗ CHƯA CHÍNH XÁC!</b> (Đáp án chuẩn: <b>${item.ans}</b>)<div class="trans-box"><b>📌 Dịch câu hỏi:</b> ${item.qTrans}<br><b>💡 Dịch đáp án chuẩn:</b> ${item.ansTrans}</div><br><b>📝 Giải thích chi tiết:</b> ${item.exp}`;
             }
         }
 
         window.onload = function() {
-            renderPart1();
-            renderFillParts(part2Data, 'part2Quiz');
-            renderFillParts(part3Data, 'part3Quiz');
+            renderFill(part1Data, 'part1Quiz');
+            renderMC(part2Data, 'part2Quiz');
+            renderFill(part3Data, 'part3Quiz');
         };
     </script>
 </body>

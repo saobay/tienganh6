@@ -37,32 +37,35 @@
         <div class="sidebar-header">
             <button class="close-sidebar-btn" onclick="closeSidebar()">✕</button>
             <h3>Tiếng Anh 6 Global Success</h3>
-            <span>Hệ Thống Học Tập & Luyện Thi</span>
+            <span>Hệ Thống Học Tập & Luyện Thi Chuẩn GD&ĐT</span>
         </div>
         <div class="nav-section">
             <div class="unit-title">📌 Unit 1: My New School</div>
             <div class="nav-item active" onclick="loadPage('unit1/unit1.html', this)">📖 Lý thuyết & Từ vựng</div>
-            <div class="nav-item" onclick="loadPage('unit1/test1.html', this)">✍️ Đề 1: Phát âm & Từ vựng</div>
+            <div class="nav-item" onclick="loadPage('unit1/test1.html', this)">✍️ Đề 1: Phát âm, Từ vựng & Giao tiếp</div>
             <div class="nav-item" onclick="loadPage('unit1/test2.html', this)">🎧 Đề 2: Bài tập Nghe (Listening)</div>
             <div class="nav-item" onclick="loadPage('unit1/test3.html', this)">📖 Đề 3: Đọc hiểu (Reading)</div>
-            <div class="nav-item" onclick="loadPage('unit1/test4.html', this)">✍️ Đề 4: Sửa lỗi sai & Luyện viết</div>
-            <div class="nav-item" onclick="loadPage('unit1/test5.html', this)">🗣️ Đề 5: Ngữ âm & Trọng âm</div>
+            <div class="nav-item" onclick="loadPage('unit1/test4.html', this)">✍️ Đề 4: Ngữ pháp, Chia từ & Sửa lỗi</div>
+            <div class="nav-item" onclick="loadPage('unit1/test5.html', this)">🗣️ Đề 5: Trọng âm & Ngữ âm</div>
+            <div class="nav-item" onclick="loadPage('unit1/test6.html', this)">💬 Đề 6: Kỹ năng Nói & Viết đoạn văn</div>
 
             <div class="unit-title">📌 Unit 2: My House</div>
             <div class="nav-item" onclick="loadPage('unit2/unit2.html', this)">📖 Lý thuyết & Từ vựng</div>
-            <div class="nav-item" onclick="loadPage('unit2/test1.html', this)">✍️ Đề 1: Phát âm & Từ vựng</div>
+            <div class="nav-item" onclick="loadPage('unit2/test1.html', this)">✍️ Đề 1: Phát âm, Từ vựng & Giao tiếp</div>
             <div class="nav-item" onclick="loadPage('unit2/test2.html', this)">🎧 Đề 2: Bài tập Nghe (Listening)</div>
             <div class="nav-item" onclick="loadPage('unit2/test3.html', this)">📖 Đề 3: Đọc hiểu (Reading)</div>
-            <div class="nav-item" onclick="loadPage('unit2/test4.html', this)">✍️ Đề 4: Sửa lỗi sai & Luyện viết</div>
-            <div class="nav-item" onclick="loadPage('unit2/test5.html', this)">🗣️ Đề 5: Ngữ âm & Trọng âm</div>
+            <div class="nav-item" onclick="loadPage('unit2/test4.html', this)">✍️ Đề 4: Ngữ pháp, Chia từ & Viết lại câu</div>
+            <div class="nav-item" onclick="loadPage('unit2/test5.html', this)">🗣️ Đề 5: Trọng âm & Ngữ âm</div>
+            <div class="nav-item" onclick="loadPage('unit2/test6.html', this)">💬 Đề 6: Kỹ năng Nói & Viết đoạn văn</div>
 
             <div class="unit-title">📌 Unit 3: My Friends</div>
             <div class="nav-item" onclick="loadPage('unit3/unit3.html', this)">📖 Lý thuyết & Từ vựng</div>
-            <div class="nav-item" onclick="loadPage('unit3/test1.html', this)">✍️ Đề 1: Phát âm & Từ vựng</div>
+            <div class="nav-item" onclick="loadPage('unit3/test1.html', this)">✍️ Đề 1: Phát âm, Từ vựng & Giao tiếp</div>
             <div class="nav-item" onclick="loadPage('unit3/test2.html', this)">🎧 Đề 2: Bài tập Nghe (Listening)</div>
             <div class="nav-item" onclick="loadPage('unit3/test3.html', this)">📖 Đề 3: Đọc hiểu (Reading)</div>
-            <div class="nav-item" onclick="loadPage('unit3/test4.html', this)">✍️ Đề 4: Sửa lỗi sai & Luyện viết</div>
-            <div class="nav-item" onclick="loadPage('unit3/test5.html', this)">🗣️ Đề 5: Ngữ âm & Trọng âm</div>
+            <div class="nav-item" onclick="loadPage('unit3/test4.html', this)">✍️ Đề 4: Ngữ pháp, Chia từ & Viết lại câu</div>
+            <div class="nav-item" onclick="loadPage('unit3/test5.html', this)">🗣️ Đề 5: Trọng âm & Ngữ âm</div>
+            <div class="nav-item" onclick="loadPage('unit3/test6.html', this)">💬 Đề 6: Kỹ năng Nói & Viết đoạn văn</div>
         </div>
     </div>
     <div class="main-content">
@@ -76,11 +79,20 @@
         function loadPage(url, el) {
             document.getElementById('contentFrame').src = url;
             document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
-            if (el) { el.classList.add('active'); document.getElementById('mobileTitle').innerText = el.innerText.trim(); }
+            if (el) {
+                el.classList.add('active');
+                document.getElementById('mobileTitle').innerText = el.innerText.trim();
+            }
             closeSidebar();
         }
-        function openSidebar() { document.getElementById('sidebar').classList.add('active'); document.getElementById('sidebarOverlay').classList.add('active'); }
-        function closeSidebar() { document.getElementById('sidebar').classList.remove('active'); document.getElementById('sidebarOverlay').classList.remove('active'); }
+        function openSidebar() {
+            document.getElementById('sidebar').classList.add('active');
+            document.getElementById('sidebarOverlay').classList.add('active');
+        }
+        function closeSidebar() {
+            document.getElementById('sidebar').classList.remove('active');
+            document.getElementById('sidebarOverlay').classList.remove('active');
+        }
     </script>
 </body>
 </html>
