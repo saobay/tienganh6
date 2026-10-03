@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit 3 - Đề 2: Bài Tập Nghe Hiểu (Listening)</title>
+    <style>
+        :root { --primary-color: #1e88e5; --secondary-color: #0d47a1; --correct-color: #2e7d32; --wrong-color: #c62828; --bg-card: #ffffff; }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; padding: 20px; background: #f4f6f9; color: #333; line-height: 1.6; }
+        h2 { color: var(--secondary-color); margin-top: 0; }
+        .audio-player-card { background: linear-gradient(135deg, #e3f2fd, #bbdefb); border: 2px solid #90caf9; border-radius: 10px; padding: 20px; margin-bottom: 24px; }
+        .audio-controls { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-top: 10px; }
+        .btn-audio { background: var(--primary-color); color: white; border: none; padding: 10px 18px; font-size: 1rem; font-weight: bold; border-radius: 6px; cursor: pointer; }
+        .btn-audio:hover { background: var(--secondary-color); }
+        .transcript-box { display: none; margin-top: 15px; background: #fff; padding: 15px; border-radius: 6px; border-left: 4px solid var(--primary-color); font-style: italic; }
+        .question-card { background: var(--bg-card); border: 1px solid #e0e0e0; border-radius: 8px; padding: 18px; margin-bottom: 16px; }
+        .question-card.status-correct { border-left: 6px solid var(--correct-color); background: #f1f8e9; }
+        .question-card.status-wrong { border-left: 6px solid var(--wrong-color); background: #fbe9e7; }
+        .btn-submit-q { background: var(--primary-color); color: white; border: none; padding: 7px 16px; font-weight: bold; border-radius: 4px; cursor: pointer; margin-top: 10px; }
+        .explanation { display: none; margin-top: 12px; padding: 12px; border-radius: 6px; font-size: 0.95rem; }
+        .explanation.correct { background: #e8f5e9; color: #1b5e20; }
+        .explanation.wrong { background: #ffebee; color: #b71c1c; }
+        .input-fill { width: 80%; max-width: 400px; padding: 8px 12px; border: 1px solid #ccc; border-radius: 4px; font-size: 1rem; }
+    </style>
+</head>
+<body>
+    <h2>ĐỀ KIỂM TRA SỐ 2 - UNIT 3: BÀI TẬP NGHE (MY BEST FRIEND)</h2>
+
+    <div class="audio-player-card">
+        <h3 style="margin:0; color:#0d47a1;">🎧 Luyện Nghe: Lan's Best Friend (Minh)</h3>
+        <p style="margin: 6px 0 0 0; color:#444;">Nhấn nút bên dưới để nghe bài giới thiệu của Lan về người bạn thân nhất của cô ấy.</p>
+        <div class="audio-controls">
+            <button class="btn-audio" onclick="playAudio()">▶️ Bật nghe đoạn văn</button>
+            <button class="btn-audio" style="background:#f57c00;" onclick="pauseAudio()">⏸️ Tạm dừng</button>
+            <button class="btn-audio" style="background:#616161;" onclick="toggleTranscript()">📝 Ẩn/Hiện bài đọc (Transcript)</button>
+        </div>
+        <div id="transcriptBox" class="transcript-box">
+            <b>Bài đọc (Audio Script):</b><br>
+            "My best friend is Minh. He is twelve years old and he is my classmate at Secondary School. Minh is tall and slim. He has short black hair, a round face, and big brown eyes. Minh is very kind and hard-working. He always helps me with difficult Maths exercises. He is also very clever and creative. He likes drawing comic books in his free time. This Saturday afternoon, Minh and I are going to the town library to read science books together."
+        </div>
+    </div>
+
+    <div id="quizList"></div>
+
+    <script>
+        const listeningText = "My best friend is Minh. He is twelve years old and he is my classmate at Secondary School. Minh is tall and slim. He has short black hair, a round face, and big brown eyes. Minh is very kind and hard-working. He always helps me with difficult Maths exercises. He is also very clever and creative. He likes drawing comic books in his free time. This Saturday afternoon, Minh and I are going to the town library to read science books together.";
+
+        const quizData = [
+            { id: 1, type: "mc", q: "Câu 1: How old is Minh?", opts: ["A. 10", "B. 11", "C. 12", "D. 13"], ans: "C", exp: "Bài nghe nói: 'He is twelve years old...'", q_tr: "Minh bao nhiêu tuổi?", ans_tr: "Đáp án C: 12 tuổi." },
+            { id: 2, type: "mc", q: "Câu 2: What does Minh look like?", opts: ["A. Short and chubby", "B. Tall and slim", "C. Short and thin", "D. Tall and chubby"], ans: "B", exp: "Bài nghe nói: 'Minh is tall and slim.'", q_tr: "Ngoại hình Minh trông như thế nào?", ans_tr: "Đáp án B: Cao và gầy/mảnh khảnh." },
+            { id: 3, type: "mc", q: "Câu 3: What subject does Minh help Lan with?", opts: ["A. English", "B. History", "C. Science", "D. Maths"], ans: "D", exp: "Bài nghe nói: 'He always helps me with difficult Maths exercises.'", q_tr: "Minh giúp Lan học môn gì?", ans_tr: "Đáp án D: Môn Toán." },
+            { id: 4, type: "mc", q: "Câu 4: What does Minh like doing in his free time?", opts: ["A. Playing football", "B. Drawing comic books", "C. Playing video games", "D. Swimming"], ans: "B", exp: "Bài nghe nói: 'He likes drawing comic books in his free time.'", q_tr: "Minh thích làm gì vào thời gian rảnh?", ans_tr: "Đáp án B: Vẽ truyện tranh." },
+            { id: 5, type: "mc", q: "Câu 5: Where are Minh and Lan going this Saturday afternoon?", opts: ["A. To the sports center", "B. To the cinema", "C. To the town library", "D. To the park"], ans: "C", exp: "Bài nghe nói: '...Minh and I are going to the town library...'", q_tr: "Minh và Lan sẽ đi đâu vào chiều Thứ Bảy này?", ans_tr: "Đáp án C: Đến thư viện thị trấn." },
+            { id: 6, type: "fill", q: "Câu 6 (Điền từ): Minh has short black hair and a _____ face.", ans: "round", exp: "Bài nghe: 'a round face'", q_tr: "Minh có mái tóc ngắn màu đen và khuôn mặt _____.", ans_tr: "Đáp án chuẩn: round (tròn)." },
+            { id: 7, type: "fill", q: "Câu 7 (Điền từ): Minh is very kind and _____.", ans: "hard-working", exp: "Bài nghe: 'Minh is very kind and hard-working.'", q_tr: "Minh rất tốt bụng và _____.", ans_tr: "Đáp án chuẩn: hard-working (chăm chỉ)." },
+            { id: 8, type: "fill", q: "Câu 8 (Điền từ): In his free time, Minh likes drawing _____ books.", ans: "comic", exp: "Bài nghe: 'drawing comic books'", q_tr: "Rảnh rỗi, Minh thích vẽ sách _____.", ans_tr: "Đáp án chuẩn: comic (truyện tranh)." }
+        ];
+
+        let synth = window.speechSynthesis;
+        function playAudio() { if ('speechSynthesis' in window) { synth.cancel(); const u = new SpeechSynthesisUtterance(listeningText); u.lang = 'en-US'; u.rate = 0.85; synth.speak(u); } }
+        function pauseAudio() { if (synth.speaking) synth.cancel(); }
+        function toggleTranscript() { const b = document.getElementById('transcriptBox'); b.style.display = (b.style.display === 'block') ? 'none' : 'block'; }
+
+        function renderQuiz() {
+            const container = document.getElementById('quizList');
+            quizData.forEach(item => {
+                let optsHtml = '';
+                if(item.type === 'mc') {
+                    item.opts.forEach(opt => { optsHtml += `<label style="display:block; margin:6px 0; cursor:pointer;"><input type="radio" name="q_${item.id}" value="${opt.charAt(0)}"> ${opt}</label>`; });
+                } else {
+                    optsHtml = `<input type="text" id="input_q_${item.id}" class="input-fill" placeholder="Nhập từ cần điền...">`;
+                }
+                container.innerHTML += `
+                    <div class="question-card" id="card_q_${item.id}">
+                        <div style="font-weight:bold; color:#1565c0;">${item.q}</div>
+                        <div style="margin:8px 0;">${optsHtml}</div>
+                        <button type="button" class="btn-submit-q" onclick="checkQuestion(${item.id})">Nộp câu này</button>
+                        <div id="explain_q_${item.id}" class="explanation"></div>
+                    </div>`;
+            });
+        }
+
+        function normalizeText(text) {
+            if (!text) return "";
+            return text.toLowerCase().replace(/[.,/#!$%^&*;:{}=\-_`~()'"?]/g, "").replace(/\s+/g, " ").trim();
+        }
+
+        function checkQuestion(qId) {
+            const item = quizData.find(x => x.id === qId);
+            if (!item) return;
+            const card = document.getElementById(`card_q_${qId}`);
+            const explainDiv = document.getElementById(`explain_q_${qId}`);
+            explainDiv.style.display = 'block';
+
+            let isCorrect = false;
+            if (item.type === 'mc') {
+                const sel = document.querySelector(`input[name="q_${qId}"]:checked`);
+                if (sel && sel.value === item.ans) isCorrect = true;
+            } else {
+                const userAns = document.getElementById(`input_q_${qId}`).value;
+                if (normalizeText(userAns) === normalizeText(item.ans)) isCorrect = true;
+            }
+
+            if (isCorrect) {
+                card.className = "question-card status-correct";
+                explainDiv.className = "explanation correct";
+                explainDiv.innerHTML = `<b>✓ CHÍNH XÁC!</b><br>📌 <b>Dịch câu hỏi:</b> ${item.q_tr}<br>💡 <b>Dịch đáp án chuẩn:</b> ${item.ans_tr}<br>📝 <b>Giải thích chi tiết:</b> ${item.exp}`;
+            } else {
+                card.className = "question-card status-wrong";
+                explainDiv.className = "explanation wrong";
+                explainDiv.innerHTML = `<b>✗ CHƯA CHÍNH XÁC!</b> (Đáp án chuẩn: <b>${item.ans}</b>)<br>📌 <b>Dịch câu hỏi:</b> ${item.q_tr}<br>💡 <b>Dịch đáp án chuẩn:</b> ${item.ans_tr}<br>📝 <b>Giải thích chi tiết:</b> ${item.exp}`;
+            }
+        }
+        window.onload = renderQuiz;
+    </script>
+</body>
+</html>

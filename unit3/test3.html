@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit 3 - Đề 3: Đọc Hiểu (Reading)</title>
+    <style>
+        :root { --primary-color: #1e88e5; --secondary-color: #0d47a1; --correct-color: #2e7d32; --wrong-color: #c62828; --bg-card: #ffffff; }
+        body { font-family: 'Segoe UI', sans-serif; padding: 20px; background: #f4f6f9; color: #333; line-height: 1.6; }
+        h2, h3 { color: var(--secondary-color); margin-top: 0; }
+        .passage-box { background: #e3f2fd; border-left: 5px solid var(--primary-color); padding: 16px; border-radius: 6px; margin-bottom: 20px; font-size: 1.02rem; }
+        .question-card { background: var(--bg-card); border: 1px solid #e0e0e0; border-radius: 8px; padding: 16px; margin-bottom: 16px; }
+        .question-card.status-correct { border-left: 6px solid var(--correct-color); background: #f1f8e9; }
+        .question-card.status-wrong { border-left: 6px solid var(--wrong-color); background: #fbe9e7; }
+        .btn-submit-q { background: var(--primary-color); color: white; border: none; padding: 7px 16px; font-weight: bold; border-radius: 4px; cursor: pointer; margin-top: 8px; }
+        .explanation { display: none; margin-top: 10px; padding: 10px; border-radius: 5px; font-size: 0.93rem; }
+        .explanation.correct { background: #e8f5e9; color: #1b5e20; }
+        .explanation.wrong { background: #ffebee; color: #b71c1c; }
+    </style>
+</head>
+<body>
+    <h2>ĐỀ KIỂM TRA SỐ 3 - UNIT 3: BÀI TẬP ĐỌC HIỂU (READING)</h2>
+
+    <h3>PART 1: CLOZE TEST (Điền từ vào đoạn văn)</h3>
+    <div class="passage-box">
+        <b>Đoạn văn 1:</b> My name is Nam. I have two best friends, Duy and Mark. Mark comes from Australia. He is tall and has blonde (1) _____ and blue eyes. He is very (2) _____ because he always plays sports like basketball and football. Duy is short and chubby. He is very (3) _____ and hard-working. At school, Duy always shares his snacks with us. Right now, we (4) _____ at a summer camp in Ba Vi. We are having a great time (5) _____ we are playing games together.
+    </div>
+    <div id="part1Quiz"></div>
+
+    <h3 style="margin-top: 30px;">PART 2: READING COMPREHENSION (Đọc hiểu đoạn văn & Đúng/Sai)</h3>
+    <div class="passage-box">
+        <b>Đoạn văn 2:</b> Dear Nick, How are you? I'm writing this email at the international summer camp in Da Lat. The camp is surrounded by pine trees and a beautiful lake. There are 30 children from different countries here. My room mate is Jimmy. He is from Canada. Jimmy is very talkative and funny. He tells us humorous jokes every night. Tomorrow, we are going hiking in the mountains and visiting a strawberry farm. I am taking many photos to show you when I get back home! Best wishes, Phong.
+    </div>
+    <div id="part2Quiz"></div>
+
+    <script>
+        const part1Data = [
+            { id: 1, q: "Câu 1 (Chỗ trống 1): He is tall and has blonde _____ and blue eyes.", opts: ["A. hair", "B. cheeks", "C. mouth", "D. nose"], ans: "A", exp: "Blonde hair (mái tóc vàng).", q_tr: "Cậu ấy cao và có mái tóc _____ màu vàng và đôi mắt màu xanh.", ans_tr: "Đáp án A: hair (tóc)." },
+            { id: 2, q: "Câu 2 (Chỗ trống 2): He is very _____ because he plays sports...", opts: ["A. shy", "B. quiet", "C. active", "D. patient"], ans: "C", exp: "Active (năng động, hăng hái thể thao).", q_tr: "Cậu ấy rất _____ vì cậu ấy hay chơi thể thao.", ans_tr: "Đáp án C: active (năng động)." },
+            { id: 3, q: "Câu 3 (Chỗ trống 3): He is very _____ and hard-working. He shares snacks...", opts: ["A. lazy", "B. kind", "C. serious", "D. talkative"], ans: "B", exp: "Kind (tốt bụng, hay chia sẻ với bạn).", q_tr: "Cậu ấy rất _____ và chăm chỉ. Cậu ấy chia sẻ đồ ăn.", ans_tr: "Đáp án B: kind (tốt bụng)." },
+            { id: 4, q: "Câu 4 (Chỗ trống 4): Right now, we _____ at a summer camp...", opts: ["A. stay", "B. stayed", "C. are staying", "D. stays"], ans: "C", exp: "Dấu hiệu 'Right now' dùng Hiện tại tiếp diễn ('are staying').", q_tr: "Ngay lúc này, chúng tôi _____ tại trại hè.", ans_tr: "Đáp án C: are staying (đang ở)." },
+            { id: 5, q: "Câu 5 (Chỗ trống 5): ...a great time _____ we are playing games.", opts: ["A. because", "B. but", "C. so", "D. or"], ans: "A", exp: "Liên từ 'because' chỉ nguyên nhân.", q_tr: "Chúng tôi vui vẻ _____ chúng tôi đang chơi trò chơi.", ans_tr: "Đáp án A: because (vì)." }
+        ];
+
+        const part2Data = [
+            { id: 6, q: "Câu 6: Where is Phong writing the email?", opts: ["A. In Ha Noi", "B. At a summer camp in Da Lat", "C. In Australia", "D. At a school library"], ans: "B", exp: "Bài đọc: 'I'm writing this email at the international summer camp in Da Lat.'", q_tr: "Phong đang viết email ở đâu?", ans_tr: "Đáp án B: Tại trại hè quốc tế ở Đà Lạt." },
+            { id: 7, q: "Câu 7: Where is Jimmy from?", opts: ["A. Canada", "B. Australia", "C. Viet Nam", "D. England"], ans: "A", exp: "Bài đọc: 'My room mate is Jimmy. He is from Canada.'", q_tr: "Jimmy đến từ nước nào?", ans_tr: "Đáp án A: Canada." },
+            { id: 8, q: "Câu 8: What is Jimmy like?", opts: ["A. Shy and quiet", "B. Active and patient", "C. Talkative and funny", "D. Serious and hard-working"], ans: "C", exp: "Bài đọc: 'Jimmy is very talkative and funny.'", q_tr: "Tính cách Jimmy thế nào?", ans_tr: "Đáp án C: Hay nói và hài hước." },
+            { id: 9, q: "Câu 9 (True/False): True or False: Phong and Jimmy are going hiking tomorrow.", opts: ["A. True", "B. False"], ans: "A", exp: "Đúng (True). Trích bài: 'Tomorrow, we are going hiking in the mountains...'", q_tr: "Đúng hay Sai: Phong và Jimmy sẽ đi leo núi vào ngày mai.", ans_tr: "Đáp án A: True (Đúng)." },
+            { id: 10, q: "Câu 10: What are they visiting tomorrow?", opts: ["A. A museum", "B. A strawberry farm", "C. A sports club", "D. A cinema"], ans: "B", exp: "Trích bài: '...and visiting a strawberry farm.'", q_tr: "Ngày mai họ sẽ đi thăm nơi nào?", ans_tr: "Đáp án B: Nông trại dâu tây." }
+        ];
+
+        const allQuestions = [...part1Data, ...part2Data];
+
+        function renderPart(data, containerId) {
+            const container = document.getElementById(containerId);
+            data.forEach(item => {
+                let optsHtml = '';
+                item.opts.forEach(opt => { optsHtml += `<label style="display:block; margin:6px 0; cursor:pointer;"><input type="radio" name="q_${item.id}" value="${opt.charAt(0)}"> ${opt}</label>`; });
+                container.innerHTML += `
+                    <div class="question-card" id="card_q_${item.id}">
+                        <div style="font-weight:bold; color:#1565c0; margin-bottom:8px;">${item.q}</div>
+                        <div>${optsHtml}</div>
+                        <button type="button" class="btn-submit-q" onclick="checkQuestion(${item.id})">Nộp câu này</button>
+                        <div id="explain_q_${item.id}" class="explanation"></div>
+                    </div>`;
+            });
+        }
+
+        function checkQuestion(qId) {
+            const item = allQuestions.find(x => x.id === qId);
+            if (!item) return;
+            const card = document.getElementById(`card_q_${qId}`);
+            const explainDiv = document.getElementById(`explain_q_${qId}`);
+            explainDiv.style.display = 'block';
+
+            const sel = document.querySelector(`input[name="q_${qId}"]:checked`);
+            if (sel && sel.value === item.ans) {
+                card.className = "question-card status-correct";
+                explainDiv.className = "explanation correct";
+                explainDiv.innerHTML = `<b>✓ CHÍNH XÁC!</b><br>📌 <b>Dịch câu hỏi:</b> ${item.q_tr}<br>💡 <b>Dịch đáp án chuẩn:</b> ${item.ans_tr}<br>📝 <b>Giải thích chi tiết:</b> ${item.exp}`;
+            } else {
+                card.className = "question-card status-wrong";
+                explainDiv.className = "explanation wrong";
+                explainDiv.innerHTML = `<b>✗ CHƯA CHÍNH XÁC!</b> (Đáp án chuẩn: <b>${item.ans}</b>)<br>📌 <b>Dịch câu hỏi:</b> ${item.q_tr}<br>💡 <b>Dịch đáp án chuẩn:</b> ${item.ans_tr}<br>📝 <b>Giải thích chi tiết:</b> ${item.exp}`;
+            }
+        }
+        window.onload = function() { renderPart(part1Data, 'part1Quiz'); renderPart(part2Data, 'part2Quiz'); };
+    </script>
+</body>
+</html>

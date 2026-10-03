@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit 3 - Đề 4: Sửa Lỗi Sai & Luyện Viết (Writing)</title>
+    <style>
+        :root { --primary-color: #1e88e5; --secondary-color: #0d47a1; --correct-color: #2e7d32; --wrong-color: #c62828; --bg-card: #ffffff; }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; padding: 20px; background: #f4f6f9; color: #333; line-height: 1.6; }
+        h2, h3 { color: var(--secondary-color); margin-top: 0; }
+        .question-card { background: var(--bg-card); border: 1px solid #e0e0e0; border-radius: 8px; padding: 16px; margin-bottom: 16px; }
+        .question-card.status-correct { border-left: 6px solid var(--correct-color); background: #f1f8e9; }
+        .question-card.status-wrong { border-left: 6px solid var(--wrong-color); background: #fbe9e7; }
+        .btn-submit-q { background: var(--primary-color); color: white; border: none; padding: 7px 16px; font-weight: bold; border-radius: 4px; cursor: pointer; margin-top: 8px; }
+        .explanation { display: none; margin-top: 10px; padding: 10px; border-radius: 5px; font-size: 0.93rem; }
+        .explanation.correct { background: #e8f5e9; color: #1b5e20; }
+        .explanation.wrong { background: #ffebee; color: #b71c1c; }
+        .input-fill { width: 90%; max-width: 600px; padding: 8px 12px; border: 1px solid #ccc; border-radius: 4px; font-size: 1rem; }
+    </style>
+</head>
+<body>
+    <h2>ĐỀ KIỂM TRA SỐ 4 - UNIT 3: SỬA LỖI SAI & LUYỆN VIẾT (WRITING)</h2>
+
+    <h3>PART 1: ERROR CORRECTION (Tìm phần gạch chân bị sai)</h3>
+    <div id="part1Quiz"></div>
+
+    <h3 style="margin-top: 30px;">PART 2: SENTENCE REORDERING (Sắp xếp từ bị xáo trộn)</h3>
+    <div id="part2Quiz"></div>
+
+    <h3 style="margin-top: 30px;">PART 3: SENTENCE TRANSFORMATION (Viết lại câu giữ nguyên nghĩa)</h3>
+    <div id="part3Quiz"></div>
+
+    <script>
+        const part1Data = [
+            {
+                id: 1, type: "mc",
+                q: "Câu 1: Look! Mai <u>play</u> (A) <u>badminton</u> (B) <u>with</u> (C) her friends <u>in</u> (D) the yard.",
+                opts: ["A. play", "B. badminton", "C. with", "D. in"], ans: "A",
+                exp: "Lỗi A: 'Look!' dùng Hiện tại tiếp diễn ('is playing').",
+                q_tr: "Nhìn kìa! Mai đang chơi cầu lông với bạn ở sân.", ans_tr: "Lỗi ở A: play ➔ sửa thành 'is playing'."
+            },
+            {
+                id: 2, type: "mc",
+                q: "Câu 2: Lan <u>is</u> (A) a <u>kind</u> (B) girl. She <u>is</u> (C) <u>have</u> (D) big brown eyes.",
+                opts: ["A. is", "B. kind", "C. is", "D. have"], ans: "C",
+                exp: "Lỗi C: Miêu tả bộ phận cơ thể dùng 'has' (She has big brown eyes), thừa động từ 'is'.",
+                q_tr: "Lan là một cô gái tốt bụng. Cô ấy có đôi mắt to màu nâu.", ans_tr: "Lỗi ở C: bỏ 'is', giữ 'has'."
+            },
+            {
+                id: 3, type: "mc",
+                q: "Câu 3: We <u>are</u> (A) <u>go</u> (B) to <u>the</u> (C) picnic <u>this</u> (D) weekend.",
+                opts: ["A. are", "B. go", "C. the", "D. this"], ans: "B",
+                exp: "Lỗi B: Cấu trúc thì Hiện tại tiếp diễn chỉ tương lai: 'are going'.",
+                q_tr: "Chúng tôi sẽ đi dã ngoại vào cuối tuần này.", ans_tr: "Lỗi ở B: go ➔ sửa thành 'going'."
+            },
+            {
+                id: 4, type: "mc",
+                q: "Câu 4: Nam <u>is</u> (A) <u>very</u> (B) <u>talkative</u> (C). He <u>rarely</u> (D) speaks in class.",
+                opts: ["A. is", "B. very", "C. talkative", "D. rarely"], ans: "D",
+                exp: "Lỗi D: Talkative (hay nói) mâu thuẫn với 'rarely' (hiếm khi). Phải sửa 'rarely' thành 'always' hoặc 'often'.",
+                q_tr: "Nam rất hay nói. Cậu ấy hiếm khi nói trong lớp (sai nghĩa).", ans_tr: "Lỗi ở D: rarely ➔ sửa thành 'always/often'."
+            }
+        ];
+
+        const part2Data = [
+            {
+                id: 5, type: "fill",
+                q: "Câu 5: my / has / eyes / friend / round / black / Best / .",
+                ans: "My best friend has round black eyes.",
+                exp: "Cấu trúc: S (My best friend) + has + adj + N (round black eyes).",
+                q_tr: "Sắp xếp: my / has / eyes / friend / round / black / Best / .", ans_tr: "Đáp án chuẩn: My best friend has round black eyes."
+            },
+            {
+                id: 6, type: "fill",
+                q: "Câu 6: playing / We / basketball / are / at / moment / the / .",
+                ans: "We are playing basketball at the moment.",
+                exp: "Cấu trúc Hiện tại tiếp diễn: S + am/is/are + V-ing + O + at the moment.",
+                q_tr: "Sắp xếp: playing / We / basketball / are / at / moment / the / .", ans_tr: "Đáp án chuẩn: We are playing basketball at the moment."
+            }
+        ];
+
+        const part3Data = [
+            {
+                id: 7, type: "fill",
+                q: "Câu 7: Mai has a round face.<br>➔ Mai's face _________________________________________",
+                ans: "is round.",
+                exp: "Chuyển đổi miêu tả: 'S + have/has + a/an + adj + face' ➔ 'S's face + is + adj'.",
+                q_tr: "Viết lại: Mai có khuôn mặt tròn. ➔ Khuôn mặt Mai _____.", ans_tr: "Đáp án chuẩn: is round."
+            },
+            {
+                id: 8, type: "fill",
+                q: "Câu 8: What is your best friend's appearance?<br>➔ What does ________________________________________?",
+                ans: "your best friend look like",
+                exp: "Chuyển đổi câu hỏi ngoại hình: 'What + do/does + S + look like?'.",
+                q_tr: "Viết lại câu hỏi ngoại hình bạn thân của bạn.", ans_tr: "Đáp án chuẩn: your best friend look like"
+            }
+        ];
+
+        const allQuestions = [...part1Data, ...part2Data, ...part3Data];
+
+        function renderPart1() {
+            const container = document.getElementById('part1Quiz');
+            part1Data.forEach(item => {
+                let optsHtml = '';
+                item.opts.forEach(opt => { optsHtml += `<label style="display:inline-block; margin-right:15px; cursor:pointer;"><input type="radio" name="q_${item.id}" value="${opt.charAt(0)}"> ${opt}</label>`; });
+                container.innerHTML += `
+                    <div class="question-card" id="card_q_${item.id}">
+                        <div style="font-weight:bold; color:#1565c0;">${item.q}</div>
+                        <div style="margin:8px 0;">${optsHtml}</div>
+                        <button type="button" class="btn-submit-q" onclick="checkQuestion(${item.id})">Nộp câu này</button>
+                        <div id="explain_q_${item.id}" class="explanation"></div>
+                    </div>`;
+            });
+        }
+
+        function renderFillParts(data, containerId) {
+            const container = document.getElementById(containerId);
+            data.forEach(item => {
+                container.innerHTML += `
+                    <div class="question-card" id="card_q_${item.id}">
+                        <div style="font-weight:bold; color:#1565c0;">${item.q}</div>
+                        <div style="margin:8px 0;"><input type="text" id="input_q_${item.id}" class="input-fill" placeholder="Gõ câu trả lời hoàn chỉnh..."></div>
+                        <button type="button" class="btn-submit-q" onclick="checkQuestion(${item.id})">Nộp câu này</button>
+                        <div id="explain_q_${item.id}" class="explanation"></div>
+                    </div>`;
+            });
+        }
+
+        function normalizeText(text) {
+            if (!text) return "";
+            return text.toLowerCase().replace(/[.,/#!$%^&*;:{}=\-_`~()'"?]/g, "").replace(/\s+/g, " ").trim();
+        }
+
+        function checkQuestion(qId) {
+            const item = allQuestions.find(x => x.id === qId);
+            if (!item) return;
+            const card = document.getElementById(`card_q_${qId}`);
+            const explainDiv = document.getElementById(`explain_q_${qId}`);
+            explainDiv.style.display = 'block';
+
+            let isCorrect = false;
+            if (item.type === 'mc') {
+                const sel = document.querySelector(`input[name="q_${qId}"]:checked`);
+                if (sel && sel.value === item.ans) isCorrect = true;
+            } else {
+                const userAns = document.getElementById(`input_q_${qId}`).value;
+                if (normalizeText(userAns) === normalizeText(item.ans)) isCorrect = true;
+            }
+
+            if (isCorrect) {
+                card.className = "question-card status-correct";
+                explainDiv.className = "explanation correct";
+                explainDiv.innerHTML = `<b>✓ CHÍNH XÁC!</b><br>📌 <b>Dịch câu hỏi:</b> ${item.q_tr}<br>💡 <b>Dịch đáp án chuẩn:</b> ${item.ans_tr}<br>📝 <b>Giải thích chi tiết:</b> ${item.exp}`;
+            } else {
+                card.className = "question-card status-wrong";
+                explainDiv.className = "explanation wrong";
+                explainDiv.innerHTML = `<b>✗ CHƯA CHÍNH XÁC!</b> (Đáp án chuẩn: <b>${item.ans}</b>)<br>📌 <b>Dịch câu hỏi:</b> ${item.q_tr}<br>💡 <b>Dịch đáp án chuẩn:</b> ${item.ans_tr}<br>📝 <b>Giải thích chi tiết:</b> ${item.exp}`;
+            }
+        }
+
+        window.onload = function() { renderPart1(); renderFillParts(part2Data, 'part2Quiz'); renderFillParts(part3Data, 'part3Quiz'); };
+    </script>
+</body>
+</html>
