@@ -3,149 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unit 2 - Đề 5: Ngữ Âm & Trọng Âm (Phonetics & Stress)</title>
+    <title>Unit 2 - Đề 5: Ngữ Âm & Trọng Âm (Phonetics & Stress Accent)</title>
     <style>
-        :root {
-            --primary-color: #1e88e5;
-            --secondary-color: #0d47a1;
-            --correct-color: #2e7d32;
-            --wrong-color: #c62828;
-            --bg-card: #ffffff;
-        }
-        body { font-family: 'Segoe UI', Tahoma, sans-serif; padding: 20px; background: #f4f6f9; color: #333; line-height: 1.6; }
-        h2, h3 { color: var(--secondary-color); margin-top: 0; }
-        .note-card {
-            background: #e3f2fd; border-left: 5px solid var(--primary-color);
-            padding: 14px 18px; border-radius: 6px; margin-bottom: 20px; font-size: 0.95rem;
-        }
-        .question-card {
-            background: var(--bg-card); border: 1px solid #e0e0e0; border-radius: 8px;
-            padding: 16px; margin-bottom: 16px; box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-        }
-        .question-card.status-correct { border-left: 6px solid var(--correct-color); background: #f1f8e9; }
-        .question-card.status-wrong { border-left: 6px solid var(--wrong-color); background: #fbe9e7; }
-        .btn-submit-q {
-            background: var(--primary-color); color: white; border: none; padding: 7px 16px;
-            font-weight: bold; border-radius: 4px; cursor: pointer; margin-top: 8px;
-        }
-        .btn-audio {
-            background: #e3f2fd; color: #1565c0; border: 1px solid #bbdefb;
-            padding: 2px 8px; border-radius: 4px; cursor: pointer; font-size: 0.85rem; margin-left: 6px;
-        }
+        :root { --primary: #1e88e5; --secondary: #0d47a1; --correct: #2e7d32; --wrong: #c62828; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 20px; background: #f4f6f9; color: #333; line-height: 1.6; }
+        h2, h3 { color: var(--secondary); margin-top: 0; }
+        .note-card { background: #e3f2fd; border-left: 5px solid var(--primary); padding: 12px 16px; border-radius: 6px; margin-bottom: 20px; font-size: 0.95rem; }
+        .question-card { background: #fff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 16px; margin-bottom: 16px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+        .question-card.status-correct { border-left: 6px solid var(--correct); background: #f1f8e9; }
+        .question-card.status-wrong { border-left: 6px solid var(--wrong); background: #fbe9e7; }
+        .opt-row { display: flex; align-items: center; margin: 6px 0; }
+        .opt-label { cursor: pointer; margin-right: 8px; }
+        .btn-audio { background: #e3f2fd; color: #1565c0; border: 1px solid #bbdefb; padding: 3px 8px; border-radius: 4px; cursor: pointer; font-size: 0.85rem; }
         .btn-audio:hover { background: #bbdefb; }
-        .explanation { display: none; margin-top: 10px; padding: 12px; border-radius: 5px; font-size: 0.93rem; }
-        .explanation.correct { background: #e8f5e9; color: #1b5e20; }
-        .explanation.wrong { background: #ffebee; color: #b71c1c; }
-        .trans-line { font-style: italic; color: #555; margin: 4px 0; }
+        .btn-submit-q { background: var(--primary); color: white; border: none; padding: 7px 16px; font-weight: bold; border-radius: 4px; cursor: pointer; margin-top: 8px; }
+        .btn-submit-q:hover { background: var(--secondary); }
+        .explanation { display: none; margin-top: 10px; padding: 12px; border-radius: 6px; font-size: 0.93rem; }
+        .explanation.correct { background: #e8f5e9; color: #1b5e20; border-left: 4px solid var(--correct); }
+        .explanation.wrong { background: #ffebee; color: #b71c1c; border-left: 4px solid var(--wrong); }
+        .trans-box { margin-top: 6px; padding: 6px 10px; background: rgba(255,255,255,0.7); border-radius: 4px; font-size: 0.9rem; }
+        .ipa-box { font-family: 'Lucida Sans', 'Arial', sans-serif; background: #fff3e0; padding: 6px 10px; border-radius: 4px; border-left: 3px solid #ff9800; margin: 6px 0; color: #e65100; }
     </style>
 </head>
 <body>
-
-    <h2>ĐỀ KIỂM TRA SỐ 5 - UNIT 2: CHUYÊN ĐỀ NGỮ ÂM & TRỌNG ÂM</h2>
-
+    <h2>ĐỀ KIỂM TRA SỐ 5 - UNIT 2: MY HOUSE (NGỮ ÂM & TRỌNG ÂM)</h2>
     <div class="note-card">
-        <b>💡 Mẹo nhỏ:</b> Bạn có thể bấm vào biểu tượng 🔊 bên cạnh từng đáp án để nghe phát âm giọng chuẩn trước hoặc sau khi làm bài!
+        <b>💡 Hướng dẫn:</b> Bấm nút <b>🔊 Nghe</b> kế bên mỗi đáp án A, B, C, D để nghe phát âm giọng chuẩn trước khi đưa ra lựa chọn!
     </div>
 
-    <h3>PART 1: PRONUNCIATION (Phát Âm)</h3>
+    <h3>PART 1: PRONUNCIATION (Phát Âm & Nguyên Âm)</h3>
     <div id="part1Quiz"></div>
 
-    <h3 style="margin-top: 30px;">PART 2: STRESS (Trọng Âm)</h3>
+    <h3 style="margin-top: 30px;">PART 2: STRESS ACCENT (Vị Trí Trọng Âm)</h3>
     <div id="part2Quiz"></div>
 
     <script>
-        const part1Data = [
-            {
-                id: 1, q: "Câu 1: Phát âm đuôi -s / -es",
-                opts: [{ text: "A. desks", word: "desks" }, { text: "B. lamps", word: "lamps" }, { text: "C. flats", word: "flats" }, { text: "D. rooms", word: "rooms" }],
-                ans: "D",
-                qTranslate: "Dịch câu hỏi: Chọn từ có phần đuôi -s phát âm khác.",
-                ansTranslate: "Dịch đáp án: A. /s/ | B. /s/ | C. /s/ | D. /z/ (rooms)",
-                exp: "D (rooms) phát âm đuôi -s là /z/. Các từ A, B, C phát âm đuôi -s là /s/."
-            },
-            {
-                id: 2, q: "Câu 2: Phát âm đuôi -es",
-                opts: [{ text: "A. houses", word: "houses" }, { text: "B. fridges", word: "fridges" }, { text: "C. dishes", word: "dishes" }, { text: "D. tables", word: "tables" }],
-                ans: "D",
-                qTranslate: "Dịch câu hỏi: Chọn từ có phần đuôi -es phát âm khác.",
-                ansTranslate: "Dịch đáp án: A. /ɪz/ | B. /ɪz/ | C. /ɪz/ | D. /z/ (tables)",
-                exp: "D (tables) phát âm đuôi -s là /z/. Các từ A, B, C phát âm đuôi -es là /ɪz/."
-            },
-            {
-                id: 3, q: "Câu 3: Phát âm nguyên âm 'u' và 'o'",
-                opts: [{ text: "A. cupboard", word: "cupboard" }, { text: "B. country", word: "country" }, { text: "C. club", word: "club" }, { text: "D. furniture", word: "furniture" }],
-                ans: "D",
-                qTranslate: "Dịch câu hỏi: Chọn từ có phát âm âm 'u/o' khác.",
-                ansTranslate: "Dịch đáp án: A. /ʌ/ | B. /ʌ/ | C. /ʌ/ | D. /ɜː/ (furniture)",
-                exp: "D (furniture) phát âm 'u' là /ɜː/. Các từ A, B, C phát âm 'u' hoặc 'ou' là /ʌ/."
-            },
-            {
-                id: 4, q: "Câu 4: Phát âm chữ 'i'",
-                opts: [{ text: "A. kitchen", word: "kitchen" }, { text: "B. fridge", word: "fridge" }, { text: "C. villa", word: "villa" }, { text: "D. microwave", word: "microwave" }],
-                ans: "D",
-                qTranslate: "Dịch câu hỏi: Chọn từ có phát âm chữ 'i' khác.",
-                ansTranslate: "Dịch đáp án: A. /ɪ/ | B. /ɪ/ | C. /ɪ/ | D. /aɪ/ (microwave)",
-                exp: "D (microwave) phát âm chữ 'i' đầu tiên là /aɪ/. Các từ A, B, C phát âm 'i' là /ɪ/."
-            },
-            {
-                id: 5, q: "Câu 5: Phát âm chữ 'a'",
-                opts: [{ text: "A. flat", word: "flat" }, { text: "B. attic", word: "attic" }, { text: "C. bag", word: "bag" }, { text: "D. wardrobe", word: "wardrobe" }],
-                ans: "D",
-                qTranslate: "Dịch câu hỏi: Chọn từ có phát âm chữ 'a' khác.",
-                ansTranslate: "Dịch đáp án: A. /æ/ | B. /æ/ | C. /æ/ | D. /ɔː/ (wardrobe)",
-                exp: "D (wardrobe) phát âm chữ 'a' là /ɔː/. Các từ A, B, C phát âm chữ 'a' là /æ/."
-            }
-        ];
-
-        const part2Data = [
-            {
-                id: 6, q: "Câu 6: Trọng âm danh từ 2 âm tiết",
-                opts: [{ text: "A. bedroom", word: "bedroom" }, { text: "B. kitchen", word: "kitchen" }, { text: "C. attic", word: "attic" }, { text: "D. behind", word: "behind" }],
-                ans: "D",
-                qTranslate: "Dịch câu hỏi: Chọn từ có vị trí trọng âm chính khác.",
-                ansTranslate: "Dịch đáp án: A. âm 1 | B. âm 1 | C. âm 1 | D. âm 2 (behind - /bɪˈhaɪnd/)",
-                exp: "D (behind) là giới từ, trọng âm rơi vào âm tiết thứ 2. Các từ A, B, C là danh từ có trọng âm nhấn âm tiết 1."
-            },
-            {
-                id: 7, q: "Câu 7: Trọng âm từ chỉ đồ dùng gia đình",
-                opts: [{ text: "A. cupboard", word: "cupboard" }, { text: "B. wardrobe", word: "wardrobe" }, { text: "C. poster", word: "poster" }, { text: "D. apartment", word: "apartment" }],
-                ans: "D",
-                qTranslate: "Dịch câu hỏi: Chọn từ có vị trí trọng âm chính khác.",
-                ansTranslate: "Dịch đáp án: A. âm 1 | B. âm 1 | C. âm 1 | D. âm 2 (apartment - /əˈpɑːt.mənt/)",
-                exp: "D (apartment) có trọng âm rơi vào âm tiết thứ 2. A, B, C có trọng âm nhấn âm tiết 1."
-            },
-            {
-                id: 8, q: "Câu 8: Trọng âm từ 2 âm tiết",
-                opts: [{ text: "A. villa", word: "villa" }, { text: "B. country", word: "country" }, { text: "C. window", word: "window" }, { text: "D. between", word: "between" }],
-                ans: "D",
-                qTranslate: "Dịch câu hỏi: Chọn từ có vị trí trọng âm chính khác.",
-                ansTranslate: "Dịch đáp án: A. âm 1 | B. âm 1 | C. âm 1 | D. âm 2 (between - /bɪˈtwiːn/)",
-                exp: "D (between) trọng âm rơi vào âm tiết thứ 2. A, B, C có trọng âm nhấn âm tiết 1."
-            },
-            {
-                id: 9, q: "Câu 9: Trọng âm từ 3 âm tiết",
-                opts: [{ text: "A. microwave", word: "microwave" }, { text: "B. dishwasher", word: "dishwasher" }, { text: "C. furniture", word: "furniture" }, { text: "D. conditioner", word: "conditioner" }],
-                ans: "D",
-                qTranslate: "Dịch câu hỏi: Chọn từ có vị trí trọng âm chính khác.",
-                ansTranslate: "Dịch đáp án: A. âm 1 | B. âm 1 | C. âm 1 | D. âm 2 (conditioner - /kənˈdɪʃ.ən.ər/)",
-                exp: "D (conditioner) trọng âm nhấn âm tiết 2. A, B, C trọng âm nhấn âm tiết 1."
-            },
-            {
-                id: 10, q: "Câu 10: Trọng âm tính từ",
-                opts: [{ text: "A. quiet", word: "quiet" }, { text: "B. modern", word: "modern" }, { text: "C. cozy", word: "cozy" }, { text: "D. expensive", word: "expensive" }],
-                ans: "D",
-                qTranslate: "Dịch câu hỏi: Chọn từ có vị trí trọng âm chính khác.",
-                ansTranslate: "Dịch đáp án: A. âm 1 | B. âm 1 | C. âm 1 | D. âm 2 (expensive - /ɪkˈspen.sɪv/)",
-                exp: "D (expensive) trọng âm nhấn âm tiết 2. A, B, C trọng âm nhấn âm tiết 1."
-            }
-        ];
+        const part1Data = [{'id': 1, 'q': 'Câu 1: Chọn từ có phần gạch chân (-s) phát âm khác.', 'qTrans': 'Chọn từ có phần đuôi -s phát âm khác các từ còn lại.', 'opts': [{'char': 'A', 'text': 'A. desks', 'word': 'desks'}, {'char': 'B', 'text': 'B. lamps', 'word': 'lamps'}, {'char': 'C', 'text': 'C. flats', 'word': 'flats'}, {'char': 'D', 'text': 'D. rooms', 'word': 'rooms'}], 'ans': 'D', 'ansTrans': 'A. desks /desks/ (-s)<br>B. lamps /læmps/ (-s)<br>C. flats /flæts/ (-s)<br>D. rooms /ruːmz/ (-z)', 'exp': 'Đáp án D (rooms) phát âm đuôi -s là /z/. Các từ A, B, C có tận cùng là âm vô thanh (/k/, /p/, /t/) nên phát âm là /s/.'}, {'id': 2, 'q': 'Câu 2: Chọn từ có phần gạch chân (-es) phát âm khác.', 'qTrans': 'Chọn từ có phần đuôi -es phát âm khác các từ còn lại.', 'opts': [{'char': 'A', 'text': 'A. houses', 'word': 'houses'}, {'char': 'B', 'text': 'B. fridges', 'word': 'fridges'}, {'char': 'C', 'text': 'C. dishes', 'word': 'dishes'}, {'char': 'D', 'text': 'D. tables', 'word': 'tables'}], 'ans': 'D', 'ansTrans': 'A. houses /ˈhaʊ.zɪz/ (-ɪz)<br>B. fridges /ˈfrɪdʒ.ɪz/ (-ɪz)<br>C. dishes /ˈdɪʃ.ɪz/ (-ɪz)<br>D. tables /ˈteɪ.bəlz/ (-z)', 'exp': 'Đáp án D (tables) phát âm đuôi -s là /z/. Các từ A, B, C có âm tận cùng s, ge, sh nên phát âm đuôi -es là /ɪz/.'}, {'id': 3, 'q': 'Câu 3: Chọn từ có nguyên âm (u) phát âm khác.', 'qTrans': "Chọn từ có nguyên âm 'u' phát âm khác các từ còn lại.", 'opts': [{'char': 'A', 'text': 'A. cupboard', 'word': 'cupboard'}, {'char': 'B', 'text': 'B. compass', 'word': 'compass'}, {'char': 'C', 'text': 'C. club', 'word': 'club'}, {'char': 'D', 'text': 'D. furniture', 'word': 'furniture'}], 'ans': 'D', 'ansTrans': 'A. cupboard /ˈkʌb.əd/ (/ʌ/)<br>B. compass /ˈkʌm.pəs/ (/ʌ/)<br>C. club /klʌb/ (/ʌ/)<br>D. furniture /ˈfɜː.nɪ.tʃər/ (/ɜː/)', 'exp': "Đáp án D (furniture) phát âm 'ur' là /ɜː/. Các từ còn lại phát âm là /ʌ/."}, {'id': 4, 'q': 'Câu 4: Chọn từ có nguyên âm (i) phát âm khác.', 'qTrans': "Chọn từ có nguyên âm 'i' phát âm khác các từ còn lại.", 'opts': [{'char': 'A', 'text': 'A. living', 'word': 'living'}, {'char': 'B', 'text': 'B. kitchen', 'word': 'kitchen'}, {'char': 'C', 'text': 'C. villa', 'word': 'villa'}, {'char': 'D', 'text': 'D. microwave', 'word': 'microwave'}], 'ans': 'D', 'ansTrans': 'A. living /ˈlɪv.ɪŋ/ (/ɪ/)<br>B. kitchen /ˈkɪtʃ.ən/ (/ɪ/)<br>C. villa /ˈvɪl.ə/ (/ɪ/)<br>D. microwave /ˈmaɪ.krə.weɪv/ (/aɪ/)', 'exp': "Đáp án D (microwave) phát âm chữ 'i' là /aɪ/. Các từ còn lại phát âm là /ɪ/."}, {'id': 5, 'q': 'Câu 5: Chọn từ có nguyên âm (a) phát âm khác.', 'qTrans': "Chọn từ có nguyên âm 'a' phát âm khác các từ còn lại.", 'opts': [{'char': 'A', 'text': 'A. flat', 'word': 'flat'}, {'char': 'B', 'text': 'B. attic', 'word': 'attic'}, {'char': 'C', 'text': 'C. bank', 'word': 'bank'}, {'char': 'D', 'text': 'D. wardrobe', 'word': 'wardrobe'}], 'ans': 'D', 'ansTrans': 'A. flat /flæt/ (/æ/)<br>B. attic /ˈæt.ɪk/ (/æ/)<br>C. bank /bæŋk/ (/æ/)<br>D. wardrobe /ˈwɔː.drəʊb/ (/ɔː/)', 'exp': "Đáp án D (wardrobe) phát âm 'ar' là /ɔː/. Các từ A, B, C phát âm chữ 'a' là /æ/."}];
+        const part2Data = [{'id': 6, 'q': 'Câu 6: Trọng âm các từ chỉ phòng và vị trí', 'qTrans': 'Chọn từ có vị trí trọng âm chính khác các từ còn lại.', 'opts': [{'char': 'A', 'text': 'A. bedroom', 'word': 'bedroom'}, {'char': 'B', 'text': 'B. kitchen', 'word': 'kitchen'}, {'char': 'C', 'text': 'C. attic', 'word': 'attic'}, {'char': 'D', 'text': 'D. behind', 'word': 'behind'}], 'ans': 'D', 'ansTrans': "A. 'bedroom /ˈbed.ruːm/ (nhấn âm 1)<br>B. 'kitchen /ˈkɪtʃ.ən/ (nhấn âm 1)<br>C. 'attic /ˈæt.ɪk/ (nhấn âm 1)<br>D. be'hind /bɪˈhaɪnd/ (nhấn âm 2)", 'exp': 'Đáp án D (behind) là giới từ có trọng âm nhấn âm tiết 2 (/bɪˈhaɪnd/). A, B, C có trọng âm nhấn âm tiết 1.'}, {'id': 7, 'q': 'Câu 7: Trọng âm từ chỉ đồ dùng gia đình', 'qTrans': 'Chọn từ có vị trí trọng âm chính khác các từ còn lại.', 'opts': [{'char': 'A', 'text': 'A. cupboard', 'word': 'cupboard'}, {'char': 'B', 'text': 'B. wardrobe', 'word': 'wardrobe'}, {'char': 'C', 'text': 'C. poster', 'word': 'poster'}, {'char': 'D', 'text': 'D. apartment', 'word': 'apartment'}], 'ans': 'D', 'ansTrans': "A. 'cupboard /ˈkʌb.əd/ (nhấn âm 1)<br>B. 'wardrobe /ˈwɔː.drəʊb/ (nhấn âm 1)<br>C. 'poster /ˈpəʊ.stər/ (nhấn âm 1)<br>D. a'partment /əˈpɑːt.mənt/ (nhấn âm 2)", 'exp': 'Đáp án D (apartment) có trọng âm nhấn âm tiết 2 (/əˈpɑːt.mənt/). A, B, C có trọng âm nhấn âm tiết 1.'}, {'id': 8, 'q': 'Câu 8: Trọng âm loại nhà và giới từ', 'qTrans': 'Chọn từ có vị trí trọng âm chính khác các từ còn lại.', 'opts': [{'char': 'A', 'text': 'A. villa', 'word': 'villa'}, {'char': 'B', 'text': 'B. cottage', 'word': 'cottage'}, {'char': 'C', 'text': 'C. palace', 'word': 'palace'}, {'char': 'D', 'text': 'D. between', 'word': 'between'}], 'ans': 'D', 'ansTrans': "A. 'villa /ˈvɪl.ə/ (nhấn âm 1)<br>B. 'cottage /ˈkɒt.ɪdʒ/ (nhấn âm 1)<br>C. 'palace /ˈpæl.əs/ (nhấn âm 1)<br>D. be'tween /bɪˈtwiːn/ (nhấn âm 2)", 'exp': 'Đáp án D (between) có trọng âm nhấn âm tiết 2 (/bɪˈtwiːn/). A, B, C có trọng âm nhấn âm tiết 1.'}, {'id': 9, 'q': 'Câu 9: Trọng âm tính từ & giới từ', 'qTrans': 'Chọn từ có vị trí trọng âm chính khác các từ còn lại.', 'opts': [{'char': 'A', 'text': 'A. cozy', 'word': 'cozy'}, {'char': 'B', 'text': 'B. country', 'word': 'country'}, {'char': 'C', 'text': 'C. modern', 'word': 'modern'}, {'char': 'D', 'text': 'D. expensive', 'word': 'expensive'}], 'ans': 'D', 'ansTrans': "A. 'cozy /ˈkəʊ.zi/ (nhấn âm 1)<br>B. 'country /ˈkʌn.tri/ (nhấn âm 1)<br>C. 'modern /ˈmɒd.ən/ (nhấn âm 1)<br>D. ex'pensive /ɪkˈspen.sɪv/ (nhấn âm 2)", 'exp': 'Đáp án D (expensive) có trọng âm nhấn âm tiết 2 (/ɪkˈspen.sɪv/). A, B, C có trọng âm nhấn âm tiết 1.'}, {'id': 10, 'q': 'Câu 10: Trọng âm thiết bị gia đình nhiều âm tiết', 'qTrans': 'Chọn từ có vị trí trọng âm chính khác các từ còn lại.', 'opts': [{'char': 'A', 'text': 'A. dishwasher', 'word': 'dishwasher'}, {'char': 'B', 'text': 'B. microwave', 'word': 'microwave'}, {'char': 'C', 'text': 'C. furniture', 'word': 'furniture'}, {'char': 'D', 'text': 'D. conditioner', 'word': 'conditioner'}], 'ans': 'D', 'ansTrans': "A. 'dishwasher /ˈdɪʃˌwɒʃ.ər/ (nhấn âm 1)<br>B. 'microwave /ˈmaɪ.krə.weɪv/ (nhấn âm 1)<br>C. 'furniture /ˈfɜː.nɪ.tʃər/ (nhấn âm 1)<br>D. con'ditioner /kənˈdɪʃ.ən.ər/ (nhấn âm 2)", 'exp': 'Đáp án D (conditioner) có trọng âm nhấn âm tiết 2 (/kənˈdɪʃ.ən.ər/). A, B, C có trọng âm nhấn âm tiết 1.'}];
+        const allQuestions = [...part1Data, ...part2Data];
 
         function speak(text) {
-            if ('speechSynthesis' in window) {
-                window.speechSynthesis.cancel();
-                const u = new SpeechSynthesisUtterance(text);
-                u.lang = 'en-US'; u.rate = 0.85;
-                window.speechSynthesis.speak(u);
+            if (!text || !('speechSynthesis' in window)) return;
+            const clean = text.replace(/🔊/g, '').trim();
+            if (!clean) return;
+
+            window.speechSynthesis.cancel();
+            const utterance = new SpeechSynthesisUtterance(clean);
+            utterance.lang = 'en-US';
+            utterance.rate = 0.85;
+            utterance.pitch = 1.0;
+
+            const voices = window.speechSynthesis.getVoices();
+            if (voices && voices.length > 0) {
+                const enVoices = voices.filter(v => v.lang && (v.lang.startsWith('en') || v.lang.startsWith('en_')));
+                const best = enVoices.find(v => 
+                    v.name.includes('Google') || 
+                    v.name.includes('Natural') || 
+                    v.name.includes('Aria') || 
+                    v.name.includes('Jenny') || 
+                    v.name.includes('Samantha') || 
+                    v.name.includes('US')
+                ) || enVoices[0];
+                if (best) utterance.voice = best;
+            }
+            window.speechSynthesis.speak(utterance);
+        }
+
+        if ('speechSynthesis' in window) {
+            window.speechSynthesis.getVoices();
+            if (window.speechSynthesis.onvoiceschanged !== undefined) {
+                window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
             }
         }
 
@@ -154,56 +81,28 @@
             data.forEach(item => {
                 let optsHtml = '';
                 item.opts.forEach(opt => {
-                    const char = opt.text.charAt(0);
-                    optsHtml += `
-                        <div style="margin:6px 0; display:flex; align-items:center;">
-                            <label style="cursor:pointer; margin-right:6px;">
-                                <input type="radio" name="q_${item.id}" value="${char}"> ${opt.text}
-                            </label>
-                            <button type="button" class="btn-audio" onclick="speak('${opt.word}')">🔊 Nghe</button>
-                        </div>
-                    `;
+                    optsHtml += `<div class="opt-row"><label class="opt-label"><input type="radio" name="q_${item.id}" value="${opt.char}"> ${opt.text}</label><button type="button" class="btn-audio" onclick="speak('${opt.word}')">🔊 Nghe</button></div>`;
                 });
-                container.innerHTML += `
-                    <div class="question-card" id="card_q_${item.id}">
-                        <div style="font-weight:bold; color:#1565c0; margin-bottom:8px;">${item.q}</div>
-                        <div>${optsHtml}</div>
-                        <button type="button" class="btn-submit-q" onclick="checkQuestion(${item.id})">Nộp câu này</button>
-                        <div id="explain_q_${item.id}" class="explanation"></div>
-                    </div>
-                `;
+                container.innerHTML += `<div class="question-card" id="card_q_${item.id}"><div style="font-weight:bold; color:#1565c0; margin-bottom:8px;">${item.q}</div><div>${optsHtml}</div><button type="button" class="btn-submit-q" onclick="checkQuestion(${item.id})">Nộp câu này</button><div id="explain_q_${item.id}" class="explanation"></div></div>`;
             });
         }
 
         function checkQuestion(qId) {
-            const allQ = [...part1Data, ...part2Data];
-            const item = allQ.find(x => x.id === qId);
-            if(!item) return;
-
+            const item = allQuestions.find(x => x.id === qId);
+            if (!item) return;
             const card = document.getElementById(`card_q_${qId}`);
             const explainDiv = document.getElementById(`explain_q_${qId}`);
             explainDiv.style.display = 'block';
 
             const sel = document.querySelector(`input[name="q_${qId}"]:checked`);
-
-            if(sel && sel.value === item.ans) {
+            if (sel && sel.value === item.ans) {
                 card.className = "question-card status-correct";
                 explainDiv.className = "explanation correct";
-                explainDiv.innerHTML = `
-                    <b>✓ CHÍNH XÁC!</b><br>
-                    <div class="trans-line">📌 <b>${item.qTranslate}</b></div>
-                    <div class="trans-line">💡 <b>${item.ansTranslate}</b></div>
-                    <br><b>Giải thích chi tiết:</b> ${item.exp}
-                `;
+                explainDiv.innerHTML = `<b>✓ CHÍNH XÁC!</b><div class="trans-box"><b>📌 Dịch câu hỏi:</b> ${item.qTrans}</div><div class="ipa-box"><b>🎙️ Phiên âm IPA chi tiết:</b><br>${item.ansTrans}</div><b>📝 Giải thích:</b> ${item.exp}`;
             } else {
                 card.className = "question-card status-wrong";
                 explainDiv.className = "explanation wrong";
-                explainDiv.innerHTML = `
-                    <b>✗ CHƯA CHÍNH XÁC!</b> (Đáp án chuẩn: <b>${item.ans}</b>)<br>
-                    <div class="trans-line">📌 <b>${item.qTranslate}</b></div>
-                    <div class="trans-line">💡 <b>${item.ansTranslate}</b></div>
-                    <br><b>Giải thích chi tiết:</b> ${item.exp}
-                `;
+                explainDiv.innerHTML = `<b>✗ CHƯA CHÍNH XÁC!</b> (Đáp án chuẩn: <b>${item.ans}</b>)<div class="trans-box"><b>📌 Dịch câu hỏi:</b> ${item.qTrans}</div><div class="ipa-box"><b>🎙️ Phiên âm IPA chi tiết:</b><br>${item.ansTrans}</div><b>📝 Giải thích:</b> ${item.exp}`;
             }
         }
 

@@ -3,103 +3,279 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unit 1 - Đề 6: Kỹ Năng Nói & Viết Đoạn Văn</title>
+    <title>Unit 1 - Đề 6: Kỹ Năng Nói & Viết Đoạn Văn (Speaking & Guided Writing)</title>
     <style>
         :root { --primary: #1e88e5; --secondary: #0d47a1; --correct: #2e7d32; --wrong: #c62828; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 20px; background: #f4f6f9; color: #333; line-height: 1.6; }
         h2, h3 { color: var(--secondary); margin-top: 0; }
-        .section-card { background: #fff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 18px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
-        .prompt-box { background: #e3f2fd; border-left: 5px solid var(--primary); padding: 14px; border-radius: 6px; margin-bottom: 12px; }
-        .model-box { background: #f1f8e9; border-left: 5px solid var(--correct); padding: 14px; border-radius: 6px; margin-top: 12px; }
-        .btn-audio { background: #1e88e5; color: white; border: none; padding: 6px 14px; font-weight: bold; border-radius: 4px; cursor: pointer; margin-top: 8px; display: inline-flex; align-items: center; gap: 6px; }
-        .btn-audio:hover { background: #0d47a1; }
-        textarea { width: 100%; height: 120px; padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-family: inherit; font-size: 1rem; box-sizing: border-box; }
-        .btn-check { background: #2e7d32; color: white; border: none; padding: 8px 18px; font-weight: bold; border-radius: 4px; cursor: pointer; margin-top: 10px; }
-        .result-box { display: none; margin-top: 12px; padding: 12px; background: #fff8e1; border-left: 4px solid #ffa000; border-radius: 6px; }
+
+        .card {
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+
+        .speaking-box {
+            background: #e3f2fd;
+            border-left: 5px solid var(--primary);
+            padding: 16px;
+            border-radius: 6px;
+            margin-bottom: 16px;
+        }
+
+        .sample-box {
+            background: #fff8e1;
+            border-left: 5px solid #ffa000;
+            padding: 16px;
+            border-radius: 6px;
+            margin-top: 12px;
+        }
+
+        .sentence-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 6px;
+            padding: 6px;
+            border-radius: 4px;
+            background: rgba(255,255,255,0.8);
+        }
+
+        .btn-audio {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 14px;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 6px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .btn-audio:hover { background: var(--secondary); }
+
+        .btn-sent-audio {
+            background: #e3f2fd;
+            color: #1565c0;
+            border: 1px solid #bbdefb;
+            padding: 3px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.82rem;
+            white-space: nowrap;
+        }
+        .btn-sent-audio:hover { background: #bbdefb; }
+
+        textarea {
+            width: 100%;
+            height: 120px;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 1rem;
+            box-sizing: border-box;
+            margin-top: 10px;
+        }
+
+        .word-count {
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: #555;
+            margin-top: 6px;
+        }
+
+        .btn-submit {
+            background: var(--correct);
+            color: white;
+            border: none;
+            padding: 9px 18px;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .btn-submit:hover { background: #1b5e20; }
+
+        .model-answer {
+            display: none;
+            margin-top: 16px;
+            background: #e8f5e9;
+            border-left: 5px solid var(--correct);
+            padding: 16px;
+            border-radius: 6px;
+        }
     </style>
 </head>
 <body>
-    <h2>ĐỀ KIỂM TRA SỐ 6 - UNIT 1: KỸ NĂNG NÓI & VIẾT ĐOẠN VĂN (SPEAKING & WRITING)</h2>
 
-    <div class="section-card">
+    <h2>ĐỀ KIỂM TRA SỐ 6 - UNIT 1: KỸ NĂNG NÓI & VIẾT ĐOẠN VĂN</h2>
+
+    <!-- PHẦN 1: KỸ NĂNG NÓI -->
+    <div class="card">
         <h3>PART 1: SPEAKING PRACTICE (Luyện Nói Theo Chủ Đề)</h3>
-        <div class="prompt-box">
-            <b>🗣️ Chủ đề nói:</b> "Talk about your new school" (Hãy giới thiệu về ngôi trường mới của em - từ 3-5 câu).<br>
-            <b>Gợi ý nội dung:</b>
-            <ul>
-                <li>What is the name of your new school? (Tên trường là gì?)</li>
-                <li>Where is it located? Is it big or small? (Trường ở đâu? Rộng hay nhỏ?)</li>
-                <li>How many classrooms/facilities does it have? (Có bao nhiêu phòng học/thiết bị?)</li>
-                <li>What do you like most about your school? (Em thích điều gì nhất?)</li>
+        <div class="speaking-box">
+            <b>📌 Chủ đề nói: Introduce your new school</b><br><br>
+            <b>Gợi ý câu hỏi luyện tập:</b>
+            <ul style="margin: 6px 0 0 0; padding-left: 20px;">
+                <li>What is the name of your new school? Where is it?</li><li>How many classrooms and computer rooms does it have?</li><li>What do you wear to school on Mondays?</li><li>What is your favorite subject and why?</li><li>Who do you usually play sports with after school?</li>
             </ul>
         </div>
-        <button class="btn-audio" onclick="speakModelSpeech()">🔊 Nghe bài nói mẫu (Sample Speech)</button>
-        <div class="model-box" id="speechModelBox">
-            <b>Bài nói mẫu (Sample Text):</b><br>
-            "Hello! My new school is Sunrise Lower Secondary School. It is a big and modern school in Ha Noi. There are thirty classrooms, a large library, and a computer room. My teachers are very friendly and helpful. I love my new school because I have many good friends here."
+
+        <button class="btn-audio" onclick="playFullParagraph()">▶️ Bật nghe bài nói mẫu (có ngắt nghỉ tự nhiên)</button>
+        <button class="btn-audio" style="background:#f57c00;" onclick="stopAudio()">⏸️ Tạm dừng</button>
+
+        <div class="sample-box">
+            <b style="color:#b76e00;">📝 Bài nói mẫu (Audio Sample - Bấm từng câu để nghe và luyện đọc theo):</b>
+            <div id="sentenceList" style="margin-top:10px;"></div>
         </div>
     </div>
 
-    <div class="section-card">
-        <h3>PART 2: GUIDED PARAGRAPH WRITING (Luyện Viết Đoạn Văn 40-60 Từ)</h3>
-        <div class="prompt-box">
-            <b>✍️ Đề bài:</b> Write a short paragraph (40 - 60 words) about your school day. (Viết một đoạn văn ngắn khoảng 40-60 từ kể về một ngày đi học của em).<br>
-            <b>Dàn ý gợi ý (Guided Prompts):</b>
-            <ul>
-                <li>How do you go to school every morning? (Đến trường bằng phương tiện gì?)</li>
-                <li>What time do lessons start and finish? (Mấy giờ bắt đầu và kết thúc học?)</li>
-                <li>What subjects do you study? What do you do at break time? (Học môn gì? Giờ ra chơi làm gì?)</li>
-            </ul>
-        </div>
+    <!-- PHẦN 2: VIẾT ĐOẠN VĂN -->
+    <div class="card">
+        <h3>PART 2: GUIDED PARAGRAPH WRITING (Viết Đoạn Văn 40-60 Từ)</h3>
+        <p><b>📝 Đề bài:</b> Write a paragraph (40-60 words) about your new school.</p>
 
-        <textarea id="writingInput" placeholder="Nhập đoạn văn Tiếng Anh của em vào đây (tối thiểu 30 từ)..."></textarea><br>
-        <button class="btn-check" onclick="checkWriting()">Nộp bài viết & Xem nhận xét mẫu</button>
+        <b>Gợi ý viết đoạn văn (Guided Prompts):</b>
+        <ul style="margin: 6px 0; padding-left: 20px;">
+            <li>Name and location of your school (Trường tên gì, ở đâu?)</li><li>Facilities: classrooms, library, playground (Cơ sở vật chất)</li><li>Subjects, friends and teachers (Môn học, bạn bè và thầy cô)</li>
+        </ul>
 
-        <div class="result-box" id="writingResult">
-            <b>📊 Đánh giá bài viết của em:</b><br>
-            <span id="wordCountText"></span><br><br>
-            <div class="model-box">
-                <b>💡 Đoạn văn mẫu tham khảo (Model Paragraph):</b><br>
-                "Every morning, I get up at 6:00 and cycle to school with my best friend, Nam. My lessons start at 7:30 and finish at 11:30. At school, I study many subjects like Maths, Science, and English. At break time, I often play badminton with my classmates in the playground. I have a wonderful school day!"
-            </div>
+        <textarea id="writingInput" oninput="updateWordCount()" placeholder="Nhập bài viết của bạn vào đây (từ 40 đến 60 từ)..."></textarea>
+        <div class="word-count" id="wordCountLabel">Số từ: 0 / 60 từ</div>
+
+        <button class="btn-submit" onclick="checkWriting()">Nộp bài viết & Xem bài mẫu</button>
+
+        <div id="modelAnswerBox" class="model-answer">
+            <b style="color:#1b5e20;">✨ BÀI VIẾT MẪU THAM KHẢO (MODEL PARAGRAPH):</b>
+            <p style="margin: 8px 0; font-style: italic;">"My new school is Sunrise Lower Secondary School in Ha Noi. It is a big school with thirty classrooms and a large library. At school, I study many interesting subjects like Science and English. The teachers are very kind and helpful. At break time, I play badminton with my friends. I love my school very much."</p>
+            <hr style="border: 0; border-top: 1px solid #a5d6a7; margin: 10px 0;">
+            <b>📌 Dịch Tiếng Việt:</b>
+            <p style="margin: 6px 0; color: #2e7d32;">"Trường học mới của em là Trường THCS Sunrise ở Hà Nội. Đó là một ngôi trường lớn với 30 phòng học và một thư viện rộng. Ở trường, em học nhiều môn học thú vị như Khoa học và Tiếng Anh. Các thầy cô giáo rất tốt bụng và tận tình. Vào giờ ra chơi, em chơi cầu lông cùng các bạn. Em rất yêu trường của em."</p>
         </div>
     </div>
 
     <script>
-        const sampleText = "Hello! My new school is Sunrise Lower Secondary School. It is a big and modern school in Ha Noi. There are thirty classrooms, a large library, and a computer room. My teachers are very friendly and helpful. I love my new school because I have many good friends here.";
+        const sentences = ['Hello! My new school is Sunrise Lower Secondary School.', 'It is a big and modern school in Ha Noi.', 'My school has thirty classrooms and two large computer rooms.', 'We wear uniforms on Mondays and Saturdays.', 'My favorite subject is Science because I love doing experiments.', 'After school, I play football with my classmate, Vy.', 'I love my new school very much!'];
+        let isSpeakingSeq = false;
 
-        function speakModelSpeech() {
-            if ('speechSynthesis' in window) {
-                window.speechSynthesis.cancel();
-                const u = new SpeechSynthesisUtterance(sampleText);
-                u.lang = 'en-US'; u.rate = 0.85;
-                window.speechSynthesis.speak(u);
-            }
+        function stopAudio() {
+            isSpeakingSeq = false;
+            if ('speechSynthesis' in window) window.speechSynthesis.cancel();
         }
 
-        function checkWriting() {
-            const input = document.getElementById('writingInput').value.trim();
-            const resultBox = document.getElementById('writingResult');
-            const countText = document.getElementById('wordCountText');
+        function speakSentence(text) {
+            stopAudio();
+            if (!text || !('speechSynthesis' in window)) return;
 
-            if (!input) {
-                alert("Em vui lòng nhập đoạn văn trước khi nộp bài!");
+            const u = new SpeechSynthesisUtterance(text.trim());
+            u.lang = 'en-US';
+            u.rate = 0.85;
+            u.pitch = 1.0;
+
+            const voices = window.speechSynthesis.getVoices();
+            if (voices && voices.length > 0) {
+                const enVoices = voices.filter(v => v.lang && (v.lang.startsWith('en') || v.lang.startsWith('en_')));
+                const best = enVoices.find(v => 
+                    v.name.includes('Google') || v.name.includes('Natural') || v.name.includes('Aria') || v.name.includes('US')
+                ) || enVoices[0];
+                if (best) u.voice = best;
+            }
+            window.speechSynthesis.speak(u);
+        }
+
+        function playFullParagraph() {
+            stopAudio();
+            if (!('speechSynthesis' in window)) {
+                alert("Trình duyệt không hỗ trợ phát âm thanh tự động.");
                 return;
             }
 
-            const words = input.split(/\s+/).filter(w => w.length > 0);
-            const count = words.length;
+            isSpeakingSeq = true;
+            let idx = 0;
 
-            resultBox.style.display = 'block';
+            function playNext() {
+                if (!isSpeakingSeq || idx >= sentences.length) {
+                    isSpeakingSeq = false;
+                    return;
+                }
 
-            if (count >= 30 && count <= 80) {
-                countText.innerHTML = `✅ <b>Đạt yêu cầu độ dài:</b> Bài viết của em có <b>${count} từ</b> (Yêu cầu: 40 - 60 từ). Hãy đối chiếu với đoạn văn mẫu bên dưới để cải thiện từ vựng và cấu trúc câu nhé!`;
-            } else if (count < 30) {
-                countText.innerHTML = `⚠️ <b>Bài viết hơi ngắn:</b> Bài viết hiện tại có <b>${count} từ</b>. Em nên viết thêm 1-2 câu nữa để đạt độ dài chuẩn (40 - 60 từ).`;
-            } else {
-                countText.innerHTML = `ℹ️ <b>Bài viết khá dài:</b> Bài viết có <b>${count} từ</b>. Em đã viết rất phong phú, chú ý tóm tắt cô đọng hơn trong các bài kiểm tra thời gian ngắn nhé!`;
+                const sText = sentences[idx].trim();
+                idx++;
+
+                if (!sText) { playNext(); return; }
+
+                const u = new SpeechSynthesisUtterance(sText);
+                u.lang = 'en-US';
+                u.rate = 0.85;
+                u.pitch = 1.0;
+
+                const voices = window.speechSynthesis.getVoices();
+                if (voices && voices.length > 0) {
+                    const enVoices = voices.filter(v => v.lang && (v.lang.startsWith('en') || v.lang.startsWith('en_')));
+                    const best = enVoices.find(v => 
+                        v.name.includes('Google') || v.name.includes('Natural') || v.name.includes('Aria') || v.name.includes('US')
+                    ) || enVoices[0];
+                    if (best) u.voice = best;
+                }
+
+                u.onend = function() {
+                    if (isSpeakingSeq) setTimeout(playNext, 350); // Ngắt nghỉ 350ms tự nhiên giữa các câu
+                };
+                u.onerror = function() {
+                    if (isSpeakingSeq) setTimeout(playNext, 350);
+                };
+
+                window.speechSynthesis.speak(u);
+            }
+
+            playNext();
+        }
+
+        function renderTranscript() {
+            const container = document.getElementById('sentenceList');
+            sentences.forEach((s, i) => {
+                container.innerHTML += `
+                    <div class="sentence-row">
+                        <button type="button" class="btn-sent-audio" onclick="speakSentence(sentences[${i}])">🔊 Câu ${i+1}</button>
+                        <span>${s}</span>
+                    </div>
+                `;
+            });
+        }
+
+        function updateWordCount() {
+            const text = document.getElementById('writingInput').value.trim();
+            const words = text ? text.split(/\s+/).length : 0;
+            const label = document.getElementById('wordCountLabel');
+            label.innerText = `Số từ: ${words} / 60 từ`;
+            label.style.color = (words >= 40 && words <= 70) ? '#2e7d32' : '#c62828';
+        }
+
+        function checkWriting() {
+            const text = document.getElementById('writingInput').value.trim();
+            if (!text) {
+                alert("Vui lòng nhập bài viết trước khi nộp bài!");
+                return;
+            }
+            document.getElementById('modelAnswerBox').style.display = 'block';
+        }
+
+        if ('speechSynthesis' in window) {
+            window.speechSynthesis.getVoices();
+            if (window.speechSynthesis.onvoiceschanged !== undefined) {
+                window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
             }
         }
+
+        window.onload = function() {
+            renderTranscript();
+        };
     </script>
 </body>
 </html>

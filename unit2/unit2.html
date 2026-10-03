@@ -193,15 +193,53 @@
     </div>
 
     <script>
-        function speak(text) {
-            if ('speechSynthesis' in window) {
-                window.speechSynthesis.cancel();
-                const u = new SpeechSynthesisUtterance(text);
-                u.lang = 'en-US';
-                u.rate = 0.85;
-                window.speechSynthesis.speak(u);
-            }
+        // ========================================================
+    // BỘ MÁY PHÁT ÂM CHUẨN BẢN XỨ NÂNG CẤP (AUDIO ENGINE V6)
+    // ========================================================
+    
+    // BỘ MÁY PHÁT ÂM CHUẨN (WEB SPEECH API SYNCHRONOUS - TỰ NHIÊN, KHÔNG NGHẼN, CHẠY 100%)
+    function speak(text) {
+        if (!text) return;
+        if (!('speechSynthesis' in window)) {
+            alert("Trình duyệt không hỗ trợ phát âm thanh.");
+            return;
         }
+
+        const cleanText = text.replace(/🔊/g, '').trim();
+        if (!cleanText) return;
+
+        // Dừng âm thanh cũ
+        window.speechSynthesis.cancel();
+
+        const utterance = new SpeechSynthesisUtterance(cleanText);
+        utterance.lang = 'en-US';
+        utterance.rate = 0.85; // Tốc độ vừa phải cho học sinh lớp 6
+        utterance.pitch = 1.0;
+
+        // Lấy danh sách giọng đọc có sẵn trên thiết bị
+        const voices = window.speechSynthesis.getVoices();
+        if (voices && voices.length > 0) {
+            const enVoices = voices.filter(v => v.lang && (v.lang.startsWith('en') || v.lang.startsWith('en_')));
+            const best = enVoices.find(v => 
+                v.name.includes('Google') || 
+                v.name.includes('Natural') || 
+                v.name.includes('Aria') || 
+                v.name.includes('Jenny') || 
+                v.name.includes('Samantha') || 
+                v.name.includes('US')
+            ) || enVoices[0];
+            if (best) utterance.voice = best;
+        }
+
+        window.speechSynthesis.speak(utterance);
+    }
+
+    if ('speechSynthesis' in window) {
+        window.speechSynthesis.getVoices();
+        if (window.speechSynthesis.onvoiceschanged !== undefined) {
+            window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
+        }
+    }
     </script>
 </body>
 </html>

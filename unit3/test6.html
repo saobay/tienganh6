@@ -3,102 +3,279 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unit 3 - Đề 6: Kỹ Năng Nói & Viết Đoạn Văn</title>
+    <title>Unit 3 - Đề 6: Kỹ Năng Nói & Viết Đoạn Văn (Speaking & Guided Writing)</title>
     <style>
         :root { --primary: #1e88e5; --secondary: #0d47a1; --correct: #2e7d32; --wrong: #c62828; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 20px; background: #f4f6f9; color: #333; line-height: 1.6; }
         h2, h3 { color: var(--secondary); margin-top: 0; }
-        .section-card { background: #fff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 18px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
-        .prompt-box { background: #e3f2fd; border-left: 5px solid var(--primary); padding: 14px; border-radius: 6px; margin-bottom: 12px; }
-        .model-box { background: #f1f8e9; border-left: 5px solid var(--correct); padding: 14px; border-radius: 6px; margin-top: 12px; }
-        .btn-audio { background: #1e88e5; color: white; border: none; padding: 6px 14px; font-weight: bold; border-radius: 4px; cursor: pointer; margin-top: 8px; display: inline-flex; align-items: center; gap: 6px; }
-        .btn-audio:hover { background: #0d47a1; }
-        textarea { width: 100%; height: 120px; padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-family: inherit; font-size: 1rem; box-sizing: border-box; }
-        .btn-check { background: #2e7d32; color: white; border: none; padding: 8px 18px; font-weight: bold; border-radius: 4px; cursor: pointer; margin-top: 10px; }
-        .result-box { display: none; margin-top: 12px; padding: 12px; background: #fff8e1; border-left: 4px solid #ffa000; border-radius: 6px; }
+
+        .card {
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+
+        .speaking-box {
+            background: #e3f2fd;
+            border-left: 5px solid var(--primary);
+            padding: 16px;
+            border-radius: 6px;
+            margin-bottom: 16px;
+        }
+
+        .sample-box {
+            background: #fff8e1;
+            border-left: 5px solid #ffa000;
+            padding: 16px;
+            border-radius: 6px;
+            margin-top: 12px;
+        }
+
+        .sentence-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 6px;
+            padding: 6px;
+            border-radius: 4px;
+            background: rgba(255,255,255,0.8);
+        }
+
+        .btn-audio {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 14px;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 6px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .btn-audio:hover { background: var(--secondary); }
+
+        .btn-sent-audio {
+            background: #e3f2fd;
+            color: #1565c0;
+            border: 1px solid #bbdefb;
+            padding: 3px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.82rem;
+            white-space: nowrap;
+        }
+        .btn-sent-audio:hover { background: #bbdefb; }
+
+        textarea {
+            width: 100%;
+            height: 120px;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 1rem;
+            box-sizing: border-box;
+            margin-top: 10px;
+        }
+
+        .word-count {
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: #555;
+            margin-top: 6px;
+        }
+
+        .btn-submit {
+            background: var(--correct);
+            color: white;
+            border: none;
+            padding: 9px 18px;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .btn-submit:hover { background: #1b5e20; }
+
+        .model-answer {
+            display: none;
+            margin-top: 16px;
+            background: #e8f5e9;
+            border-left: 5px solid var(--correct);
+            padding: 16px;
+            border-radius: 6px;
+        }
     </style>
 </head>
 <body>
-    <h2>ĐỀ KIỂM TRA SỐ 6 - UNIT 3: KỸ NĂNG NÓI & VIẾT ĐOẠN VĂN (SPEAKING & WRITING)</h2>
 
-    <div class="section-card">
+    <h2>ĐỀ KIỂM TRA SỐ 6 - UNIT 3: KỸ NĂNG NÓI & VIẾT ĐOẠN VĂN</h2>
+
+    <!-- PHẦN 1: KỸ NĂNG NÓI -->
+    <div class="card">
         <h3>PART 1: SPEAKING PRACTICE (Luyện Nói Theo Chủ Đề)</h3>
-        <div class="prompt-box">
-            <b>🗣️ Chủ đề nói:</b> "Describe your best friend" (Hãy miêu tả về người bạn thân nhất của em).<br>
-            <b>Gợi ý nội dung:</b>
-            <ul>
-                <li>Who is your best friend? What does he/she look like? (Bạn tên gì? Ngoại hình thế nào?)</li>
-                <li>What is his/her personality? (Tính cách bạn ấy như thế nào?)</li>
-                <li>What activities do you often do together? (Hai em thường làm gì cùng nhau?)</li>
+        <div class="speaking-box">
+            <b>📌 Chủ đề nói: Describe your best friend</b><br><br>
+            <b>Gợi ý câu hỏi luyện tập:</b>
+            <ul style="margin: 6px 0 0 0; padding-left: 20px;">
+                <li>Who is your best friend? How old is he/she?</li><li>What does he/she look like? (tall, slim, hair, eyes...)</li><li>What is he/she like? (friendly, kind, clever, active...)</li><li>What do you usually do together?</li>
             </ul>
         </div>
-        <button class="btn-audio" onclick="speakModelSpeech()">🔊 Nghe bài nói mẫu (Sample Speech)</button>
-        <div class="model-box">
-            <b>Bài nói mẫu (Sample Text):</b><br>
-            "My best friend is Minh. He is tall and thin with short black hair and big brown eyes. Minh is a very clever and kind boy. He always helps me when I have difficult math problems. In our free time, we often play basketball and ride bikes in the park together."
+
+        <button class="btn-audio" onclick="playFullParagraph()">▶️ Bật nghe bài nói mẫu (có ngắt nghỉ tự nhiên)</button>
+        <button class="btn-audio" style="background:#f57c00;" onclick="stopAudio()">⏸️ Tạm dừng</button>
+
+        <div class="sample-box">
+            <b style="color:#b76e00;">📝 Bài nói mẫu (Audio Sample - Bấm từng câu để nghe và luyện đọc theo):</b>
+            <div id="sentenceList" style="margin-top:10px;"></div>
         </div>
     </div>
 
-    <div class="section-card">
-        <h3>PART 2: GUIDED PARAGRAPH WRITING (Luyện Viết Đoạn Văn 40-60 Từ)</h3>
-        <div class="prompt-box">
-            <b>✍️ Đề bài:</b> Write a short paragraph (40 - 60 words) about a close friend. (Viết một đoạn văn ngắn khoảng 40-60 từ về một người bạn thân).<br>
-            <b>Dàn ý gợi ý (Guided Prompts):</b>
-            <ul>
-                <li>What is your friend's name and age? (Tên và bao nhiêu tuổi?)</li>
-                <li>Describe his/her hair, eyes, and appearance. (Mô tả tóc, mắt và ngoại hình.)</li>
-                <li>What personality traits make him/her special? (Tính cách nổi bật là gì?)</li>
-            </ul>
-        </div>
+    <!-- PHẦN 2: VIẾT ĐOẠN VĂN -->
+    <div class="card">
+        <h3>PART 2: GUIDED PARAGRAPH WRITING (Viết Đoạn Văn 40-60 Từ)</h3>
+        <p><b>📝 Đề bài:</b> Write a paragraph (40-60 words) about your best friend.</p>
 
-        <textarea id="writingInput" placeholder="Nhập đoạn văn Tiếng Anh của em vào đây..."></textarea><br>
-        <button class="btn-check" onclick="checkWriting()">Nộp bài viết & Xem nhận xét mẫu</button>
+        <b>Gợi ý viết đoạn văn (Guided Prompts):</b>
+        <ul style="margin: 6px 0; padding-left: 20px;">
+            <li>Who is your best friend and how old is he/she? (Bạn thân nhất của em là ai?)</li><li>Appearance: height, hair, eyes, face... (Ngoại hình: chiều cao, mái tóc, đôi mắt)</li><li>Personality adjectives: kind, clever, friendly... (Tính cách)</li><li>Activities you do together (Các hoạt động làm cùng nhau)</li>
+        </ul>
 
-        <div class="result-box" id="writingResult">
-            <b>📊 Đánh giá bài viết của em:</b><br>
-            <span id="wordCountText"></span><br><br>
-            <div class="model-box">
-                <b>💡 Đoạn văn mẫu tham khảo (Model Paragraph):</b><br>
-                "My close friend is Hoa. She is twelve years old. She has a round face, long black hair, and bright blue eyes. Hoa is very friendly and active. She likes playing badminton and singing in her free time. I love Hoa because she is always a good listener and very patient with everyone."
-            </div>
+        <textarea id="writingInput" oninput="updateWordCount()" placeholder="Nhập bài viết của bạn vào đây (từ 40 đến 60 từ)..."></textarea>
+        <div class="word-count" id="wordCountLabel">Số từ: 0 / 60 từ</div>
+
+        <button class="btn-submit" onclick="checkWriting()">Nộp bài viết & Xem bài mẫu</button>
+
+        <div id="modelAnswerBox" class="model-answer">
+            <b style="color:#1b5e20;">✨ BÀI VIẾT MẪU THAM KHẢO (MODEL PARAGRAPH):</b>
+            <p style="margin: 8px 0; font-style: italic;">"My best friend is Minh, who is also my classmate. He is tall and slim with short black hair and big brown eyes. Minh is very kind, clever, and hard-working. He always helps me when I have difficult Maths exercises. In our free time, we often go to the library to read science books together. I am very happy to have a good friend like Minh."</p>
+            <hr style="border: 0; border-top: 1px solid #a5d6a7; margin: 10px 0;">
+            <b>📌 Dịch Tiếng Việt:</b>
+            <p style="margin: 6px 0; color: #2e7d32;">"Người bạn thân nhất của em là Minh, cũng là bạn cùng lớp với em. Bạn ấy cao và mảnh khảnh với mái tóc đen ngắn và đôi mắt to màu nâu. Minh rất tốt bụng, thông minh và chăm chỉ. Bạn ấy luôn giúp đỡ em khi em gặp bài tập Toán khó. Vào thời gian rảnh rỗi, chúng em thường đến thư viện để cùng đọc sách khoa học. Em rất hạnh phúc khi có một người bạn tốt như Minh."</p>
         </div>
     </div>
 
     <script>
-        const sampleText = "My best friend is Minh. He is tall and thin with short black hair and big brown eyes. Minh is a very clever and kind boy. He always helps me when I have difficult math problems. In our free time, we often play basketball and ride bikes in the park together.";
+        const sentences = ['My best friend is Minh, my classmate.', 'He is tall and slim with short black hair and brown eyes.', 'Minh is very kind, hard-working, and clever.', 'He always helps me with difficult Maths homework.', 'In his free time, he likes drawing comic books.', 'We usually read science books together at the library.'];
+        let isSpeakingSeq = false;
 
-        function speakModelSpeech() {
-            if ('speechSynthesis' in window) {
-                window.speechSynthesis.cancel();
-                const u = new SpeechSynthesisUtterance(sampleText);
-                u.lang = 'en-US'; u.rate = 0.85;
-                window.speechSynthesis.speak(u);
-            }
+        function stopAudio() {
+            isSpeakingSeq = false;
+            if ('speechSynthesis' in window) window.speechSynthesis.cancel();
         }
 
-        function checkWriting() {
-            const input = document.getElementById('writingInput').value.trim();
-            const resultBox = document.getElementById('writingResult');
-            const countText = document.getElementById('wordCountText');
+        function speakSentence(text) {
+            stopAudio();
+            if (!text || !('speechSynthesis' in window)) return;
 
-            if (!input) {
-                alert("Em vui lòng nhập đoạn văn trước khi nộp bài!");
+            const u = new SpeechSynthesisUtterance(text.trim());
+            u.lang = 'en-US';
+            u.rate = 0.85;
+            u.pitch = 1.0;
+
+            const voices = window.speechSynthesis.getVoices();
+            if (voices && voices.length > 0) {
+                const enVoices = voices.filter(v => v.lang && (v.lang.startsWith('en') || v.lang.startsWith('en_')));
+                const best = enVoices.find(v => 
+                    v.name.includes('Google') || v.name.includes('Natural') || v.name.includes('Aria') || v.name.includes('US')
+                ) || enVoices[0];
+                if (best) u.voice = best;
+            }
+            window.speechSynthesis.speak(u);
+        }
+
+        function playFullParagraph() {
+            stopAudio();
+            if (!('speechSynthesis' in window)) {
+                alert("Trình duyệt không hỗ trợ phát âm thanh tự động.");
                 return;
             }
 
-            const words = input.split(/\s+/).filter(w => w.length > 0);
-            const count = words.length;
+            isSpeakingSeq = true;
+            let idx = 0;
 
-            resultBox.style.display = 'block';
+            function playNext() {
+                if (!isSpeakingSeq || idx >= sentences.length) {
+                    isSpeakingSeq = false;
+                    return;
+                }
 
-            if (count >= 30 && count <= 80) {
-                countText.innerHTML = `✅ <b>Đạt yêu cầu độ dài:</b> Bài viết của em có <b>${count} từ</b> (Yêu cầu: 40 - 60 từ). Hãy đối chiếu với đoạn văn mẫu để học thêm từ vựng nhé!`;
-            } else if (count < 30) {
-                countText.innerHTML = `⚠️ <b>Bài viết hơi ngắn:</b> Bài viết có <b>${count} từ</b>. Em nên viết thêm 1-2 câu nữa để đạt độ dài chuẩn.`;
-            } else {
-                countText.innerHTML = `ℹ️ <b>Bài viết phong phú:</b> Bài viết có <b>${count} từ</b>. Em chú ý diễn đạt cô đọng hơn trong các bài thi thời gian ngắn.`;
+                const sText = sentences[idx].trim();
+                idx++;
+
+                if (!sText) { playNext(); return; }
+
+                const u = new SpeechSynthesisUtterance(sText);
+                u.lang = 'en-US';
+                u.rate = 0.85;
+                u.pitch = 1.0;
+
+                const voices = window.speechSynthesis.getVoices();
+                if (voices && voices.length > 0) {
+                    const enVoices = voices.filter(v => v.lang && (v.lang.startsWith('en') || v.lang.startsWith('en_')));
+                    const best = enVoices.find(v => 
+                        v.name.includes('Google') || v.name.includes('Natural') || v.name.includes('Aria') || v.name.includes('US')
+                    ) || enVoices[0];
+                    if (best) u.voice = best;
+                }
+
+                u.onend = function() {
+                    if (isSpeakingSeq) setTimeout(playNext, 350); // Ngắt nghỉ 350ms tự nhiên giữa các câu
+                };
+                u.onerror = function() {
+                    if (isSpeakingSeq) setTimeout(playNext, 350);
+                };
+
+                window.speechSynthesis.speak(u);
+            }
+
+            playNext();
+        }
+
+        function renderTranscript() {
+            const container = document.getElementById('sentenceList');
+            sentences.forEach((s, i) => {
+                container.innerHTML += `
+                    <div class="sentence-row">
+                        <button type="button" class="btn-sent-audio" onclick="speakSentence(sentences[${i}])">🔊 Câu ${i+1}</button>
+                        <span>${s}</span>
+                    </div>
+                `;
+            });
+        }
+
+        function updateWordCount() {
+            const text = document.getElementById('writingInput').value.trim();
+            const words = text ? text.split(/\s+/).length : 0;
+            const label = document.getElementById('wordCountLabel');
+            label.innerText = `Số từ: ${words} / 60 từ`;
+            label.style.color = (words >= 40 && words <= 70) ? '#2e7d32' : '#c62828';
+        }
+
+        function checkWriting() {
+            const text = document.getElementById('writingInput').value.trim();
+            if (!text) {
+                alert("Vui lòng nhập bài viết trước khi nộp bài!");
+                return;
+            }
+            document.getElementById('modelAnswerBox').style.display = 'block';
+        }
+
+        if ('speechSynthesis' in window) {
+            window.speechSynthesis.getVoices();
+            if (window.speechSynthesis.onvoiceschanged !== undefined) {
+                window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
             }
         }
+
+        window.onload = function() {
+            renderTranscript();
+        };
     </script>
 </body>
 </html>

@@ -3,80 +3,250 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unit 3 - Đề 2: Bài Tập Nghe Hiểu (Listening)</title>
+    <title>Unit 3 - Đề 2: Bài Tập Nghe Hiểu (Listening Skills)</title>
     <style>
-        :root { --primary-color: #1e88e5; --secondary-color: #0d47a1; --correct-color: #2e7d32; --wrong-color: #c62828; --bg-card: #ffffff; }
-        body { font-family: 'Segoe UI', Tahoma, sans-serif; padding: 20px; background: #f4f6f9; color: #333; line-height: 1.6; }
-        h2 { color: var(--secondary-color); margin-top: 0; }
-        .audio-player-card { background: linear-gradient(135deg, #e3f2fd, #bbdefb); border: 2px solid #90caf9; border-radius: 10px; padding: 20px; margin-bottom: 24px; }
-        .audio-controls { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-top: 10px; }
-        .btn-audio { background: var(--primary-color); color: white; border: none; padding: 10px 18px; font-size: 1rem; font-weight: bold; border-radius: 6px; cursor: pointer; }
-        .btn-audio:hover { background: var(--secondary-color); }
-        .transcript-box { display: none; margin-top: 15px; background: #fff; padding: 15px; border-radius: 6px; border-left: 4px solid var(--primary-color); font-style: italic; }
-        .question-card { background: var(--bg-card); border: 1px solid #e0e0e0; border-radius: 8px; padding: 18px; margin-bottom: 16px; }
-        .question-card.status-correct { border-left: 6px solid var(--correct-color); background: #f1f8e9; }
-        .question-card.status-wrong { border-left: 6px solid var(--wrong-color); background: #fbe9e7; }
-        .btn-submit-q { background: var(--primary-color); color: white; border: none; padding: 7px 16px; font-weight: bold; border-radius: 4px; cursor: pointer; margin-top: 10px; }
-        .explanation { display: none; margin-top: 12px; padding: 12px; border-radius: 6px; font-size: 0.95rem; }
-        .explanation.correct { background: #e8f5e9; color: #1b5e20; }
-        .explanation.wrong { background: #ffebee; color: #b71c1c; }
-        .input-fill { width: 80%; max-width: 400px; padding: 8px 12px; border: 1px solid #ccc; border-radius: 4px; font-size: 1rem; }
+        :root { --primary: #1e88e5; --secondary: #0d47a1; --correct: #2e7d32; --wrong: #c62828; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 20px; background: #f4f6f9; color: #333; line-height: 1.6; }
+        h2, h3 { color: var(--secondary); margin-top: 0; }
+        
+        .audio-player-card {
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+            border: 2px solid #90caf9;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+        }
+
+        .audio-controls {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+
+        .btn-audio {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 9px 16px;
+            font-size: 0.95rem;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: background 0.2s;
+        }
+        .btn-audio:hover { background: var(--secondary); }
+        .btn-pause { background: #f57c00; }
+        .btn-pause:hover { background: #e65100; }
+
+        .transcript-box {
+            display: none;
+            margin-top: 15px;
+            background: #fff;
+            padding: 16px;
+            border-radius: 8px;
+            border-left: 5px solid var(--primary);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+
+        .sentence-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+            padding: 6px;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+        .sentence-row:hover { background: #f1f8e9; }
+
+        .btn-sent-audio {
+            background: #e3f2fd;
+            color: #1565c0;
+            border: 1px solid #bbdefb;
+            padding: 3px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.82rem;
+            white-space: nowrap;
+        }
+        .btn-sent-audio:hover { background: #bbdefb; }
+
+        .question-card {
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 18px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+        .question-card.status-correct { border-left: 6px solid var(--correct); background: #f1f8e9; }
+        .question-card.status-wrong { border-left: 6px solid var(--wrong); background: #fbe9e7; }
+
+        .q-title { font-weight: bold; color: #1565c0; margin-bottom: 10px; }
+
+        .btn-submit-q {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 7px 16px;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .btn-submit-q:hover { background: var(--secondary); }
+
+        .explanation {
+            display: none;
+            margin-top: 12px;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 0.95rem;
+        }
+        .explanation.correct { background: #e8f5e9; color: #1b5e20; border-left: 4px solid var(--correct); }
+        .explanation.wrong { background: #ffebee; color: #b71c1c; border-left: 4px solid var(--wrong); }
+
+        .trans-box { margin-top: 6px; padding: 6px 10px; background: rgba(255,255,255,0.7); border-radius: 4px; font-size: 0.9rem; }
+
+        .input-fill {
+            width: 80%;
+            max-width: 400px;
+            padding: 8px 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
     </style>
 </head>
 <body>
-    <h2>ĐỀ KIỂM TRA SỐ 2 - UNIT 3: BÀI TẬP NGHE (MY BEST FRIEND)</h2>
+
+    <h2>ĐỀ KIỂM TRA SỐ 2 - UNIT 3: BÀI TẬP NGHE HIỂU (LISTENING)</h2>
 
     <div class="audio-player-card">
-        <h3 style="margin:0; color:#0d47a1;">🎧 Luyện Nghe: Lan's Best Friend (Minh)</h3>
-        <p style="margin: 6px 0 0 0; color:#444;">Nhấn nút bên dưới để nghe bài giới thiệu của Lan về người bạn thân nhất của cô ấy.</p>
+        <h3 style="margin:0; color:#0d47a1;">🎧 Luyện Nghe: My Friends (Minh - Lan's Best Friend)</h3>
+        <p style="margin: 6px 0 0 0; color:#444;">
+            Nhấn vào nút <b>▶️ Bật nghe toàn bộ đoạn văn</b> để nghe trình đọc với nhịp ngắt nghỉ tự nhiên giữa các câu, hoặc mở <b>📝 Bài đọc</b> để nghe từng câu lẻ.
+        </p>
+        
         <div class="audio-controls">
-            <button class="btn-audio" onclick="playAudio()">▶️ Bật nghe đoạn văn</button>
-            <button class="btn-audio" style="background:#f57c00;" onclick="pauseAudio()">⏸️ Tạm dừng</button>
+            <button class="btn-audio" onclick="playFullParagraph()">▶️ Bật nghe toàn bộ đoạn văn</button>
+            <button class="btn-audio btn-pause" onclick="pauseAudio()">⏸️ Tạm dừng</button>
             <button class="btn-audio" style="background:#616161;" onclick="toggleTranscript()">📝 Ẩn/Hiện bài đọc (Transcript)</button>
         </div>
+
         <div id="transcriptBox" class="transcript-box">
-            <b>Bài đọc (Audio Script):</b><br>
-            "My best friend is Minh. He is twelve years old and he is my classmate at Secondary School. Minh is tall and slim. He has short black hair, a round face, and big brown eyes. Minh is very kind and hard-working. He always helps me with difficult Maths exercises. He is also very clever and creative. He likes drawing comic books in his free time. This Saturday afternoon, Minh and I are going to the town library to read science books together."
+            <b style="color:#0d47a1;">📝 Bài đọc (Audio Script - Bấm từng câu để nghe lẻ):</b>
+            <div id="sentenceList" style="margin-top:10px;"></div>
         </div>
     </div>
 
+    <h3>DANH SÁCH CÂU HỎI BÀI NGHE</h3>
     <div id="quizList"></div>
 
     <script>
         const listeningText = "My best friend is Minh. He is twelve years old and he is my classmate at Secondary School. Minh is tall and slim. He has short black hair, a round face, and big brown eyes. Minh is very kind and hard-working. He always helps me with difficult Maths exercises. He is also very clever and creative. He likes drawing comic books in his free time. This Saturday afternoon, Minh and I are going to the town library to read science books together.";
+        const sentences = ['My best friend is Minh.', 'He is twelve years old and he is my classmate at Secondary School.', 'Minh is tall and slim.', 'He has short black hair, a round face, and big brown eyes.', 'Minh is very kind and hard-working.', 'He always helps me with difficult Maths exercises.', 'He is also very clever and creative.', 'He likes drawing comic books in his free time.', 'This Saturday afternoon, Minh and I are going to the town library to read science books together.'];
+        const quizData = [{'id': 1, 'type': 'mc', 'q': 'Câu 1: How old is Minh?', 'opts': ['A. Ten years old', 'B. Twelve years old', 'C. Eleven years old', 'D. Thirteen years old'], 'ans': 'B', 'qTrans': 'Minh bao nhiêu tuổi?', 'ansTrans': 'B. 12 tuổi', 'exp': "Trích bài nói: 'He is twelve years old and he is my classmate...'"}, {'id': 2, 'type': 'mc', 'q': 'Câu 2: What does Minh look like?', 'opts': ['A. Short and chubby', 'B. Short with long hair', 'C. Tall and slim with short black hair', 'D. Tall with curly blonde hair'], 'ans': 'C', 'qTrans': 'Ngoại hình của Minh như thế nào?', 'ansTrans': 'C. Cao và mảnh khảnh với mái tóc đen ngắn', 'exp': "Trích bài nói: 'Minh is tall and slim. He has short black hair...'"}, {'id': 3, 'type': 'mc', 'q': 'Câu 3: What subject does Minh usually help his friend with?', 'opts': ['A. English', 'B. Maths', 'C. Science', 'D. History'], 'ans': 'B', 'qTrans': 'Minh thường giúp bạn mình môn học nào?', 'ansTrans': 'B. Môn Toán', 'exp': "Trích bài nói: 'He always helps me with difficult Maths exercises.'"}, {'id': 4, 'type': 'mc', 'q': 'Câu 4: What does Minh like doing in his free time?', 'opts': ['A. Playing football', 'B. Playing video games', 'C. Drawing comic books', 'D. Swimming'], 'ans': 'C', 'qTrans': 'Minh thích làm gì vào thời gian rảnh rỗi?', 'ansTrans': 'C. Vẽ truyện tranh', 'exp': "Trích bài nói: 'He likes drawing comic books in his free time.'"}, {'id': 5, 'type': 'mc', 'q': 'Câu 5: Where are Minh and his friend going this Saturday afternoon?', 'opts': ['A. To the cinema', 'B. To the park', 'C. To the town library', 'D. To the sports center'], 'ans': 'C', 'qTrans': 'Minh và bạn mình sẽ đi đâu vào chiều Thứ Bảy này?', 'ansTrans': 'C. Đến thư viện thị trấn', 'exp': "Trích bài nói: 'This Saturday afternoon, Minh and I are going to the town library...'"}, {'id': 6, 'type': 'fill', 'q': 'Câu 6 (Điền từ): Minh has a _____ face and big brown eyes.', 'ans': 'round', 'qTrans': 'Minh có khuôn mặt _____ và đôi mắt to màu nâu.', 'ansTrans': 'round (tròn)', 'exp': "Trích bài nói: 'He has short black hair, a round face, and big brown eyes.'"}, {'id': 7, 'type': 'fill', 'q': 'Câu 7 (Điền từ): Minh is very kind and _____.', 'ans': 'hard-working', 'qTrans': 'Minh rất tốt bụng và _____.', 'ansTrans': 'hard-working (chăm chỉ)', 'exp': "Trích bài nói: 'Minh is very kind and hard-working.'"}, {'id': 8, 'type': 'fill', 'q': 'Câu 8 (Điền từ): Minh is also very clever and _____.', 'ans': 'creative', 'qTrans': 'Minh cũng rất thông minh và _____.', 'ansTrans': 'creative (sáng tạo)', 'exp': "Trích bài nói: 'He is also very clever and creative.'"}, {'id': 9, 'type': 'fill', 'q': 'Câu 9 (Điền từ): On Saturday afternoon, they are going to read _____ books together.', 'ans': 'science', 'qTrans': 'Vào chiều Thứ Bảy, họ sẽ đọc sách _____ cùng nhau.', 'ansTrans': 'science (khoa học)', 'exp': "Trích bài nói: '...to read science books together.'"}, {'id': 10, 'type': 'mc', 'q': 'Câu 10: Why is Minh a good friend?', 'opts': ['A. Because he gives gifts', 'B. Because he is kind, hard-working, and always helps others', 'C. Because he lives near school', 'D. Because he is quiet'], 'ans': 'B', 'qTrans': 'Tại sao Minh là một người bạn tốt?', 'ansTrans': 'B. Vì bạn ấy tốt bụng, chăm chỉ và luôn giúp đỡ người khác', 'exp': 'Bài nói thể hiện Minh là người bạn tốt vì luôn kiên nhẫn giúp bạn học môn Toán và vui vẻ đi đọc sách cùng nhau.'}];
 
-        const quizData = [
-            { id: 1, type: "mc", q: "Câu 1: How old is Minh?", opts: ["A. 10", "B. 11", "C. 12", "D. 13"], ans: "C", exp: "Bài nghe nói: 'He is twelve years old...'", q_tr: "Minh bao nhiêu tuổi?", ans_tr: "Đáp án C: 12 tuổi." },
-            { id: 2, type: "mc", q: "Câu 2: What does Minh look like?", opts: ["A. Short and chubby", "B. Tall and slim", "C. Short and thin", "D. Tall and chubby"], ans: "B", exp: "Bài nghe nói: 'Minh is tall and slim.'", q_tr: "Ngoại hình Minh trông như thế nào?", ans_tr: "Đáp án B: Cao và gầy/mảnh khảnh." },
-            { id: 3, type: "mc", q: "Câu 3: What subject does Minh help Lan with?", opts: ["A. English", "B. History", "C. Science", "D. Maths"], ans: "D", exp: "Bài nghe nói: 'He always helps me with difficult Maths exercises.'", q_tr: "Minh giúp Lan học môn gì?", ans_tr: "Đáp án D: Môn Toán." },
-            { id: 4, type: "mc", q: "Câu 4: What does Minh like doing in his free time?", opts: ["A. Playing football", "B. Drawing comic books", "C. Playing video games", "D. Swimming"], ans: "B", exp: "Bài nghe nói: 'He likes drawing comic books in his free time.'", q_tr: "Minh thích làm gì vào thời gian rảnh?", ans_tr: "Đáp án B: Vẽ truyện tranh." },
-            { id: 5, type: "mc", q: "Câu 5: Where are Minh and Lan going this Saturday afternoon?", opts: ["A. To the sports center", "B. To the cinema", "C. To the town library", "D. To the park"], ans: "C", exp: "Bài nghe nói: '...Minh and I are going to the town library...'", q_tr: "Minh và Lan sẽ đi đâu vào chiều Thứ Bảy này?", ans_tr: "Đáp án C: Đến thư viện thị trấn." },
-            { id: 6, type: "fill", q: "Câu 6 (Điền từ): Minh has short black hair and a _____ face.", ans: "round", exp: "Bài nghe: 'a round face'", q_tr: "Minh có mái tóc ngắn màu đen và khuôn mặt _____.", ans_tr: "Đáp án chuẩn: round (tròn)." },
-            { id: 7, type: "fill", q: "Câu 7 (Điền từ): Minh is very kind and _____.", ans: "hard-working", exp: "Bài nghe: 'Minh is very kind and hard-working.'", q_tr: "Minh rất tốt bụng và _____.", ans_tr: "Đáp án chuẩn: hard-working (chăm chỉ)." },
-            { id: 8, type: "fill", q: "Câu 8 (Điền từ): In his free time, Minh likes drawing _____ books.", ans: "comic", exp: "Bài nghe: 'drawing comic books'", q_tr: "Rảnh rỗi, Minh thích vẽ sách _____.", ans_tr: "Đáp án chuẩn: comic (truyện tranh)." }
-        ];
+        let isSpeakingSeq = false;
 
-        let synth = window.speechSynthesis;
-        function playAudio() { if ('speechSynthesis' in window) { synth.cancel(); const u = new SpeechSynthesisUtterance(listeningText); u.lang = 'en-US'; u.rate = 0.85; synth.speak(u); } }
-        function pauseAudio() { if (synth.speaking) synth.cancel(); }
-        function toggleTranscript() { const b = document.getElementById('transcriptBox'); b.style.display = (b.style.display === 'block') ? 'none' : 'block'; }
+        function stopAudio() {
+            isSpeakingSeq = false;
+            if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+        }
 
-        function renderQuiz() {
-            const container = document.getElementById('quizList');
-            quizData.forEach(item => {
-                let optsHtml = '';
-                if(item.type === 'mc') {
-                    item.opts.forEach(opt => { optsHtml += `<label style="display:block; margin:6px 0; cursor:pointer;"><input type="radio" name="q_${item.id}" value="${opt.charAt(0)}"> ${opt}</label>`; });
-                } else {
-                    optsHtml = `<input type="text" id="input_q_${item.id}" class="input-fill" placeholder="Nhập từ cần điền...">`;
+        function speakSentence(text) {
+            stopAudio();
+            if (!text || !('speechSynthesis' in window)) return;
+
+            const u = new SpeechSynthesisUtterance(text.trim());
+            u.lang = 'en-US';
+            u.rate = 0.85;
+            u.pitch = 1.0;
+
+            const voices = window.speechSynthesis.getVoices();
+            if (voices && voices.length > 0) {
+                const enVoices = voices.filter(v => v.lang && (v.lang.startsWith('en') || v.lang.startsWith('en_')));
+                const best = enVoices.find(v => 
+                    v.name.includes('Google') || v.name.includes('Natural') || v.name.includes('Aria') || v.name.includes('US')
+                ) || enVoices[0];
+                if (best) u.voice = best;
+            }
+            window.speechSynthesis.speak(u);
+        }
+
+        function playFullParagraph() {
+            stopAudio();
+            if (!('speechSynthesis' in window)) {
+                alert("Trình duyệt không hỗ trợ phát âm thanh tự động.");
+                return;
+            }
+
+            isSpeakingSeq = true;
+            let idx = 0;
+
+            function playNext() {
+                if (!isSpeakingSeq || idx >= sentences.length) {
+                    isSpeakingSeq = false;
+                    return;
                 }
+
+                const sText = sentences[idx].trim();
+                idx++;
+
+                if (!sText) { playNext(); return; }
+
+                const u = new SpeechSynthesisUtterance(sText);
+                u.lang = 'en-US';
+                u.rate = 0.85;
+                u.pitch = 1.0;
+
+                const voices = window.speechSynthesis.getVoices();
+                if (voices && voices.length > 0) {
+                    const enVoices = voices.filter(v => v.lang && (v.lang.startsWith('en') || v.lang.startsWith('en_')));
+                    const best = enVoices.find(v => 
+                        v.name.includes('Google') || v.name.includes('Natural') || v.name.includes('Aria') || v.name.includes('US')
+                    ) || enVoices[0];
+                    if (best) u.voice = best;
+                }
+
+                u.onend = function() {
+                    if (isSpeakingSeq) setTimeout(playNext, 350);
+                };
+                u.onerror = function() {
+                    if (isSpeakingSeq) setTimeout(playNext, 350);
+                };
+
+                window.speechSynthesis.speak(u);
+            }
+
+            playNext();
+        }
+
+        function pauseAudio() {
+            stopAudio();
+        }
+
+        function toggleTranscript() {
+            const box = document.getElementById('transcriptBox');
+            box.style.display = (box.style.display === 'block') ? 'none' : 'block';
+        }
+
+        function renderTranscript() {
+            const container = document.getElementById('sentenceList');
+            sentences.forEach((s, i) => {
                 container.innerHTML += `
-                    <div class="question-card" id="card_q_${item.id}">
-                        <div style="font-weight:bold; color:#1565c0;">${item.q}</div>
-                        <div style="margin:8px 0;">${optsHtml}</div>
-                        <button type="button" class="btn-submit-q" onclick="checkQuestion(${item.id})">Nộp câu này</button>
-                        <div id="explain_q_${item.id}" class="explanation"></div>
-                    </div>`;
+                    <div class="sentence-row">
+                        <button type="button" class="btn-sent-audio" onclick="speakSentence(sentences[${i}])">🔊 Câu ${i+1}</button>
+                        <span>${s}</span>
+                    </div>
+                `;
             });
         }
 
@@ -85,33 +255,71 @@
             return text.toLowerCase().replace(/[.,/#!$%^&*;:{}=\-_`~()'"?]/g, "").replace(/\s+/g, " ").trim();
         }
 
+        function renderQuiz() {
+            const container = document.getElementById('quizList');
+            quizData.forEach(item => {
+                let optsHtml = '';
+                if (item.type === 'mc') {
+                    item.opts.forEach(opt => {
+                        optsHtml += `<label style="display:block; margin:6px 0; cursor:pointer;"><input type="radio" name="q_${item.id}" value="${opt.charAt(0)}"> ${opt}</label>`;
+                    });
+                } else {
+                    optsHtml = `<input type="text" id="input_q_${item.id}" class="input-fill" placeholder="Nhập đáp án từ còn thiếu...">`;
+                }
+
+                container.innerHTML += `
+                    <div class="question-card" id="card_q_${item.id}">
+                        <div class="q-title">${item.q}</div>
+                        <div>${optsHtml}</div>
+                        <button type="button" class="btn-submit-q" onclick="checkQuestion(${item.id})">Nộp câu này</button>
+                        <div id="explain_q_${item.id}" class="explanation"></div>
+                    </div>
+                `;
+            });
+        }
+
         function checkQuestion(qId) {
             const item = quizData.find(x => x.id === qId);
             if (!item) return;
+
             const card = document.getElementById(`card_q_${qId}`);
             const explainDiv = document.getElementById(`explain_q_${qId}`);
             explainDiv.style.display = 'block';
 
             let isCorrect = false;
+
             if (item.type === 'mc') {
                 const sel = document.querySelector(`input[name="q_${qId}"]:checked`);
                 if (sel && sel.value === item.ans) isCorrect = true;
             } else {
                 const userAns = document.getElementById(`input_q_${qId}`).value;
-                if (normalizeText(userAns) === normalizeText(item.ans)) isCorrect = true;
+                if (normalizeText(userAns) === normalizeText(item.ans) || (item.ans === "thirty" && normalizeText(userAns) === "30") || (item.ans === "six" && normalizeText(userAns) === "6") || (item.ans === "twelve" && normalizeText(userAns) === "12")) {
+                    isCorrect = true;
+                }
             }
 
             if (isCorrect) {
                 card.className = "question-card status-correct";
                 explainDiv.className = "explanation correct";
-                explainDiv.innerHTML = `<b>✓ CHÍNH XÁC!</b><br>📌 <b>Dịch câu hỏi:</b> ${item.q_tr}<br>💡 <b>Dịch đáp án chuẩn:</b> ${item.ans_tr}<br>📝 <b>Giải thích chi tiết:</b> ${item.exp}`;
+                explainDiv.innerHTML = `<b>✓ CHÍNH XÁC!</b><div class="trans-box"><b>📌 Dịch câu hỏi:</b> ${item.qTrans}<br><b>💡 Dịch đáp án chuẩn:</b> ${item.ansTrans}</div><br><b>📝 Giải thích chi tiết:</b> ${item.exp}`;
             } else {
                 card.className = "question-card status-wrong";
                 explainDiv.className = "explanation wrong";
-                explainDiv.innerHTML = `<b>✗ CHƯA CHÍNH XÁC!</b> (Đáp án chuẩn: <b>${item.ans}</b>)<br>📌 <b>Dịch câu hỏi:</b> ${item.q_tr}<br>💡 <b>Dịch đáp án chuẩn:</b> ${item.ans_tr}<br>📝 <b>Giải thích chi tiết:</b> ${item.exp}`;
+                explainDiv.innerHTML = `<b>✗ CHƯA CHÍNH XÁC!</b> (Đáp án chuẩn: <b>${item.ans}</b>)<div class="trans-box"><b>📌 Dịch câu hỏi:</b> ${item.qTrans}<br><b>💡 Dịch đáp án chuẩn:</b> ${item.ansTrans}</div><br><b>📝 Giải thích chi tiết:</b> ${item.exp}`;
             }
         }
-        window.onload = renderQuiz;
+
+        if ('speechSynthesis' in window) {
+            window.speechSynthesis.getVoices();
+            if (window.speechSynthesis.onvoiceschanged !== undefined) {
+                window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
+            }
+        }
+
+        window.onload = function() {
+            renderTranscript();
+            renderQuiz();
+        };
     </script>
 </body>
 </html>

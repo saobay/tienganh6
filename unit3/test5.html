@@ -3,56 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unit 3 - Đề 5: Ngữ Âm & Trọng Âm</title>
+    <title>Unit 3 - Đề 5: Ngữ Âm & Trọng Âm (Phonetics & Stress Accent)</title>
     <style>
-        :root { --primary-color: #1e88e5; --secondary-color: #0d47a1; --correct-color: #2e7d32; --wrong-color: #c62828; --bg-card: #ffffff; }
-        body { font-family: 'Segoe UI', Tahoma, sans-serif; padding: 20px; background: #f4f6f9; color: #333; line-height: 1.6; }
-        h2, h3 { color: var(--secondary-color); margin-top: 0; }
-        .note-card { background: #e3f2fd; border-left: 5px solid var(--primary-color); padding: 12px 16px; border-radius: 6px; margin-bottom: 20px; font-size: 0.95rem; }
-        .question-card { background: var(--bg-card); border: 1px solid #e0e0e0; border-radius: 8px; padding: 16px; margin-bottom: 16px; }
-        .question-card.status-correct { border-left: 6px solid var(--correct-color); background: #f1f8e9; }
-        .question-card.status-wrong { border-left: 6px solid var(--wrong-color); background: #fbe9e7; }
-        .btn-submit-q { background: var(--primary-color); color: white; border: none; padding: 7px 16px; font-weight: bold; border-radius: 4px; cursor: pointer; margin-top: 8px; }
-        .btn-audio { background: #e3f2fd; color: #1565c0; border: 1px solid #bbdefb; padding: 2px 8px; border-radius: 4px; cursor: pointer; font-size: 0.85rem; margin-left: 6px; }
+        :root { --primary: #1e88e5; --secondary: #0d47a1; --correct: #2e7d32; --wrong: #c62828; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 20px; background: #f4f6f9; color: #333; line-height: 1.6; }
+        h2, h3 { color: var(--secondary); margin-top: 0; }
+        .note-card { background: #e3f2fd; border-left: 5px solid var(--primary); padding: 12px 16px; border-radius: 6px; margin-bottom: 20px; font-size: 0.95rem; }
+        .question-card { background: #fff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 16px; margin-bottom: 16px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+        .question-card.status-correct { border-left: 6px solid var(--correct); background: #f1f8e9; }
+        .question-card.status-wrong { border-left: 6px solid var(--wrong); background: #fbe9e7; }
+        .opt-row { display: flex; align-items: center; margin: 6px 0; }
+        .opt-label { cursor: pointer; margin-right: 8px; }
+        .btn-audio { background: #e3f2fd; color: #1565c0; border: 1px solid #bbdefb; padding: 3px 8px; border-radius: 4px; cursor: pointer; font-size: 0.85rem; }
         .btn-audio:hover { background: #bbdefb; }
-        .explanation { display: none; margin-top: 10px; padding: 10px; border-radius: 5px; font-size: 0.93rem; }
-        .explanation.correct { background: #e8f5e9; color: #1b5e20; }
-        .explanation.wrong { background: #ffebee; color: #b71c1c; }
+        .btn-submit-q { background: var(--primary); color: white; border: none; padding: 7px 16px; font-weight: bold; border-radius: 4px; cursor: pointer; margin-top: 8px; }
+        .btn-submit-q:hover { background: var(--secondary); }
+        .explanation { display: none; margin-top: 10px; padding: 12px; border-radius: 6px; font-size: 0.93rem; }
+        .explanation.correct { background: #e8f5e9; color: #1b5e20; border-left: 4px solid var(--correct); }
+        .explanation.wrong { background: #ffebee; color: #b71c1c; border-left: 4px solid var(--wrong); }
+        .trans-box { margin-top: 6px; padding: 6px 10px; background: rgba(255,255,255,0.7); border-radius: 4px; font-size: 0.9rem; }
+        .ipa-box { font-family: 'Lucida Sans', 'Arial', sans-serif; background: #fff3e0; padding: 6px 10px; border-radius: 4px; border-left: 3px solid #ff9800; margin: 6px 0; color: #e65100; }
     </style>
 </head>
 <body>
-    <h2>ĐỀ KIỂM TRA SỐ 5 - UNIT 3: CHUYÊN ĐỀ NGỮ ÂM & TRỌNG ÂM</h2>
-
+    <h2>ĐỀ KIỂM TRA SỐ 5 - UNIT 3: MY FRIENDS (NGỮ ÂM & TRỌNG ÂM)</h2>
     <div class="note-card">
-        <b>💡 Mẹo nhỏ:</b> Bấm vào biểu tượng 🔊 bên cạnh từng đáp án để nghe phát âm giọng chuẩn trước hoặc sau khi làm bài!
+        <b>💡 Hướng dẫn:</b> Bấm nút <b>🔊 Nghe</b> kế bên mỗi đáp án A, B, C, D để nghe phát âm giọng chuẩn trước khi đưa ra lựa chọn!
     </div>
 
-    <h3>PART 1: PRONUNCIATION (Phân biệt âm /p/ và /b/)</h3>
+    <h3>PART 1: PRONUNCIATION (Phát Âm & Nguyên Âm)</h3>
     <div id="part1Quiz"></div>
 
-    <h3 style="margin-top: 30px;">PART 2: STRESS (Trọng âm tính từ chỉ tính cách)</h3>
+    <h3 style="margin-top: 30px;">PART 2: STRESS ACCENT (Vị Trí Trọng Âm)</h3>
     <div id="part2Quiz"></div>
 
     <script>
-        const part1Data = [
-            { id: 1, q: "Câu 1: Choose the word starting with /p/ sound.", opts: [{ text: "A. patient", word: "patient" }, { text: "B. birthday", word: "birthday" }, { text: "C. blonde", word: "blonde" }, { text: "D. body", word: "body" }], ans: "A", exp: "A (patient) bắt đầu bằng âm /p/. B, C, D bắt đầu bằng âm /b/.", q_tr: "Chọn từ bắt đầu bằng âm /p/.", ans_tr: "Đáp án A: patient (kiên nhẫn)." },
-            { id: 2, q: "Câu 2: Choose the word starting with /b/ sound.", opts: [{ text: "A. pony", word: "pony" }, { text: "B. picture", word: "picture" }, { text: "C. picnic", word: "picnic" }, { text: "D. basketball", word: "basketball" }], ans: "D", exp: "D (basketball) bắt đầu bằng âm /b/. A, B, C bắt đầu bằng âm /p/.", q_tr: "Chọn từ bắt đầu bằng âm /b/.", ans_tr: "Đáp án D: basketball (bóng rổ)." },
-            { id: 3, q: "Câu 3: Choose the word with a different vowel sound.", opts: [{ text: "A. kind", word: "kind" }, { text: "B. active", word: "active" }, { text: "C. clever", word: "clever" }, { text: "D. friendly", word: "friendly" }], ans: "A", exp: "A (kind) phát âm chữ 'i' là /aɪ/. B phát âm là /ɪ/.", q_tr: "Chọn từ có nguyên âm khác các từ còn lại.", ans_tr: "Đáp án A: kind (tốt bụng)." }
-        ];
-
-        const part2Data = [
-            { id: 4, q: "Câu 4: Trọng âm tính từ 2 âm tiết", opts: [{ text: "A. clever", word: "clever" }, { text: "B. active", word: "active" }, { text: "C. friendly", word: "friendly" }, { text: "D. polite", word: "polite" }], ans: "D", exp: "D (polite) có trọng âm nhấn âm tiết 2 (/pəˈlaɪt/). A, B, C nhấn âm tiết 1.", q_tr: "Chọn từ có trọng âm khác các từ còn lại.", ans_tr: "Đáp án D: polite (lịch sự - nhấn âm 2)." },
-            { id: 5, q: "Câu 5: Trọng âm tính từ 3 âm tiết", opts: [{ text: "A. confident", word: "confident" }, { text: "B. creative", word: "creative" }, { text: "C. talkative", word: "talkative" }, { text: "D. personal", word: "personal" }], ans: "B", exp: "B (creative) trọng âm nhấn âm tiết 2 (/kriˈeɪ.tɪv/). A, C, D nhấn âm tiết 1.", q_tr: "Chọn từ có trọng âm khác các từ còn lại.", ans_tr: "Đáp án B: creative (sáng tạo - nhấn âm 2)." }
-        ];
-
+        const part1Data = [{'id': 1, 'q': 'Câu 1: Chọn từ bắt đầu bằng phụ âm /p/ khác từ có phụ âm /b/.', 'qTrans': 'Chọn từ bắt đầu bằng âm /p/ khác các từ bắt đầu bằng âm /b/.', 'opts': [{'char': 'A', 'text': 'A. patient', 'word': 'patient'}, {'char': 'B', 'text': 'B. birthday', 'word': 'birthday'}, {'char': 'C', 'text': 'C. blonde', 'word': 'blonde'}, {'char': 'D', 'text': 'D. body', 'word': 'body'}], 'ans': 'A', 'ansTrans': 'A. patient /ˈpeɪ.ʃənt/ (bắt đầu bằng /p/)<br>B. birthday /ˈbɜːθ.deɪ/ (bắt đầu bằng /b/)<br>C. blonde /blɒnd/ (bắt đầu bằng /b/)<br>D. body /ˈbɒd.i/ (bắt đầu bằng /b/)', 'exp': 'Đáp án A (patient) bắt đầu bằng phụ âm vô thanh /p/. Các từ B, C, D bắt đầu bằng phụ âm hữu thanh /b/.'}, {'id': 2, 'q': 'Câu 2: Chọn từ bắt đầu bằng phụ âm /b/ khác từ có phụ âm /p/.', 'qTrans': 'Chọn từ bắt đầu bằng âm /b/ khác các từ bắt đầu bằng âm /p/.', 'opts': [{'char': 'A', 'text': 'A. pony', 'word': 'pony'}, {'char': 'B', 'text': 'B. picture', 'word': 'picture'}, {'char': 'C', 'text': 'C. picnic', 'word': 'picnic'}, {'char': 'D', 'text': 'D. basketball', 'word': 'basketball'}], 'ans': 'D', 'ansTrans': 'A. pony /ˈpəʊ.ni/ (bắt đầu bằng /p/)<br>B. picture /ˈpɪk.tʃər/ (bắt đầu bằng /p/)<br>C. picnic /ˈpɪk.nɪk/ (bắt đầu bằng /p/)<br>D. basketball /ˈbɑː.skɪt.bɔːl/ (bắt đầu bằng /b/)', 'exp': 'Đáp án D (basketball) bắt đầu bằng phụ âm hữu thanh /b/. Các từ A, B, C bắt đầu bằng âm /p/.'}, {'id': 3, 'q': 'Câu 3: Chọn từ có nguyên âm phát âm khác.', 'qTrans': "Chọn từ có nguyên âm 'i' phát âm khác các từ còn lại.", 'opts': [{'char': 'A', 'text': 'A. kind', 'word': 'kind'}, {'char': 'B', 'text': 'B. polite', 'word': 'polite'}, {'char': 'C', 'text': 'C. nice', 'word': 'nice'}, {'char': 'D', 'text': 'D. active', 'word': 'active'}], 'ans': 'D', 'ansTrans': 'A. kind /kaɪnd/ (/aɪ/)<br>B. polite /pəˈlaɪt/ (/aɪ/)<br>C. nice /naɪs/ (/aɪ/)<br>D. active /ˈæk.tɪv/ (/ɪ/)', 'exp': "Đáp án D (active) phát âm 'i' là /ɪ/. Các từ A, B, C phát âm 'i' là /aɪ/."}, {'id': 4, 'q': 'Câu 4: Chọn từ có nguyên âm phát âm khác.', 'qTrans': "Chọn từ có nguyên âm 'e' phát âm khác các từ còn lại.", 'opts': [{'char': 'A', 'text': 'A. clever', 'word': 'clever'}, {'char': 'B', 'text': 'B. friendly', 'word': 'friendly'}, {'char': 'C', 'text': 'C. generous', 'word': 'generous'}, {'char': 'D', 'text': 'D. cheek', 'word': 'cheek'}], 'ans': 'D', 'ansTrans': 'A. clever /ˈklev.ər/ (/e/)<br>B. friendly /ˈfrend.li/ (/e/)<br>C. generous /ˈdʒen.ər.əs/ (/e/)<br>D. cheek /tʃiːk/ (/iː/)', 'exp': "Đáp án D (cheek) phát âm 'ee' là /iː/. Các từ A, B, C phát âm 'e' là /e/."}, {'id': 5, 'q': 'Câu 5: Chọn từ có nguyên âm (a/e) phát âm khác.', 'qTrans': 'Chọn từ có nguyên âm phát âm khác các từ còn lại.', 'opts': [{'char': 'A', 'text': 'A. black', 'word': 'black'}, {'char': 'B', 'text': 'B. hand', 'word': 'hand'}, {'char': 'C', 'text': 'C. bank', 'word': 'bank'}, {'char': 'D', 'text': 'D. clever', 'word': 'clever'}], 'ans': 'D', 'ansTrans': 'A. black /blæk/ (/æ/)<br>B. hand /hænd/ (/æ/)<br>C. bank /bæŋk/ (/æ/)<br>D. clever /ˈklev.ər/ (/e/)', 'exp': "Đáp án D (clever) phát âm 'e' là /e/. Các từ A, B, C có nguyên âm 'a' phát âm là /æ/."}];
+        const part2Data = [{'id': 6, 'q': 'Câu 6: Trọng âm tính từ 2 âm tiết', 'qTrans': 'Chọn từ có vị trí trọng âm chính khác các từ còn lại.', 'opts': [{'char': 'A', 'text': 'A. clever', 'word': 'clever'}, {'char': 'B', 'text': 'B. active', 'word': 'active'}, {'char': 'C', 'text': 'C. friendly', 'word': 'friendly'}, {'char': 'D', 'text': 'D. polite', 'word': 'polite'}], 'ans': 'D', 'ansTrans': "A. 'clever /ˈklev.ər/ (nhấn âm 1)<br>B. 'active /ˈæk.tɪv/ (nhấn âm 1)<br>C. 'friendly /ˈfrend.li/ (nhấn âm 1)<br>D. po'lite /pəˈlaɪt/ (nhấn âm 2)", 'exp': 'Đáp án D (polite) có trọng âm nhấn âm tiết 2 (/pəˈlaɪt/). A, B, C có trọng âm nhấn âm tiết 1.'}, {'id': 7, 'q': 'Câu 7: Trọng âm tính từ 3 âm tiết', 'qTrans': 'Chọn từ có vị trí trọng âm chính khác các từ còn lại.', 'opts': [{'char': 'A', 'text': 'A. confident', 'word': 'confident'}, {'char': 'B', 'text': 'B. talkative', 'word': 'talkative'}, {'char': 'C', 'text': 'C. generous', 'word': 'generous'}, {'char': 'D', 'text': 'D. creative', 'word': 'creative'}], 'ans': 'D', 'ansTrans': "A. 'confident /ˈkɒn.fɪ.dənt/ (nhấn âm 1)<br>B. 'talkative /ˈtɔː.kə.tɪv/ (nhấn âm 1)<br>C. 'generous /ˈdʒen.ər.əs/ (nhấn âm 1)<br>D. cre'ative /kriˈeɪ.tɪv/ (nhấn âm 2)", 'exp': 'Đáp án D (creative) có trọng âm nhấn âm tiết 2 (/kriˈeɪ.tɪv/). A, B, C có trọng âm nhấn âm tiết 1.'}, {'id': 8, 'q': 'Câu 8: Trọng âm từ chỉ tính cách & ngoại hình', 'qTrans': 'Chọn từ có vị trí trọng âm chính khác các từ còn lại.', 'opts': [{'char': 'A', 'text': 'A. patient', 'word': 'patient'}, {'char': 'B', 'text': 'B. helpful', 'word': 'helpful'}, {'char': 'C', 'text': 'C. funny', 'word': 'funny'}, {'char': 'D', 'text': 'D. appearance', 'word': 'appearance'}], 'ans': 'D', 'ansTrans': "A. 'patient /ˈpeɪ.ʃənt/ (nhấn âm 1)<br>B. 'helpful /ˈhelp.fəl/ (nhấn âm 1)<br>C. 'funny /ˈfʌn.i/ (nhấn âm 1)<br>D. ap'pearance /əˈpɪə.rəns/ (nhấn âm 2)", 'exp': 'Đáp án D (appearance) có trọng âm nhấn âm tiết 2 (/əˈpɪə.rəns/). A, B, C có trọng âm nhấn âm tiết 1.'}, {'id': 9, 'q': 'Câu 9: Trọng âm danh từ & tính từ miêu tả', 'qTrans': 'Chọn từ có vị trí trọng âm chính khác các từ còn lại.', 'opts': [{'char': 'A', 'text': 'A. chubby', 'word': 'chubby'}, {'char': 'B', 'text': 'B. shoulder', 'word': 'shoulder'}, {'char': 'C', 'text': 'C. elbow', 'word': 'elbow'}, {'char': 'D', 'text': 'D. competitive', 'word': 'competitive'}], 'ans': 'D', 'ansTrans': "A. 'chubby /ˈtʃʌb.i/ (nhấn âm 1)<br>B. 'shoulder /ˈʃəʊl.dər/ (nhấn âm 1)<br>C. 'elbow /ˈel.bəʊ/ (nhấn âm 1)<br>D. com'petitive /kəmˈpet.ə.tɪv/ (nhấn âm 2)", 'exp': 'Đáp án D (competitive) có trọng âm nhấn âm tiết 2 (/kəmˈpet.ə.tɪv/). A, B, C có trọng âm nhấn âm tiết 1.'}, {'id': 10, 'q': 'Câu 10: Trọng âm tính từ chỉ tính cách nhiều âm tiết', 'qTrans': 'Chọn từ có vị trí trọng âm chính khác các từ còn lại.', 'opts': [{'char': 'A', 'text': 'A. curious', 'word': 'curious'}, {'char': 'B', 'text': 'B. serious', 'word': 'serious'}, {'char': 'C', 'text': 'C. sensitive', 'word': 'sensitive'}, {'char': 'D', 'text': 'D. responsible', 'word': 'responsible'}], 'ans': 'D', 'ansTrans': "A. 'curious /ˈkjʊə.ri.əs/ (nhấn âm 1)<br>B. 'serious /ˈsɪə.ri.əs/ (nhấn âm 1)<br>C. 'sensitive /ˈsen.sɪ.tɪv/ (nhấn âm 1)<br>D. re'sponsible /rɪˈspɒn.sə.bəl/ (nhấn âm 2)", 'exp': 'Đáp án D (responsible) có trọng âm nhấn âm tiết 2 (/rɪˈspɒn.sə.bəl/). A, B, C có trọng âm nhấn âm tiết 1.'}];
         const allQuestions = [...part1Data, ...part2Data];
 
         function speak(text) {
-            if ('speechSynthesis' in window) {
-                window.speechSynthesis.cancel();
-                const u = new SpeechSynthesisUtterance(text);
-                u.lang = 'en-US'; u.rate = 0.85;
-                window.speechSynthesis.speak(u);
+            if (!text || !('speechSynthesis' in window)) return;
+            const clean = text.replace(/🔊/g, '').trim();
+            if (!clean) return;
+
+            window.speechSynthesis.cancel();
+            const utterance = new SpeechSynthesisUtterance(clean);
+            utterance.lang = 'en-US';
+            utterance.rate = 0.85;
+            utterance.pitch = 1.0;
+
+            const voices = window.speechSynthesis.getVoices();
+            if (voices && voices.length > 0) {
+                const enVoices = voices.filter(v => v.lang && (v.lang.startsWith('en') || v.lang.startsWith('en_')));
+                const best = enVoices.find(v => 
+                    v.name.includes('Google') || 
+                    v.name.includes('Natural') || 
+                    v.name.includes('Aria') || 
+                    v.name.includes('Jenny') || 
+                    v.name.includes('Samantha') || 
+                    v.name.includes('US')
+                ) || enVoices[0];
+                if (best) utterance.voice = best;
+            }
+            window.speechSynthesis.speak(utterance);
+        }
+
+        if ('speechSynthesis' in window) {
+            window.speechSynthesis.getVoices();
+            if (window.speechSynthesis.onvoiceschanged !== undefined) {
+                window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
             }
         }
 
@@ -61,20 +81,9 @@
             data.forEach(item => {
                 let optsHtml = '';
                 item.opts.forEach(opt => {
-                    const char = opt.text.charAt(0);
-                    optsHtml += `
-                        <div style="margin:6px 0; display:flex; align-items:center;">
-                            <label style="cursor:pointer; margin-right:6px;"><input type="radio" name="q_${item.id}" value="${char}"> ${opt.text}</label>
-                            <button type="button" class="btn-audio" onclick="speak('${opt.word}')">🔊 Nghe</button>
-                        </div>`;
+                    optsHtml += `<div class="opt-row"><label class="opt-label"><input type="radio" name="q_${item.id}" value="${opt.char}"> ${opt.text}</label><button type="button" class="btn-audio" onclick="speak('${opt.word}')">🔊 Nghe</button></div>`;
                 });
-                container.innerHTML += `
-                    <div class="question-card" id="card_q_${item.id}">
-                        <div style="font-weight:bold; color:#1565c0;">${item.q}</div>
-                        <div>${optsHtml}</div>
-                        <button type="button" class="btn-submit-q" onclick="checkQuestion(${item.id})">Nộp câu này</button>
-                        <div id="explain_q_${item.id}" class="explanation"></div>
-                    </div>`;
+                container.innerHTML += `<div class="question-card" id="card_q_${item.id}"><div style="font-weight:bold; color:#1565c0; margin-bottom:8px;">${item.q}</div><div>${optsHtml}</div><button type="button" class="btn-submit-q" onclick="checkQuestion(${item.id})">Nộp câu này</button><div id="explain_q_${item.id}" class="explanation"></div></div>`;
             });
         }
 
@@ -89,14 +98,18 @@
             if (sel && sel.value === item.ans) {
                 card.className = "question-card status-correct";
                 explainDiv.className = "explanation correct";
-                explainDiv.innerHTML = `<b>✓ CHÍNH XÁC!</b><br>📌 <b>Dịch câu hỏi:</b> ${item.q_tr}<br>💡 <b>Dịch đáp án chuẩn:</b> ${item.ans_tr}<br>📝 <b>Giải thích chi tiết:</b> ${item.exp}`;
+                explainDiv.innerHTML = `<b>✓ CHÍNH XÁC!</b><div class="trans-box"><b>📌 Dịch câu hỏi:</b> ${item.qTrans}</div><div class="ipa-box"><b>🎙️ Phiên âm IPA chi tiết:</b><br>${item.ansTrans}</div><b>📝 Giải thích:</b> ${item.exp}`;
             } else {
                 card.className = "question-card status-wrong";
                 explainDiv.className = "explanation wrong";
-                explainDiv.innerHTML = `<b>✗ CHƯA CHÍNH XÁC!</b> (Đáp án chuẩn: <b>${item.ans}</b>)<br>📌 <b>Dịch câu hỏi:</b> ${item.q_tr}<br>💡 <b>Dịch đáp án chuẩn:</b> ${item.ans_tr}<br>📝 <b>Giải thích chi tiết:</b> ${item.exp}`;
+                explainDiv.innerHTML = `<b>✗ CHƯA CHÍNH XÁC!</b> (Đáp án chuẩn: <b>${item.ans}</b>)<div class="trans-box"><b>📌 Dịch câu hỏi:</b> ${item.qTrans}</div><div class="ipa-box"><b>🎙️ Phiên âm IPA chi tiết:</b><br>${item.ansTrans}</div><b>📝 Giải thích:</b> ${item.exp}`;
             }
         }
-        window.onload = function() { renderPart(part1Data, 'part1Quiz'); renderPart(part2Data, 'part2Quiz'); };
+
+        window.onload = function() {
+            renderPart(part1Data, 'part1Quiz');
+            renderPart(part2Data, 'part2Quiz');
+        };
     </script>
 </body>
 </html>
