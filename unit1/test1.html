@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit 1 - Đề Kiểm Tra Số 1 (20 Câu Chuyên Sâu)</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #f9fbfd; padding: 20px; color: #333; line-height: 1.5; }
+        h1 { color: #0d47a1; font-size: 1.5rem; margin-bottom: 20px; border-bottom: 2px solid #1e88e5; padding-bottom: 8px; }
+        
+        .question-card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 18px;
+            margin-bottom: 18px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+            transition: all 0.3s ease;
+        }
+
+        .question-card.status-correct { border-left: 6px solid #2e7d32; background-color: #f1f8e9; }
+        .question-card.status-wrong { border-left: 6px solid #c62828; background-color: #fbe9e7; }
+
+        .q-title { font-weight: bold; color: #1565c0; margin-bottom: 10px; font-size: 1.02rem; }
+        .options { margin: 10px 0; }
+        .options label { display: block; background: #f5f5f5; padding: 8px 12px; margin: 5px 0; border-radius: 5px; cursor: pointer; border: 1px solid #ddd; }
+        .options label:hover { background: #e3f2fd; }
+
+        .input-fill { width: 70%; padding: 8px 12px; border: 1px solid #ccc; border-radius: 4px; font-size: 0.98rem; margin-top: 5px; }
+
+        .btn-submit-q {
+            background: #1e88e5;
+            color: white;
+            border: none;
+            padding: 7px 16px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .btn-submit-q:hover { background: #0d47a1; }
+
+        .explanation {
+            display: none;
+            margin-top: 12px;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 0.93rem;
+            line-height: 1.5;
+        }
+
+        .explanation.correct { background: #e8f5e9; color: #1b5e20; border: 1px solid #a5d6a7; }
+        .explanation.wrong { background: #ffebee; color: #b71c1c; border: 1px solid #ef9a9a; }
+    </style>
+</head>
+<body>
+
+    <h1>ĐỀ KIỂM TRA SỐ 1 - UNIT 1: MY NEW SCHOOL (20 CÂU TƯƠNG TÁC)</h1>
+
+    <div id="quizList"></div>
+
+    <script>
+        const quizData = [
+            // PART 1: MULTIPLE CHOICE (CÂU 1 - 10)
+            { id: 1, type: "mc", q: "Câu 1 (Phát âm -s/es): Choose the word whose underlined part is pronounced differently.", opts: ["A. books", "B. lamps", "C. hats", "D. bags"], ans: "D", exp: "D đúng vì 'bags' có đuôi -s phát âm là /z/ (do tận cùng bằng phụ âm hữu thanh /ɡ/). Các đáp án A, B, C đều có đuôi -s phát âm là /s/ (tận cùng bằng âm vô thanh /k/, /p/, /t/)." },
+            { id: 2, type: "mc", q: "Câu 2 (Từ vựng): Phong is very _____. He always invents new games and draws beautiful pictures.", opts: ["A. shy", "B. creative", "C. lazy", "D. quiet"], ans: "B", exp: "B (creative - sáng tạo) phù hợp ngữ cảnh 'phát minh trò chơi mới và vẽ tranh đẹp'. Shy = nhút nhát, Lazy = lười biếng, Quiet = yên lặng." },
+            { id: 3, type: "mc", q: "Câu 3 (Động từ kết hợp): Every Tuesday afternoon, Vy _____ judo with her close friends in the club.", opts: ["A. plays", "B. does", "C. studies", "D. has"], correct: "B", ans: "B", exp: "B (does) đúng vì 'do judo' là cụm từ cố định cho môn võ. 'Play' đi với bóng/nhạc cụ, 'study' đi với môn học." },
+            { id: 4, type: "mc", q: "Câu 4 (Ngữ pháp): My younger brother _____ up early to cycle to school every morning.", opts: ["A. get", "B. gets", "C. is getting", "D. getting"], ans: "B", exp: "B (gets) đúng. Dấu hiệu 'every morning' diễn tả thói quen ở Hiện tại đơn. Chủ ngữ số ít 'My younger brother' chia động từ thêm -s." },
+            { id: 5, type: "mc", q: "Câu 5 (Dụng cụ học tập): I need a _____ to draw circles for my Geometry class tomorrow.", opts: ["A. rubber", "B. calculator", "C. compass", "D. pencil sharpener"], ans: "C", exp: "C (compass - com-pa) dùng để vẽ hình tròn (draw circles). Rubber = cục tẩy, Calculator = máy tính, Pencil sharpener = gọt bút chì." },
+            { id: 6, type: "mc", q: "Câu 6 (Trạng từ tần suất): Minh is a hard-working student. He _____ does his homework before going to bed.", opts: ["A. never", "B. rarely", "C. always", "D. seldom"], ans: "C", exp: "C (always - luôn luôn) thể hiện thói quen của một học sinh chăm chỉ (hard-working). Never/rarely/seldom đều mang nghĩa hiếm khi/không bao giờ." },
+            { id: 7, type: "mc", q: "Câu 7 (Loại hình trường): At a _____, students live, eat and study there during the school term.", opts: ["A. international school", "B. boarding school", "C. primary school", "D. secondary school"], ans: "B", exp: "B (boarding school - trường nội trú) là nơi học sinh sinh sống, ăn uống và học tập tại trường." },
+            { id: 8, type: "mc", q: "Câu 8 (Giao tiếp): - 'How is your first day at school, Linh?' - '_____'", opts: ["A. Yes, it is.", "B. It's wonderful, thanks!", "C. I go to school by bus.", "D. She is my new classmate."], ans: "B", exp: "B ('Nó rất tuyệt vời, cảm ơn!') trả lời phù hợp cho câu hỏi cảm nhận về ngày đầu đi học." },
+            { id: 9, type: "mc", q: "Câu 9 (Ngữ pháp To Be): _____ Mai and Hoa in the school library right now?", opts: ["A. Is", "B. Are", "C. Do", "D. Does"], ans: "B", exp: "B (Are) đúng vì chủ ngữ là hai người 'Mai and Hoa' (số nhiều) và 'in the library' là cụm giới từ chỉ nơi chốn đi với To Be." },
+            { id: 10, type: "mc", q: "Câu 10 (Thời khóa biểu): We usually _____ History and Geography on Thursday mornings.", opts: ["A. study", "B. play", "C. do", "D. make"], ans: "A", exp: "A (study) đi kèm tên các môn học (History, Geography)." },
+
+            // PART 2: FILL-IN-THE-BLANK / CHIA ĐỘNG TỪ (CÂU 11 - 20)
+            { id: 11, type: "fill", q: "Câu 11 (Chia động từ): My sister (watch) _____ TV with our family after dinner.", ans: "watches", exp: "Chia 'watches'. Chủ ngữ 'My sister' (số ít) ở hiện tại đơn, động từ tận cùng bằng 'ch' nên thêm '-es'." },
+            { id: 12, type: "fill", q: "Câu 12 (Chia động từ phủ định): They (not have) _____ English lessons on Saturday.", ans: "don't have", exp: "Chia 'don't have' hoặc 'do not have'. Dạng phủ định hiện tại đơn với chủ ngữ số nhiều 'They' dùng trợ động từ 'don't' + V-bare." },
+            { id: 13, type: "fill", q: "Câu 13 (Điền từ): Students wear their school _____ on Mondays and Fridays.", ans: "uniform", exp: "Điền 'uniform' (đồng phục). Cụm từ: wear school uniform (mặc đồng phục trường)." },
+            { id: 14, type: "fill", q: "Câu 14 (Chia động từ): Look! Phong (do) _____ his homework in the classroom.", ans: "is doing", exp: "Chia 'is doing'. Dấu hiệu 'Look!' mở đầu câu mệnh lệnh nhận biết thì Hiện tại tiếp diễn (S + am/is/are + V-ing)." },
+            { id: 15, type: "fill", q: "Câu 15 (Chia dạng từ - Word Formation): Hoa is very _____ (CREATE) and usually makes nice handicrafts.", ans: "creative", exp: "Điền 'creative' (tính từ của động từ create). Sau To Be 'is' và trạng từ 'very' cần một tính từ." },
+            { id: 16, type: "fill", q: "Câu 16 (Điền từ): Do you often play _____ with your friends during break time? (bóng đá)", ans: "football", exp: "Điền 'football' hoặc 'soccer' (môn bóng đá đi với động từ play)." },
+            { id: 17, type: "fill", q: "Câu 17 (Trạng từ vị trí): She is _____ (NEVER) late for her English classes.", ans: "never", exp: "Điền 'never'. Trạng từ chỉ tần suất 'never' đứng SAU động từ To Be 'is'." },
+            { id: 18, type: "fill", q: "Câu 18 (Chia động từ): Mr. Robert (teach) _____ us Physics every Wednesday.", ans: "teaches", exp: "Chia 'teaches'. Chủ ngữ Mr. Robert (ngôi thứ 3 số ít), động từ 'teach' kết thúc bằng 'ch' thêm '-es'." },
+            { id: 19, type: "fill", q: "Câu 19 (Viết lại câu): Lan walks to school every day. ➔ Lan goes to school _____ foot every day.", ans: "on", exp: "Điền giới từ 'on'. Cụm giới từ 'on foot' = walk (đi bộ)." },
+            { id: 20, type: "fill", q: "Câu 20 (Điền từ): Can I borrow your pencil _____ to sharpen my wooden pencil?", ans: "sharpener", exp: "Điền 'sharpener'. Pencil sharpener = cái gọt bút chì." }
+        ];
+
+        function renderQuiz() {
+            const container = document.getElementById('quizList');
+            container.innerHTML = '';
+
+            quizData.forEach(item => {
+                let optionsHtml = '';
+                if(item.type === 'mc') {
+                    item.opts.forEach((opt, idx) => {
+                        const val = opt.charAt(0);
+                        optionsHtml += `<label><input type="radio" name="q_${item.id}" value="${val}"> ${opt}</label>`;
+                    });
+                } else {
+                    optionsHtml = `<input type="text" id="input_q_${item.id}" class="input-fill" placeholder="Nhập đáp án của bạn vào đây...">`;
+                }
+
+                container.innerHTML += `
+                    <div class="question-card" id="card_q_${item.id}">
+                        <div class="q-title">${item.q}</div>
+                        <div class="options">${optionsHtml}</div>
+                        <button type="button" class="btn-submit-q" onclick="checkQuestion(${item.id})">Nộp câu này</button>
+                        <div id="explain_q_${item.id}" class="explanation"></div>
+                    </div>
+                `;
+            });
+        }
+
+        function checkQuestion(qId) {
+            const item = quizData.find(x => x.id === qId);
+            const card = document.getElementById(`card_q_${qId}`);
+            const explainDiv = document.getElementById(`explain_q_${qId}`);
+            explainDiv.style.display = 'block';
+
+            let isCorrect = false;
+            let userAns = '';
+
+            if(item.type === 'mc') {
+                const selected = document.querySelector(`input[name="q_${qId}"]:checked`);
+                if(selected) {
+                    userAns = selected.value;
+                    if(userAns === item.ans) isCorrect = true;
+                }
+            } else {
+                const inputVal = document.getElementById(`input_q_${qId}`).value.trim();
+                userAns = inputVal;
+                // Flexible check for case insensitivity and alternate spaces
+                if(inputVal.toLowerCase() === item.ans.toLowerCase()) {
+                    isCorrect = true;
+                }
+            }
+
+            if(isCorrect) {
+                card.className = "question-card status-correct";
+                explainDiv.className = "explanation correct";
+                explainDiv.innerHTML = `<b>✓ CHÍNH XÁC!</b><br>${item.exp}`;
+            } else {
+                card.className = "question-card status-wrong";
+                explainDiv.className = "explanation wrong";
+                explainDiv.innerHTML = `
+                    <b>✗ CHƯA CHÍNH XÁC!</b> (Bạn nhập/chọn: <b>${userAns || 'Chưa trả lời'}</b> | Đáp án chuẩn: <b>${item.ans}</b>)<br>
+                    <b>Phân tích chi tiết:</b> ${item.exp}
+                `;
+            }
+        }
+
+        window.onload = renderQuiz;
+    </script>
+</body>
+</html>

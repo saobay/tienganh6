@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Học Tiếng Anh Lớp 6 - Global Success (Chương Trình Chuyên Sâu)</title>
+    <style>
+        :root {
+            --primary-color: #1e88e5;
+            --secondary-color: #0d47a1;
+            --bg-color: #f4f6f9;
+            --card-bg: #ffffff;
+            --sidebar-width: 280px;
+        }
+
+        * { box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background-color: var(--bg-color); display: flex; height: 100vh; overflow: hidden; }
+
+        /* Sidebar Navigation */
+        .sidebar {
+            width: var(--sidebar-width);
+            background: #ffffff;
+            border-right: 1px solid #e0e0e0;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 2px 0 8px rgba(0,0,0,0.05);
+            z-index: 10;
+        }
+
+        .sidebar-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1.5rem 1rem;
+            text-align: center;
+        }
+
+        .sidebar-header h2 { margin: 0; font-size: 1.2rem; }
+        .sidebar-header p { margin: 5px 0 0; font-size: 0.85rem; opacity: 0.9; }
+
+        .nav-section {
+            padding: 1rem;
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        .unit-group { margin-bottom: 1.5rem; }
+        .unit-title { font-weight: bold; color: var(--secondary-color); font-size: 0.95rem; text-transform: uppercase; border-bottom: 2px solid #bbdefb; padding-bottom: 0.3rem; margin-bottom: 0.8rem; }
+
+        .nav-item {
+            display: block;
+            padding: 0.6rem 0.8rem;
+            color: #444;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            margin-bottom: 0.3rem;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .nav-item:hover { background-color: #e3f2fd; color: var(--primary-color); }
+        .nav-item.active { background-color: var(--primary-color); color: white; font-weight: bold; }
+
+        /* Main Content Viewport */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: var(--bg-color);
+        }
+
+        .content-header {
+            background: white;
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .content-header h1 { margin: 0; font-size: 1.3rem; color: #333; }
+
+        .iframe-container {
+            flex: 1;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar Menu Manager -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h2>Tiếng Anh 6 - Global Success</h2>
+            <p>Hệ Thống Tự Học & Luyện Thi Chuyên Sâu</p>
+        </div>
+
+        <div class="nav-section">
+            <!-- UNIT 1 -->
+            <div class="unit-group">
+                <div class="unit-title">📌 Unit 1: My New School</div>
+                <div class="nav-item active" onclick="loadPage('unit1/unit1.html', 'Unit 1: Kiến Thức Trọng Tâm', this)">📖 Lý thuyết & Từ vựng</div>
+                <div class="nav-item" onclick="loadPage('unit1/test1.html', 'Unit 1: Đề Kiểm Tra Số 1 (20 Câu)', this)">✍️ Đề bài tập số 1</div>
+                <div class="nav-item" onclick="loadPage('unit1/test2.html', 'Unit 1: Đề Kiểm Tra Số 2 (20 Câu)', this)">✍️ Đề bài tập số 2</div>
+            </div>
+
+            <!-- UNIT 2 Placeholder -->
+            <div class="unit-group">
+                <div class="unit-title">📌 Unit 2: My House</div>
+                <div class="nav-item" onclick="loadPage('unit2/unit2.html', 'Unit 2: Kiến Thức Trọng Tâm', this)">📖 Lý thuyết & Từ vựng</div>
+                <div class="nav-item" onclick="loadPage('unit2/test1.html', 'Unit 2: Đề Kiểm Tra Số 1', this)">✍️ Đề bài tập số 1</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Dynamic Content Frame -->
+    <div class="main-content">
+        <div class="content-header">
+            <h1 id="pageTitle">Unit 1: Kiến Thức Trọng Tâm & Từ Vựng Chuyên Sâu</h1>
+        </div>
+        <div class="iframe-container">
+            <iframe id="contentFrame" src="unit1/unit1.html"></iframe>
+        </div>
+    </div>
+
+    <script>
+        function loadPage(url, title, element) {
+            document.getElementById('contentFrame').src = url;
+            document.getElementById('pageTitle').innerText = title;
+
+            // Highlight active navigation item
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+            if(element) element.classList.add('active');
+        }
+    </script>
+</body>
+</html>
