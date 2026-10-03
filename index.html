@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Học Tiếng Anh Lớp 6 - Global Success (Mô hình Modular)</title>
+    <title>Học Tiếng Anh Lớp 6 - Global Success</title>
     <style>
+        * { box-sizing: border-box; }
+        
         body {
             margin: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -12,6 +14,15 @@
             height: 100vh;
             overflow: hidden;
             background: #f4f6f9;
+        }
+
+        /* Lớp mờ nền khi mở sidebar trên điện thoại */
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 99;
         }
 
         /* Sidebar điều hướng */
@@ -22,6 +33,8 @@
             display: flex;
             flex-direction: column;
             box-shadow: 2px 0 8px rgba(0,0,0,0.03);
+            z-index: 100;
+            transition: transform 0.3s ease;
         }
 
         .sidebar-header {
@@ -29,10 +42,21 @@
             color: white;
             padding: 1.2rem 1rem;
             text-align: center;
+            position: relative;
         }
 
         .sidebar-header h3 { margin: 0; font-size: 1.15rem; }
         .sidebar-header span { font-size: 0.85rem; opacity: 0.9; }
+
+        /* Nút đóng sidebar góc phải trên mobile */
+        .close-sidebar-btn {
+            display: none;
+            position: absolute;
+            right: 10px; top: 10px;
+            background: none; border: none;
+            color: white; font-size: 1.4rem;
+            cursor: pointer;
+        }
 
         .nav-section {
             padding: 1rem;
@@ -75,6 +99,32 @@
             display: flex;
             flex-direction: column;
             background: #ffffff;
+            position: relative;
+        }
+
+        /* Thanh Topbar Mobile (Chỉ hiện trên màn hình điện thoại) */
+        .mobile-topbar {
+            display: none;
+            background: #1e88e5;
+            color: white;
+            padding: 10px 15px;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .mobile-toggle-btn {
+            background: #0d47a1;
+            color: white;
+            border: none;
+            padding: 7px 12px;
+            border-radius: 4px;
+            font-size: 0.95rem;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
         iframe {
@@ -82,14 +132,45 @@
             height: 100%;
             border: none;
         }
+
+        /* CAI ĐẶT RESPONSIVE DÀNH CHO ĐIỆN THOẠI (Màn hình <= 768px) */
+        @media (max-width: 768px) {
+            .mobile-topbar {
+                display: flex;
+            }
+
+            .close-sidebar-btn {
+                display: block;
+            }
+
+            .sidebar {
+                position: fixed;
+                top: 0; left: 0; bottom: 0;
+                width: 280px;
+                transform: translateX(-100%); /* Ẩn hẳn sidebar ra ngoài màn hình */
+            }
+
+            .sidebar.active {
+                transform: translateX(0); /* Bấm nút mở trượt ra */
+            }
+
+            .sidebar-overlay.active {
+                display: block; /* Hiện nền mờ */
+            }
+        }
     </style>
 </head>
 <body>
 
-    <div class="sidebar">
+    <!-- Lớp mờ nền khi mở menu trên điện thoại -->
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+
+    <!-- Sidebar điều hướng -->
+    <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
+            <button class="close-sidebar-btn" onclick="closeSidebar()">✕</button>
             <h3>Tiếng Anh 6 Global Success</h3>
-            <span>Hệ Thống Học Tập & Luyện Thi Chuyên Sâu</span>
+            <span>Hệ Thống Học Tập & Luyện Thi</span>
         </div>
 
         <div class="nav-section">
@@ -107,15 +188,42 @@
         </div>
     </div>
 
+    <!-- Khung nội dung chính -->
     <div class="main-content">
+        <!-- Thanh công cụ hiển thị riêng trên di động -->
+        <div class="mobile-topbar">
+            <button class="mobile-toggle-btn" onclick="openSidebar()">☰ Danh mục bài</button>
+            <span style="font-weight:bold; font-size:0.88rem;" id="mobileTitle">📖 Lý thuyết & Từ vựng</span>
+        </div>
+
         <iframe id="contentFrame" src="unit1/unit1.html"></iframe>
     </div>
 
     <script>
         function loadPage(url, el) {
+            // Tải bài học vào iframe
             document.getElementById('contentFrame').src = url;
+
+            // Đổi trạng thái active cho menu
             document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
-            if(el) el.classList.add('active');
+            if (el) {
+                el.classList.add('active');
+                // Cập nhật tên bài học đang xem lên thanh Topbar Mobile
+                document.getElementById('mobileTitle').innerText = el.innerText.trim();
+            }
+
+            // Tự động đóng menu trượt sau khi học sinh chọn bài (trên điện thoại)
+            closeSidebar();
+        }
+
+        function openSidebar() {
+            document.getElementById('sidebar').classList.add('active');
+            document.getElementById('sidebarOverlay').classList.add('active');
+        }
+
+        function closeSidebar() {
+            document.getElementById('sidebar').classList.remove('active');
+            document.getElementById('sidebarOverlay').classList.remove('active');
         }
     </script>
 </body>
