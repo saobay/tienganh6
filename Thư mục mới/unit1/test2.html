@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unit 1 - Đề 2: Bài Tập Nghe Hiểu</title>
+    <title>Unit 1 - Đề 2: Bài Tập Nghe Hiểu (Listening)</title>
     <style>
         :root {
             --primary-color: #1e88e5;
@@ -23,6 +23,7 @@
 
         h2 { color: var(--secondary-color); margin-top: 0; }
 
+        /* Bảng điều khiển bài nghe */
         .audio-player-card {
             background: linear-gradient(135deg, #e3f2fd, #bbdefb);
             border: 2px solid #90caf9;
@@ -69,6 +70,7 @@
             font-style: italic;
         }
 
+        /* Thẻ câu hỏi */
         .question-card {
             background: var(--bg-card);
             border: 1px solid #e0e0e0;
@@ -100,7 +102,6 @@
             padding: 12px;
             border-radius: 6px;
             font-size: 0.95rem;
-            line-height: 1.5;
         }
 
         .explanation.correct { background: #e8f5e9; color: #1b5e20; }
@@ -120,6 +121,7 @@
 
     <h2>ĐỀ KIỂM TRA SỐ 2 - UNIT 1: BÀI TẬP NGHE (LISTENING SKILL)</h2>
 
+    <!-- KHUNG PHÁT ÂM THANH BÀI NGHE -->
     <div class="audio-player-card">
         <h3 style="margin:0; color:#0d47a1;">🎧 Luyện Nghe: My New School (Phong's Introduction)</h3>
         <p style="margin: 6px 0 0 0; color:#444;">
@@ -138,127 +140,103 @@
         </div>
     </div>
 
+    <!-- DANH SÁCH CÂU HỎI -->
     <div id="quizList"></div>
 
     <script>
+        // Nội dung bài nghe
         const listeningText = "Hi, my name is Phong. I am a student at Sunrise Middle School. It is a big school in Ha Noi. My school has thirty classrooms, a large library, and two computer rooms. I go to school from Monday to Friday. At school, we wear uniforms on Mondays and Saturdays. My favorite subject is Science because I love doing experiments. After school, I usually play football or do judo with my classmate, Vy. I love my new school very much because the teachers are kind and helpful.";
 
+        // Danh sách câu hỏi dựa trên bài nghe
         const quizData = [
             {
                 id: 1,
                 type: "mc",
                 q: "Câu 1: Which school does Phong go to?",
-                qTrans: "Phong học ở trường nào?",
                 opts: ["A. PLC Sydney", "B. Sunrise Middle School", "C. Dream School", "D. An Son School"],
                 ans: "B",
-                ansTrans: "B. Sunrise Middle School (Trường THCS Sunrise)",
                 exp: "Trong bài nói Phong giới thiệu: 'I am a student at Sunrise Middle School.'"
             },
             {
                 id: 2,
                 type: "mc",
                 q: "Câu 2: How many computer rooms are there in his school?",
-                qTrans: "Có bao nhiêu phòng máy tính ở trường của cậu ấy?",
                 opts: ["A. One", "B. Two", "C. Three", "D. Thirty"],
                 ans: "B",
-                ansTrans: "B. Two (Hai phòng)",
                 exp: "Trích câu bài nghe: '...a large library, and two computer rooms.'"
             },
             {
                 id: 3,
                 type: "mc",
                 q: "Câu 3: When do students wear uniforms at Sunrise Middle School?",
-                qTrans: "Khi nào học sinh mặc đồng phục tại Trường THCS Sunrise?",
                 opts: ["A. Every day", "B. Mondays and Fridays", "C. Mondays and Saturdays", "D. Tuesdays and Thursdays"],
                 ans: "C",
-                ansTrans: "C. Mondays and Saturdays (Các ngày Thứ Hai và Thứ Bảy)",
                 exp: "Trích câu bài nghe: 'we wear uniforms on Mondays and Saturdays.'"
             },
             {
                 id: 4,
                 type: "mc",
                 q: "Câu 4: What is Phong's favorite subject?",
-                qTrans: "Môn học yêu thích của Phong là gì?",
                 opts: ["A. English", "B. Maths", "C. Science", "D. History"],
                 ans: "C",
-                ansTrans: "C. Science (Môn Khoa học)",
                 exp: "Trích câu bài nghe: 'My favorite subject is Science because I love doing experiments.'"
             },
             {
                 id: 5,
                 type: "mc",
                 q: "Câu 5: Who does Phong usually play football or do judo with?",
-                qTrans: "Phong thường chơi bóng đá hoặc tập judo với ai?",
                 opts: ["A. His brother", "B. His sister", "C. His teacher", "D. His classmate, Vy"],
                 ans: "D",
-                ansTrans: "D. His classmate, Vy (Bạn cùng lớp của cậu ấy, Vy)",
                 exp: "Trích câu bài nghe: '...with my classmate, Vy.'"
             },
             {
                 id: 6,
                 type: "fill",
                 q: "Câu 6 (Điền từ): Sunrise Middle School is a _____ school in Ha Noi.",
-                qTrans: "Trường THCS Sunrise là một ngôi trường _____ ở Hà Nội.",
                 ans: "big",
-                ansTrans: "big (lớn / to)",
                 exp: "Từ cần điền là 'big'. Trích đoạn nghe: 'It is a big school in Ha Noi.'"
             },
             {
                 id: 7,
                 type: "fill",
                 q: "Câu 7 (Điền số/từ): Phong's school has _____ classrooms.",
-                qTrans: "Trường của Phong có _____ phòng học.",
                 ans: "thirty",
-                ansTrans: "thirty / 30 (ba mươi)",
                 exp: "Đáp án đúng là 'thirty' (hoặc 30). Trích đoạn nghe: 'My school has thirty classrooms.'"
             },
             {
                 id: 8,
                 type: "fill",
                 q: "Câu 8 (Điền từ): Phong loves Science because he loves doing _____.",
-                qTrans: "Phong thích Khoa học vì cậu ấy thích làm _____.",
                 ans: "experiments",
-                ansTrans: "experiments (các thí nghiệm)",
-                exp: "Từ cần điền là 'experiments'. Trích đoạn nghe: 'because I love doing experiments.'"
+                exp: "Từ cần điền là 'experiments' (thí nghiệm). Trích đoạn nghe: 'because I love doing experiments.'"
             },
             {
                 id: 9,
                 type: "fill",
                 q: "Câu 9 (Điền từ): After school, Phong usually plays football or does _____.",
-                qTrans: "Sau giờ học, Phong thường chơi bóng đá hoặc tập _____.",
                 ans: "judo",
-                ansTrans: "judo (môn võ judo)",
                 exp: "Từ cần điền là 'judo'. Trích đoạn nghe: 'I usually play football or do judo...'"
             },
             {
                 id: 10,
                 type: "mc",
                 q: "Câu 10: Why does Phong love his new school?",
-                qTrans: "Tại sao Phong yêu ngôi trường mới của mình?",
                 opts: ["A. Because it is near his house", "B. Because the teachers are kind and helpful", "C. Because he has no homework", "D. Because there is a swimming pool"],
                 ans: "B",
-                ansTrans: "B. Because the teachers are kind and helpful (Vì các thầy cô giáo tốt bụng và tận tình)",
                 exp: "Trích câu cuối bài nghe: 'I love my new school very much because the teachers are kind and helpful.'"
             }
         ];
 
+        // Trình phát âm thanh Web Speech API
         let synth = window.speechSynthesis;
         let utterance = null;
 
-        function normalizeText(text) {
-            if (!text) return "";
-            return text.toLowerCase()
-                .replace(/[.,/#!$%^&*;:{}=\-_`~()'"?]/g, "")
-                .replace(/\s+/g, " ")
-                .trim();
-        }
-
         function playAudio() {
             if ('speechSynthesis' in window) {
-                synth.cancel();
+                synth.cancel(); // Dừng nếu đang đọc dở
                 utterance = new SpeechSynthesisUtterance(listeningText);
                 utterance.lang = 'en-US';
-                utterance.rate = 0.85;
+                utterance.rate = 0.85; // Tốc độ vừa phải cho học sinh lớp 6
                 synth.speak(utterance);
             } else {
                 alert("Trình duyệt không hỗ trợ phát âm thanh tự động.");
@@ -276,6 +254,7 @@
             box.style.display = (box.style.display === 'block') ? 'none' : 'block';
         }
 
+        // Render danh sách câu hỏi
         function renderQuiz() {
             const container = document.getElementById('quizList');
             quizData.forEach(item => {
@@ -299,49 +278,35 @@
             });
         }
 
+        // Chấm điểm câu hỏi riêng biệt
         function checkQuestion(qId) {
             const item = quizData.find(x => x.id === qId);
-            if (!item) return;
-
             const card = document.getElementById(`card_q_${qId}`);
             const explainDiv = document.getElementById(`explain_q_${qId}`);
             explainDiv.style.display = 'block';
 
-            let isCorrect = false;
-
-            if (item.type === 'mc') {
+            let isCorrect = false, userAns = '';
+            if(item.type === 'mc') {
                 const sel = document.querySelector(`input[name="q_${qId}"]:checked`);
-                if (sel && sel.value === item.ans) {
-                    isCorrect = true;
+                if(sel) {
+                    userAns = sel.value;
+                    if(userAns === item.ans) isCorrect = true;
                 }
             } else {
-                const userAns = document.getElementById(`input_q_${qId}`).value;
-                const cleanUser = normalizeText(userAns);
-                const cleanCorrect = normalizeText(item.ans);
-
-                if (cleanUser === cleanCorrect || (item.ans === "thirty" && cleanUser === "30")) {
+                userAns = document.getElementById(`input_q_${qId}`).value.trim();
+                if(userAns.toLowerCase() === item.ans.toLowerCase() || (item.ans === "thirty" && userAns === "30")) {
                     isCorrect = true;
                 }
             }
 
-            if (isCorrect) {
+            if(isCorrect) {
                 card.className = "question-card status-correct";
                 explainDiv.className = "explanation correct";
-                explainDiv.innerHTML = `
-                    <b>✓ CHÍNH XÁC!</b><br>
-                    📌 <b>Dịch câu hỏi:</b> ${item.qTrans}<br>
-                    💡 <b>Dịch đáp án chuẩn:</b> ${item.ansTrans}<br>
-                    📝 <b>Giải thích chi tiết:</b> ${item.exp}
-                `;
+                explainDiv.innerHTML = `<b>✓ CHÍNH XÁC!</b><br>${item.exp}`;
             } else {
                 card.className = "question-card status-wrong";
                 explainDiv.className = "explanation wrong";
-                explainDiv.innerHTML = `
-                    <b>✗ CHƯA CHÍNH XÁC!</b> (Đáp án chuẩn: <b>${item.ans}</b>)<br>
-                    📌 <b>Dịch câu hỏi:</b> ${item.qTrans}<br>
-                    💡 <b>Dịch đáp án chuẩn:</b> ${item.ansTrans}<br>
-                    📝 <b>Giải thích chi tiết:</b> ${item.exp}
-                `;
+                explainDiv.innerHTML = `<b>✗ CHƯA CHÍNH XÁC!</b> (Đáp án đúng: <b>${item.ans}</b>)<br><b>Giải thích:</b> ${item.exp}`;
             }
         }
 

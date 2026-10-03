@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unit 1 - Đề 1: Luyện Phát Âm & Từ Vựng</title>
+    <title>Unit 1 - Đề 1: Luyện Phát Âm & Từ Vựng (Phonetics & Vocabulary)</title>
     <style>
         :root {
             --primary-color: #1e88e5;
@@ -45,8 +45,16 @@
         .question-card.status-correct { border-left: 6px solid var(--correct-color); background: #f1f8e9; }
         .question-card.status-wrong { border-left: 6px solid var(--wrong-color); background: #fbe9e7; }
 
-        .opt-row { display: flex; align-items: center; margin: 6px 0; }
-        .opt-label { cursor: pointer; margin-right: 8px; }
+        .opt-row {
+            display: flex;
+            align-items: center;
+            margin: 6px 0;
+        }
+
+        .opt-label {
+            cursor: pointer;
+            margin-right: 8px;
+        }
 
         .btn-audio {
             background: #e3f2fd;
@@ -58,7 +66,11 @@
             font-size: 0.85rem;
             transition: all 0.2s;
         }
-        .btn-audio:hover { background: #bbdefb; color: #0d47a1; }
+
+        .btn-audio:hover {
+            background: #bbdefb;
+            color: #0d47a1;
+        }
 
         .btn-submit-q {
             background: var(--primary-color);
@@ -70,13 +82,21 @@
             cursor: pointer;
             margin-top: 8px;
         }
+
         .btn-submit-q:hover { background: var(--secondary-color); }
 
-        .explanation { display: none; margin-top: 10px; padding: 12px; border-radius: 5px; font-size: 0.93rem; line-height: 1.5; }
+        .explanation { display: none; margin-top: 10px; padding: 10px; border-radius: 5px; font-size: 0.93rem; }
         .explanation.correct { background: #e8f5e9; color: #1b5e20; }
         .explanation.wrong { background: #ffebee; color: #b71c1c; }
 
-        .input-fill { width: 80%; max-width: 500px; padding: 8px 12px; border: 1px solid #ccc; border-radius: 4px; font-size: 1rem; }
+        .input-fill {
+            width: 80%;
+            max-width: 500px;
+            padding: 8px 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
     </style>
 </head>
 <body>
@@ -87,19 +107,21 @@
         <b>💡 Hướng dẫn:</b> Bấm vào nút <b>🔊 Nghe</b> ngay bên cạnh từng phương án A, B, C, D để nghe phát âm giọng chuẩn trước khi chọn đáp án!
     </div>
 
+    <!-- PHẦN 1: BÀI TẬP PHÁT ÂM CÓ NÚT NGHE KẾ BÊN -->
     <h3>PART 1: PHONETICS (Luyện Nghe & Chọn Phát Âm)</h3>
     <div id="part1Quiz"></div>
 
+    <!-- PHẦN 2: BÀI TẬP TỪ VỰNG & ĐIỀN TỪ -->
     <h3 style="margin-top: 30px;">PART 2: VOCABULARY & GRAMMAR (Từ Vựng & Ngữ Pháp)</h3>
     <div id="part2Quiz"></div>
 
     <script>
+        // Dữ liệu Phần 1: Phát âm có nút nghe riêng từng từ
         const part1Data = [
             {
                 id: 1,
                 type: "mc_audio",
                 q: "Câu 1: Choose the word whose underlined part is pronounced differently (-s / -es).",
-                qTrans: "Chọn từ có phần gạch chân phát âm khác với các từ còn lại.",
                 opts: [
                     { char: "A", text: "A. books", word: "books" },
                     { char: "B", text: "B. lamps", word: "lamps" },
@@ -107,14 +129,12 @@
                     { char: "D", text: "D. bags", word: "bags" }
                 ],
                 ans: "D",
-                ansTrans: "D. bags (những chiếc cặp sách)",
                 exp: "Đáp án D (bags) phát âm đuôi -s là /z/. Các từ A, B, C có tận cùng là âm vô thanh (/k/, /p/, /t/) nên phát âm đuôi -s là /s/."
             },
             {
                 id: 2,
                 type: "mc_audio",
                 q: "Câu 2: Choose the word whose underlined part is pronounced differently (-es).",
-                qTrans: "Chọn từ có phần đuôi -es phát âm khác với các từ còn lại.",
                 opts: [
                     { char: "A", text: "A. watches", word: "watches" },
                     { char: "B", text: "B. pencil cases", word: "pencil cases" },
@@ -122,14 +142,12 @@
                     { char: "D", text: "D. pens", word: "pens" }
                 ],
                 ans: "D",
-                ansTrans: "D. pens (những chiếc bút mực)",
                 exp: "Đáp án D (pens) phát âm đuôi -s là /z/. Các từ A, B, C phát âm đuôi -es là /ɪz/."
             },
             {
                 id: 3,
                 type: "mc_audio",
                 q: "Câu 3: Choose the word with a different vowel sound.",
-                qTrans: "Chọn từ có nguyên âm phát âm khác các từ còn lại.",
                 opts: [
                     { char: "A", text: "A. rubber", word: "rubber" },
                     { char: "B", text: "B. compass", word: "compass" },
@@ -137,14 +155,12 @@
                     { char: "D", text: "D. ruler", word: "ruler" }
                 ],
                 ans: "D",
-                ansTrans: "D. ruler (thước kẻ)",
                 exp: "Đáp án D (ruler) phát âm 'u' là /uː/. Các từ A, B, C phát âm là /ʌ/."
             },
             {
                 id: 4,
                 type: "mc_audio",
                 q: "Câu 4: Choose the word whose underlined part is pronounced differently.",
-                qTrans: "Chọn từ có nguyên âm 'a' phát âm khác các từ còn lại.",
                 opts: [
                     { char: "A", text: "A. class", word: "class" },
                     { char: "B", text: "B. smart", word: "smart" },
@@ -152,14 +168,12 @@
                     { char: "D", text: "D. activity", word: "activity" }
                 ],
                 ans: "D",
-                ansTrans: "D. activity (hoạt động)",
                 exp: "Đáp án D (activity) phát âm 'a' là /æ/. Các từ A, B, C phát âm 'a' là /ɑː/."
             },
             {
                 id: 5,
                 type: "mc_audio",
                 q: "Câu 5: Choose the word with a different -s / -es pronunciation.",
-                qTrans: "Chọn từ có cách phát âm đuôi -s khác các từ còn lại.",
                 opts: [
                     { char: "A", text: "A. students", word: "students" },
                     { char: "B", text: "B. notebooks", word: "notebooks" },
@@ -167,71 +181,54 @@
                     { char: "D", text: "D. rubbers", word: "rubbers" }
                 ],
                 ans: "D",
-                ansTrans: "D. rubbers (những cục tẩy)",
                 exp: "Đáp án D (rubbers) phát âm đuôi -s là /z/. Các từ A, B, C phát âm đuôi -s là /s/."
             }
         ];
 
+        // Dữ liệu Phần 2: Từ vựng & Điền từ
         const part2Data = [
             {
                 id: 6,
                 type: "mc",
                 q: "Câu 6: Phong is very _____. He always invents new ideas in class.",
-                qTrans: "Phong rất _____. Cậu ấy luôn phát minh ra các ý tưởng mới trong lớp.",
                 opts: ["A. shy", "B. creative", "C. lazy", "D. quiet"],
                 ans: "B",
-                ansTrans: "B. creative (sáng tạo)",
-                exp: "Creative (sáng tạo) phù hợp với việc luôn tạo ra ý tưởng mới."
+                exp: "Creative (sáng tạo) phù hợp với việc sáng tạo ý tưởng mới."
             },
             {
                 id: 7,
                 type: "mc",
                 q: "Câu 7: Vy and Lan _____ judo in the gym after school.",
-                qTrans: "Vy và Lan _____ môn võ judo ở phòng tập sau giờ học.",
                 opts: ["A. play", "B. do", "C. study", "D. have"],
                 ans: "B",
-                ansTrans: "B. do (tập/làm)",
-                exp: "Môn võ judo dùng kết hợp với động từ 'do' (do judo)."
+                exp: "Môn võ judo dùng động từ 'do' (do judo)."
             },
             {
                 id: 8,
                 type: "fill",
                 q: "Câu 8 (Điền từ): My sister (watch) _____ TV with our family after dinner.",
-                qTrans: "Chị gái tôi (xem) tivi với gia đình chúng tôi sau bữa tối.",
                 ans: "watches",
-                ansTrans: "watches (xem)",
                 exp: "Thì Hiện tại đơn, chủ ngữ số ít 'My sister', động từ tận cùng 'ch' thêm '-es' thành 'watches'."
             },
             {
                 id: 9,
                 type: "fill",
                 q: "Câu 9 (Điền từ): I forgot my _____ so I cannot calculate these difficult math problems.",
-                qTrans: "Tôi quên mang _____ nên không thể tính toán các bài toán khó này.",
                 ans: "calculator",
-                ansTrans: "calculator (máy tính cầm tay)",
                 exp: "Calculator (máy tính cầm tay) dùng để tính toán bài tập toán."
             },
             {
                 id: 10,
                 type: "fill",
                 q: "Câu 10 (Điền từ): Students wear their school _____ on Mondays.",
-                qTrans: "Học sinh mặc _____ trường vào các ngày Thứ Hai.",
                 ans: "uniform",
-                ansTrans: "uniform (đồng phục)",
                 exp: "Uniform (đồng phục). Cụm từ: wear school uniform."
             }
         ];
 
         const allQuestions = [...part1Data, ...part2Data];
 
-        function normalizeText(text) {
-            if (!text) return "";
-            return text.toLowerCase()
-                .replace(/[.,/#!$%^&*;:{}=\-_`~()'"?]/g, "")
-                .replace(/\s+/g, " ")
-                .trim();
-        }
-
+        // Hàm phát âm từ tiếng Anh qua Web Speech API
         function speak(text) {
             if ('speechSynthesis' in window) {
                 window.speechSynthesis.cancel();
@@ -239,9 +236,12 @@
                 u.lang = 'en-US';
                 u.rate = 0.85;
                 window.speechSynthesis.speak(u);
+            } else {
+                alert("Trình duyệt của bạn không hỗ trợ phát âm thanh.");
             }
         }
 
+        // Render Phần 1 (Có nút nghe kề bên từng phương án)
         function renderPart1() {
             const container = document.getElementById('part1Quiz');
             part1Data.forEach(item => {
@@ -268,6 +268,7 @@
             });
         }
 
+        // Render Phần 2
         function renderPart2() {
             const container = document.getElementById('part2Quiz');
             part2Data.forEach(item => {
@@ -296,6 +297,7 @@
             });
         }
 
+        // Kiểm tra đáp án theo ID
         function checkQuestion(qId) {
             const item = allQuestions.find(x => x.id === qId);
             if (!item) return;
@@ -312,8 +314,11 @@
                     isCorrect = true;
                 }
             } else {
-                const userAns = document.getElementById(`input_q_${qId}`).value;
-                if (normalizeText(userAns) === normalizeText(item.ans)) {
+                const userAns = document.getElementById(`input_q_${qId}`).value.trim();
+                const cleanUser = userAns.toLowerCase().replace(/[.,/#!\$%^&*;:{}=\-_`~()]/g, "").replace(/\s+/g, " ");
+                const cleanCorrect = item.ans.toLowerCase().replace(/[.,/#!$%^&*;:{}=\-_`~()]/g, "").replace(/\s+/g, " ");
+
+                if (cleanUser === cleanCorrect) {
                     isCorrect = true;
                 }
             }
@@ -321,21 +326,11 @@
             if (isCorrect) {
                 card.className = "question-card status-correct";
                 explainDiv.className = "explanation correct";
-                explainDiv.innerHTML = `
-                    <b>✓ CHÍNH XÁC!</b><br>
-                    📌 <b>Dịch câu hỏi:</b> ${item.qTrans}<br>
-                    💡 <b>Dịch đáp án chuẩn:</b> ${item.ansTrans}<br>
-                    📝 <b>Giải thích chi tiết:</b> ${item.exp}
-                `;
+                explainDiv.innerHTML = `<b>✓ CHÍNH XÁC!</b><br>${item.exp}`;
             } else {
                 card.className = "question-card status-wrong";
                 explainDiv.className = "explanation wrong";
-                explainDiv.innerHTML = `
-                    <b>✗ CHƯA CHÍNH XÁC!</b> (Đáp án chuẩn: <b>${item.ans}</b>)<br>
-                    📌 <b>Dịch câu hỏi:</b> ${item.qTrans}<br>
-                    💡 <b>Dịch đáp án chuẩn:</b> ${item.ansTrans}<br>
-                    📝 <b>Giải thích chi tiết:</b> ${item.exp}
-                `;
+                explainDiv.innerHTML = `<b>✗ CHƯA CHÍNH XÁC!</b> (Đáp án chuẩn: <b>${item.ans}</b>)<br><b>Giải thích:</b> ${item.exp}`;
             }
         }
 

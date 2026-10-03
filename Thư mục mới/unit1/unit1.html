@@ -51,6 +51,7 @@
             font-weight: 600;
         }
 
+        /* Styling cho từ bấm phát âm */
         .speakable {
             color: #1565c0;
             font-weight: bold;
@@ -67,6 +68,15 @@
         .speakable:hover {
             background: #bbdefb;
             color: #0d47a1;
+            transform: translateY(-1px);
+        }
+
+        .speakable:active {
+            transform: translateY(0);
+        }
+
+        .speaker-icon {
+            font-size: 0.9em;
         }
 
         .ipa {
@@ -88,6 +98,7 @@
 
     <h1>UNIT 1: MY NEW SCHOOL - LÝ THUYẾT & TỪ VỰNG CHUYÊN SÂU</h1>
 
+    <!-- I. PHÁT ÂM (PHONETICS) -->
     <div class="card">
         <h2>I. PHÁT ÂM (PHONETICS): QUY TẮC ĐUÔI -S / -ES</h2>
         <p><i>💡 Click vào từ tiếng Anh bất kỳ có biểu tượng 🔊 để nghe phát âm chuẩn:</i></p>
@@ -131,6 +142,7 @@
         </table>
     </div>
 
+    <!-- II. TỪ VỰNG (VOCABULARY) -->
     <div class="card">
         <h2>II. TỪ VỰNG TRỌNG TÂM (VOCABULARY)</h2>
         <p><i>💡 Bấm vào từng từ tiếng Anh để luyện nghe phát âm chuẩn:</i></p>
@@ -191,28 +203,23 @@
         </table>
     </div>
 
-    <div class="card">
-        <h2>III. NGỮ PHÁP (GRAMMAR)</h2>
-        <h3>1. Thì Hiện tại đơn (Present Simple Tense)</h3>
-        <p><b>Với To Be:</b> S + am/is/are (+ not) + N/Adj</p>
-        <p><b>Với Động từ thường:</b> S + V(s/es) | S + don't/doesn't + V-bare</p>
-        
-        <h3>2. Trạng từ chỉ tần suất (Adverbs of Frequency)</h3>
-        <p><i>always, usually, often, sometimes, rarely, never</i> ➔ Đứng <b>TRƯỚC</b> động từ thường và <b>SAU</b> động từ To Be.</p>
-    </div>
-
+    <!-- HÀM PHÁT ÂM JAVASCRIPT -->
     <script>
         function speak(text) {
             if ('speechSynthesis' in window) {
+                // Hủy các giọng đọc đang chờ trước đó để đọc từ mới ngay lập tức
                 window.speechSynthesis.cancel();
+                
                 const utterance = new SpeechSynthesisUtterance(text);
-                utterance.lang = 'en-US';
-                utterance.rate = 0.85;
+                utterance.lang = 'en-US'; // Giọng tiếng Anh - Mỹ chuẩn
+                utterance.rate = 0.85;    // Tốc độ đọc vừa phải cho học sinh lớp 6 dễ nghe
+                
                 window.speechSynthesis.speak(utterance);
             } else {
-                alert("Trình duyệt không hỗ trợ phát âm thanh tự động.");
+                alert("Trình duyệt của bạn không hỗ trợ tính năng phát âm tự động.");
             }
         }
     </script>
+
 </body>
 </html>

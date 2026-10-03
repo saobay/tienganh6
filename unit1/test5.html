@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unit 1 - Đề 5: Ngữ Âm & Trọng Âm (Phonetics & Stress)</title>
+    <title>Unit 1 - Đề 5: Ngữ Âm & Trọng Âm</title>
     <style>
         :root {
             --primary-color: #1e88e5;
@@ -60,7 +60,7 @@
         }
         .btn-audio:hover { background: #bbdefb; }
 
-        .explanation { display: none; margin-top: 10px; padding: 10px; border-radius: 5px; font-size: 0.93rem; }
+        .explanation { display: none; margin-top: 10px; padding: 12px; border-radius: 5px; font-size: 0.93rem; line-height: 1.5; }
         .explanation.correct { background: #e8f5e9; color: #1b5e20; }
         .explanation.wrong { background: #ffebee; color: #b71c1c; }
     </style>
@@ -73,30 +73,110 @@
         <b>💡 Mẹo nhỏ:</b> Bạn có thể bấm vào biểu tượng 🔊 bên cạnh từng đáp án để nghe phát âm giọng chuẩn trước hoặc sau khi làm bài!
     </div>
 
-    <!-- PHẦN 1: PRONUNCIATION -->
-    <h3>PART 1: PRONUNCIATION (Chọn từ có phần gạch chân/phát âm khác với các từ còn lại)</h3>
+    <h3>PART 1: PRONUNCIATION (Chọn từ có phát âm khác các từ còn lại)</h3>
     <div id="part1Quiz"></div>
 
-    <!-- PHẦN 2: STRESS -->
-    <h3 style="margin-top: 30px;">PART 2: STRESS (Chọn từ có vị trí trọng âm chính khác với các từ còn lại)</h3>
+    <h3 style="margin-top: 30px;">PART 2: STRESS (Chọn từ có vị trí trọng âm khác các từ còn lại)</h3>
     <div id="part2Quiz"></div>
 
     <script>
         const part1Data = [
-            { id: 1, q: "Câu 1: Phát âm đuôi -s / -es", opts: [{ text: "A. lamps", word: "lamps" }, { text: "B. books", word: "books" }, { text: "C. hats", word: "hats" }, { text: "D. bags", word: "bags" }], ans: "D", exp: "D (bags) phát âm đuôi -s là /z/. Các từ A, B, C có tận cùng là âm vô thanh (/p/, /k/, /t/) nên phát âm đuôi -s là /s/." },
-            { id: 2, q: "Câu 2: Phát âm đuôi -es", opts: [{ text: "A. watches", word: "watches" }, { text: "B. classes", word: "classes" }, { text: "C. boxes", word: "boxes" }, { text: "D. pens", word: "pens" }], ans: "D", exp: "D (pens) phát âm đuôi -s là /z/. Các từ A, B, C có âm tận cùng là /tʃ/, /s/, /x/ nên phát âm -es là /ɪz/." },
-            { id: 3, q: "Câu 3: Nguyên âm /æ/ và /ɑː/", opts: [{ text: "A. class", word: "class" }, { text: "B. father", word: "father" }, { text: "C. smart", word: "smart" }, { text: "D. match", word: "match" }], ans: "D", exp: "D (match) phát âm chữ 'a' là /æ/. Các từ A, B, C phát âm 'a' là /ɑː/." },
-            { id: 4, q: "Câu 4: Nguyên âm /ʌ/ và /uː/", opts: [{ text: "A. rubber", word: "rubber" }, { text: "B. compass", word: "compass" }, { text: "C. club", word: "club" }, { text: "D. ruler", word: "ruler" }], ans: "D", exp: "D (ruler) phát âm 'u' là /uː/. Các từ A, B, C phát âm 'u' hoặc 'o' là /ʌ/." },
-            { id: 5, q: "Câu 5: Phát âm đuôi -s", opts: [{ text: "A. students", word: "students" }, { text: "B. uniforms", word: "uniforms" }, { text: "C. notebooks", word: "notebooks" }, { text: "D. pencil cases", word: "pencil cases" }], ans: "D", exp: "D (pencil cases) phát âm đuôi -es là /ɪz/. Các từ A, B, C phát âm -s là /s/ hoặc /z/." }
+            {
+                id: 1,
+                q: "Câu 1: Phát âm đuôi -s / -es",
+                qTrans: "Chọn từ có phần đuôi -s phát âm khác các từ còn lại.",
+                opts: [{ text: "A. lamps", word: "lamps" }, { text: "B. books", word: "books" }, { text: "C. hats", word: "hats" }, { text: "D. bags", word: "bags" }],
+                ans: "D",
+                ansTrans: "D. bags (/bæɡz/ - đuôi phát âm là /z/)",
+                exp: "D (bags) phát âm đuôi -s là /z/. Các từ A, B, C có tận cùng là âm vô thanh (/p/, /k/, /t/) nên phát âm đuôi -s là /s/."
+            },
+            {
+                id: 2,
+                q: "Câu 2: Phát âm đuôi -es",
+                qTrans: "Chọn từ có phần đuôi -es phát âm khác các từ còn lại.",
+                opts: [{ text: "A. watches", word: "watches" }, { text: "B. classes", word: "classes" }, { text: "C. boxes", word: "boxes" }, { text: "D. pens", word: "pens" }],
+                ans: "D",
+                ansTrans: "D. pens (/penz/ - đuôi phát âm là /z/)",
+                exp: "D (pens) phát âm đuôi -s là /z/. Các từ A, B, C có âm tận cùng là /tʃ/, /s/, /x/ nên phát âm -es là /ɪz/."
+            },
+            {
+                id: 3,
+                q: "Câu 3: Nguyên âm /æ/ và /ɑː/",
+                qTrans: "Chọn từ có nguyên âm phát âm khác các từ còn lại.",
+                opts: [{ text: "A. class", word: "class" }, { text: "B. father", word: "father" }, { text: "C. smart", word: "smart" }, { text: "D. match", word: "match" }],
+                ans: "D",
+                ansTrans: "D. match (/mætʃ/ - phát âm là /æ/)",
+                exp: "D (match) phát âm chữ 'a' là /æ/. Các từ A, B, C phát âm 'a' là /ɑː/."
+            },
+            {
+                id: 4,
+                q: "Câu 4: Nguyên âm /ʌ/ và /uː/",
+                qTrans: "Chọn từ có nguyên âm phát âm khác các từ còn lại.",
+                opts: [{ text: "A. rubber", word: "rubber" }, { text: "B. compass", word: "compass" }, { text: "C. club", word: "club" }, { text: "D. ruler", word: "ruler" }],
+                ans: "D",
+                ansTrans: "D. ruler (/ˈruː.lər/ - phát âm là /uː/)",
+                exp: "D (ruler) phát âm 'u' là /uː/. Các từ A, B, C phát âm 'u' hoặc 'o' là /ʌ/."
+            },
+            {
+                id: 5,
+                q: "Câu 5: Phát âm đuôi -s",
+                qTrans: "Chọn từ có cách phát âm đuôi -s khác các từ còn lại.",
+                opts: [{ text: "A. students", word: "students" }, { text: "B. uniforms", word: "uniforms" }, { text: "C. notebooks", word: "notebooks" }, { text: "D. pencil cases", word: "pencil cases" }],
+                ans: "D",
+                ansTrans: "D. pencil cases (/ˈpen.səl keɪsɪz/ - phát âm là /ɪz/)",
+                exp: "D (pencil cases) phát âm đuôi -es là /ɪz/. Các từ A, B, C phát âm -s là /s/ hoặc /z/."
+            }
         ];
 
         const part2Data = [
-            { id: 6, q: "Câu 6: Trọng âm từ 2 âm tiết", opts: [{ text: "A. compass", word: "compass" }, { text: "B. rubber", word: "rubber" }, { text: "C. classmate", word: "classmate" }, { text: "D. advice", word: "advice" }], ans: "D", exp: "D (advice) có trọng âm rơi vào âm tiết thứ 2 (/ədˈvaɪs/). Các từ A, B, C có trọng âm rơi vào âm tiết 1." },
-            { id: 7, q: "Câu 7: Trọng âm danh từ & tính từ", opts: [{ text: "A. secret", word: "secret" }, { text: "B. heavy", word: "heavy" }, { text: "C. subject", word: "subject" }, { text: "D. receive", word: "receive" }], ans: "D", exp: "D (receive) là động từ, trọng âm rơi vào âm tiết thứ 2 (/rɪˈsiːv/). A, B, C có trọng âm rơi vào âm tiết 1." },
-            { id: 8, q: "Câu 8: Trọng âm từ chỉ đồ dùng học tập", opts: [{ text: "A. pencil", word: "pencil" }, { text: "B. ruler", word: "ruler" }, { text: "C. eraser", word: "eraser" }, { text: "D. notebook", word: "notebook" }], ans: "C", exp: "C (eraser) có trọng âm rơi vào âm tiết thứ 2 (/ɪˈreɪ.zər/). A, B, D có trọng âm rơi vào âm tiết 1." },
-            { id: 9, q: "Câu 9: Trọng âm tính từ miêu tả", opts: [{ text: "A. active", word: "active" }, { text: "B. creative", word: "creative" }, { text: "C. clever", word: "clever" }, { text: "D. quiet", word: "quiet" }], ans: "B", exp: "B (creative) có trọng âm rơi vào âm tiết thứ 2 (/kriˈeɪ.tɪv/). A, C, D có trọng âm rơi vào âm tiết 1." },
-            { id: 10, q: "Câu 10: Trọng âm từ 3 âm tiết", opts: [{ text: "A. calculator", word: "calculator" }, { text: "B. international", word: "international" }, { text: "C. uniform", word: "uniform" }, { text: "D. history", word: "history" }], ans: "A", exp: "A (calculator) trọng âm nhấn âm 1 (/ˈkæl.kjə.leɪ.tər/). B (international) có trọng âm chính nhấn âm 3 (/ˌɪn.təˈnæʃ.ən.əl/)." }
+            {
+                id: 6,
+                q: "Câu 6: Trọng âm từ 2 âm tiết",
+                qTrans: "Chọn từ có vị trí trọng âm nhấn khác các từ còn lại.",
+                opts: [{ text: "A. compass", word: "compass" }, { text: "B. rubber", word: "rubber" }, { text: "C. classmate", word: "classmate" }, { text: "D. advice", word: "advice" }],
+                ans: "D",
+                ansTrans: "D. advice (nhấn trọng âm âm tiết 2: /ədˈvaɪs/)",
+                exp: "D (advice) có trọng âm rơi vào âm tiết thứ 2 (/ədˈvaɪs/). Các từ A, B, C có trọng âm rơi vào âm tiết 1."
+            },
+            {
+                id: 7,
+                q: "Câu 7: Trọng âm danh từ & tính từ",
+                qTrans: "Chọn từ có vị trí trọng âm nhấn khác các từ còn lại.",
+                opts: [{ text: "A. secret", word: "secret" }, { text: "B. heavy", word: "heavy" }, { text: "C. subject", word: "subject" }, { text: "D. receive", word: "receive" }],
+                ans: "D",
+                ansTrans: "D. receive (nhấn trọng âm âm tiết 2: /rɪˈsiːv/)",
+                exp: "D (receive) là động từ, trọng âm rơi vào âm tiết thứ 2 (/rɪˈsiːv/). A, B, C có trọng âm rơi vào âm tiết 1."
+            },
+            {
+                id: 8,
+                q: "Câu 8: Trọng âm từ chỉ đồ dùng học tập",
+                qTrans: "Chọn từ có vị trí trọng âm nhấn khác các từ còn lại.",
+                opts: [{ text: "A. pencil", word: "pencil" }, { text: "B. ruler", word: "ruler" }, { text: "C. eraser", word: "eraser" }, { text: "D. notebook", word: "notebook" }],
+                ans: "C",
+                ansTrans: "C. eraser (nhấn trọng âm âm tiết 2: /ɪˈreɪ.zər/)",
+                exp: "C (eraser) có trọng âm rơi vào âm tiết thứ 2 (/ɪˈreɪ.zər/). A, B, D có trọng âm rơi vào âm tiết 1."
+            },
+            {
+                id: 9,
+                q: "Câu 9: Trọng âm tính từ miêu tả",
+                qTrans: "Chọn từ có vị trí trọng âm nhấn khác các từ còn lại.",
+                opts: [{ text: "A. active", word: "active" }, { text: "B. creative", word: "creative" }, { text: "C. clever", word: "clever" }, { text: "D. quiet", word: "quiet" }],
+                ans: "B",
+                ansTrans: "B. creative (nhấn trọng âm âm tiết 2: /kriˈeɪ.tɪv/)",
+                exp: "B (creative) có trọng âm rơi vào âm tiết thứ 2 (/kriˈeɪ.tɪv/). A, C, D có trọng âm rơi vào âm tiết 1."
+            },
+            {
+                id: 10,
+                q: "Câu 10: Trọng âm từ 3 âm tiết",
+                qTrans: "Chọn từ có vị trí trọng âm nhấn khác các từ còn lại.",
+                opts: [{ text: "A. calculator", word: "calculator" }, { text: "B. international", word: "international" }, { text: "C. uniform", word: "uniform" }, { text: "D. history", word: "history" }],
+                ans: "A",
+                ansTrans: "A. calculator (nhấn trọng âm âm tiết 1: /ˈkæl.kjə.leɪ.tər/)",
+                exp: "A (calculator) trọng âm nhấn âm 1 (/ˈkæl.kjə.leɪ.tər/). B (international) có trọng âm chính nhấn âm 3 (/ˌɪn.təˈnæʃ.ən.əl/)."
+            }
         ];
+
+        const allQuestions = [...part1Data, ...part2Data];
 
         function speak(text) {
             if ('speechSynthesis' in window) {
@@ -125,29 +205,43 @@
                 });
                 container.innerHTML += `
                     <div class="question-card" id="card_q_${item.id}">
-                        <div style="font-weight:bold; color:#1565c0;">${item.q}</div>
+                        <div style="font-weight:bold; color:#1565c0; margin-bottom:8px;">${item.q}</div>
                         <div>${optsHtml}</div>
-                        <button type="button" class="btn-submit-q" onclick="checkQuestion(${item.id}, '${item.ans}', '${item.exp}')">Nộp câu này</button>
+                        <button type="button" class="btn-submit-q" onclick="checkQuestion(${item.id})">Nộp câu này</button>
                         <div id="explain_q_${item.id}" class="explanation"></div>
                     </div>
                 `;
             });
         }
 
-        function checkQuestion(qId, correctAns, expText) {
+        function checkQuestion(qId) {
+            const item = allQuestions.find(x => x.id === qId);
+            if (!item) return;
+
             const card = document.getElementById(`card_q_${qId}`);
             const explainDiv = document.getElementById(`explain_q_${qId}`);
-            const sel = document.querySelector(`input[name="q_${qId}"]:checked`);
             explainDiv.style.display = 'block';
 
-            if(sel && sel.value === correctAns) {
+            const sel = document.querySelector(`input[name="q_${qId}"]:checked`);
+
+            if (sel && sel.value === item.ans) {
                 card.className = "question-card status-correct";
                 explainDiv.className = "explanation correct";
-                explainDiv.innerHTML = `<b>✓ CHÍNH XÁC!</b><br>${expText}`;
+                explainDiv.innerHTML = `
+                    <b>✓ CHÍNH XÁC!</b><br>
+                    📌 <b>Dịch câu hỏi:</b> ${item.qTrans}<br>
+                    💡 <b>Dịch đáp án chuẩn:</b> ${item.ansTrans}<br>
+                    📝 <b>Giải thích chi tiết:</b> ${item.exp}
+                `;
             } else {
                 card.className = "question-card status-wrong";
                 explainDiv.className = "explanation wrong";
-                explainDiv.innerHTML = `<b>✗ CHƯA CHÍNH XÁC!</b> (Đáp án đúng: <b>${correctAns}</b>)<br><b>Giải thích:</b> ${expText}`;
+                explainDiv.innerHTML = `
+                    <b>✗ CHƯA CHÍNH XÁC!</b> (Đáp án chuẩn: <b>${item.ans}</b>)<br>
+                    📌 <b>Dịch câu hỏi:</b> ${item.qTrans}<br>
+                    💡 <b>Dịch đáp án chuẩn:</b> ${item.ansTrans}<br>
+                    📝 <b>Giải thích chi tiết:</b> ${item.exp}
+                `;
             }
         }
 
