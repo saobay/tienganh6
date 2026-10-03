@@ -94,17 +94,85 @@
             background: var(--correct);
             color: white;
             border: none;
-            padding: 9px 18px;
+            padding: 10px 20px;
+            font-size: 1rem;
             font-weight: bold;
-            border-radius: 4px;
+            border-radius: 6px;
             cursor: pointer;
-            margin-top: 10px;
+            margin-top: 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
         .btn-submit:hover { background: #1b5e20; }
 
+        /* KHUNG CHẤM ĐIỂM & NHẬN XÉT */
+        .feedback-box {
+            display: none;
+            margin-top: 20px;
+            background: #ffffff;
+            border: 2px solid var(--primary);
+            border-radius: 8px;
+            padding: 18px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .score-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #e3f2fd;
+            padding: 12px 18px;
+            border-radius: 6px;
+            margin-bottom: 16px;
+        }
+
+        .score-badge {
+            font-size: 1.6rem;
+            font-weight: bold;
+            color: #0d47a1;
+            margin-right: 10px;
+        }
+
+        .level-tag {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            color: white;
+            display: inline-block;
+        }
+        .tag-excellent { background: #2e7d32; }
+        .tag-good { background: #1976d2; }
+        .tag-average { background: #f57c00; }
+        .tag-poor { background: #c62828; }
+
+        .criteria-item {
+            margin-bottom: 12px;
+            padding: 12px;
+            border-radius: 6px;
+            background: #f8f9fa;
+            border-left: 4px solid #1e88e5;
+        }
+
+        .criteria-title {
+            font-weight: bold;
+            color: #0d47a1;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 4px;
+        }
+
+        .comment-list {
+            margin: 8px 0 0 0;
+            padding-left: 20px;
+            font-size: 0.93rem;
+        }
+
+        .pos-comment { color: #1b5e20; margin-bottom: 4px; }
+        .sug-comment { color: #e65100; margin-bottom: 4px; }
+
         .model-answer {
             display: none;
-            margin-top: 16px;
+            margin-top: 20px;
             background: #e8f5e9;
             border-left: 5px solid var(--correct);
             padding: 16px;
@@ -120,11 +188,14 @@
     <div class="card">
         <h3>PART 1: SPEAKING PRACTICE (Luyện Nói Theo Chủ Đề)</h3>
         <div class="speaking-box">
-            <b>📌 Chủ đề nói: Describe your best friend</b><br><br>
+            <b>📌 Chủ đề nói: your best friend</b><br><br>
             <b>Gợi ý câu hỏi luyện tập:</b>
-            <ul style="margin: 6px 0 0 0; padding-left: 20px;">
-                <li>Who is your best friend? How old is he/she?</li><li>What does he/she look like? (tall, slim, hair, eyes...)</li><li>What is he/she like? (friendly, kind, clever, active...)</li><li>What do you usually do together?</li>
-            </ul>
+            <ul style="margin: 6px 0; padding-left: 20px;">
+            <li>Who is your best friend? How old is he/she? (Tên bạn là gì, bao nhiêu tuổi?)</li>
+            <li>What does he/she look like? (Ngoại hình: tall, slim, hair, eyes...)</li>
+            <li>What is he/she like? (Tính cách: kind, clever, friendly, active...)</li>
+            <li>What do you usually do together? (Cùng làm gì với nhau?)</li>
+        </ul>
         </div>
 
         <button class="btn-audio" onclick="playFullParagraph()">▶️ Bật nghe bài nói mẫu (có ngắt nghỉ tự nhiên)</button>
@@ -143,26 +214,72 @@
 
         <b>Gợi ý viết đoạn văn (Guided Prompts):</b>
         <ul style="margin: 6px 0; padding-left: 20px;">
-            <li>Who is your best friend and how old is he/she? (Bạn thân nhất của em là ai?)</li><li>Appearance: height, hair, eyes, face... (Ngoại hình: chiều cao, mái tóc, đôi mắt)</li><li>Personality adjectives: kind, clever, friendly... (Tính cách)</li><li>Activities you do together (Các hoạt động làm cùng nhau)</li>
+            <li>Who is your best friend? How old is he/she? (Tên bạn là gì, bao nhiêu tuổi?)</li>
+            <li>What does he/she look like? (Ngoại hình: tall, slim, hair, eyes...)</li>
+            <li>What is he/she like? (Tính cách: kind, clever, friendly, active...)</li>
+            <li>What do you usually do together? (Cùng làm gì với nhau?)</li>
         </ul>
 
         <textarea id="writingInput" oninput="updateWordCount()" placeholder="Nhập bài viết của bạn vào đây (từ 40 đến 60 từ)..."></textarea>
         <div class="word-count" id="wordCountLabel">Số từ: 0 / 60 từ</div>
 
-        <button class="btn-submit" onclick="checkWriting()">Nộp bài viết & Xem bài mẫu</button>
+        <button class="btn-submit" onclick="evaluateWriting()">Nộp bài viết & Chấm điểm chi tiết</button>
 
+        <!-- BẢNG CHẤM ĐIỂM & NHẬN XÉT BÀI VIẾT TỰ ĐỘNG -->
+        <div id="feedbackBox" class="feedback-box">
+            <div class="score-header">
+                <div>
+                    <span style="font-size: 1.15rem; font-weight: bold; color: #333;">📊 KẾT QUẢ CHẤM ĐIỂM BÀI VIẾT</span><br>
+                    <span style="font-size: 0.88rem; color: #666;">Phân tích tự động về Số lượng từ, Từ vựng chủ đề & Ngữ pháp</span>
+                </div>
+                <div>
+                    <span id="scoreBadge" class="score-badge">0 / 10</span>
+                    <span id="levelTag" class="level-tag tag-good">Khá</span>
+                </div>
+            </div>
+
+            <div id="criteriaList"></div>
+
+            <div style="margin-top: 15px; padding: 12px; background: #f1f8e9; border-radius: 6px; border-left: 4px solid #2e7d32;">
+                <b style="color: #1b5e20;">💬 ĐÁNH GIÁ TỔNG THỂ & ĐỊNH HƯỚNG CẢI THIỆN:</b>
+                <ul id="overallComments" class="comment-list"></ul>
+            </div>
+        </div>
+
+        <!-- BÀI VIẾT MẪU -->
         <div id="modelAnswerBox" class="model-answer">
             <b style="color:#1b5e20;">✨ BÀI VIẾT MẪU THAM KHẢO (MODEL PARAGRAPH):</b>
-            <p style="margin: 8px 0; font-style: italic;">"My best friend is Minh, who is also my classmate. He is tall and slim with short black hair and big brown eyes. Minh is very kind, clever, and hard-working. He always helps me when I have difficult Maths exercises. In our free time, we often go to the library to read science books together. I am very happy to have a good friend like Minh."</p>
+            <p style="margin: 8px 0; font-style: italic;">"My best friend is Lan. She is twelve years old and she is my classmate. Lan is tall and slim with long black hair and a round face. She is very friendly and kind. She always shares her things with everyone. In our free time, we often play badminton or read books together. I am very happy to have Lan as my best friend."</p>
             <hr style="border: 0; border-top: 1px solid #a5d6a7; margin: 10px 0;">
             <b>📌 Dịch Tiếng Việt:</b>
-            <p style="margin: 6px 0; color: #2e7d32;">"Người bạn thân nhất của em là Minh, cũng là bạn cùng lớp với em. Bạn ấy cao và mảnh khảnh với mái tóc đen ngắn và đôi mắt to màu nâu. Minh rất tốt bụng, thông minh và chăm chỉ. Bạn ấy luôn giúp đỡ em khi em gặp bài tập Toán khó. Vào thời gian rảnh rỗi, chúng em thường đến thư viện để cùng đọc sách khoa học. Em rất hạnh phúc khi có một người bạn tốt như Minh."</p>
+            <p style="margin: 6px 0; color: #2e7d32;">"Bạn thân nhất của em là Lan. Bạn ấy 12 tuổi và là bạn cùng lớp với em. Lan cao và mảnh khảnh với mái tóc đen dài và khuôn mặt tròn. Bạn ấy rất thân thiện và tốt bụng. Bạn ấy luôn chia sẻ đồ dùng với mọi người. Vào thời gian rảnh, chúng em thường cùng nhau chơi cầu lông hoặc đọc sách. Em rất hạnh phúc khi có Lan là bạn thân nhất."</p>
         </div>
     </div>
 
     <script>
-        const sentences = ['My best friend is Minh, my classmate.', 'He is tall and slim with short black hair and brown eyes.', 'Minh is very kind, hard-working, and clever.', 'He always helps me with difficult Maths homework.', 'In his free time, he likes drawing comic books.', 'We usually read science books together at the library.'];
+        const sentences = ['My best friend is Minh.', 'He is tall and thin with short black hair and big brown eyes.', 'Minh is very kind and hard-working.', 'He always helps me with difficult Maths exercises.', 'He is also clever and creative.', 'He likes drawing comic books.', 'On weekends, we often read science books together at the town library.'];
         let isSpeakingSeq = false;
+
+        const topicKeywords = {
+            unit1: {
+                groupA: { name: "Tên / Vị trí trường", words: ["school", "sunrise", "secondary", "ha noi", "big", "small", "new", "old"] },
+                groupB: { name: "Cơ sở vật chất", words: ["classroom", "classrooms", "library", "computer room", "computer rooms", "playground", "room", "gym", "garden"] },
+                groupC: { name: "Môn học / Thầy cô", words: ["subject", "subjects", "teacher", "teachers", "science", "english", "maths", "math", "history", "kind", "helpful"] },
+                groupD: { name: "Hoạt động / Bạn bè", words: ["break time", "friend", "friends", "classmate", "badminton", "football", "judo", "uniform", "uniforms", "play", "study", "love", "like"] }
+            },
+            unit2: {
+                groupA: { name: "Loại nhà / Tầng / Phòng", words: ["house", "bedroom", "living room", "kitchen", "bathroom", "attic", "floor", "flat", "town house", "country house"] },
+                groupB: { name: "Đồ đạc gia đình", words: ["bed", "wardrobe", "desk", "chair", "lamp", "poster", "picture", "fridge", "cupboard", "table", "tv", "microwave", "window"] },
+                groupC: { name: "Từ chỉ vị trí", words: ["in", "on", "under", "next to", "behind", "in front of", "between", "wall", "floor"] },
+                groupD: { name: "Cảm xúc / Bầu không khí", words: ["cozy", "quiet", "favorite", "love", "like", "comfortable", "big", "small", "clean", "relax"] }
+            },
+            unit3: {
+                groupA: { name: "Thông tin bạn bè / Tuổi", words: ["friend", "best friend", "classmate", "name", "years old", "twelve", "12", "student"] },
+                groupB: { name: "Từ miêu tả ngoại hình", words: ["tall", "short", "slim", "chubby", "hair", "eyes", "face", "glasses", "round", "black", "brown", "long", "big"] },
+                groupC: { name: "Tính từ chỉ tính cách", words: ["kind", "friendly", "clever", "creative", "hard-working", "active", "patient", "talkative", "helpful", "nice"] },
+                groupD: { name: "Hoạt động chung", words: ["play", "study", "draw", "read", "basketball", "football", "badminton", "picnic", "love", "like", "together"] }
+            }
+        };
 
         function stopAudio() {
             isSpeakingSeq = false;
@@ -225,7 +342,7 @@
                 }
 
                 u.onend = function() {
-                    if (isSpeakingSeq) setTimeout(playNext, 350); // Ngắt nghỉ 350ms tự nhiên giữa các câu
+                    if (isSpeakingSeq) setTimeout(playNext, 350);
                 };
                 u.onerror = function() {
                     if (isSpeakingSeq) setTimeout(playNext, 350);
@@ -257,13 +374,173 @@
             label.style.color = (words >= 40 && words <= 70) ? '#2e7d32' : '#c62828';
         }
 
-        function checkWriting() {
+        function evaluateWriting() {
             const text = document.getElementById('writingInput').value.trim();
             if (!text) {
-                alert("Vui lòng nhập bài viết trước khi nộp bài!");
+                alert("Vui lòng nhập bài viết của bạn trước khi nộp!");
                 return;
             }
+
+            // 1. Word Count Evaluation
+            const wordsList = text.split(/\s+/).filter(w => w.length > 0);
+            const wordCount = wordsList.length;
+
+            let wordScore = 0;
+            let wordComment = "";
+            if (wordCount >= 40 && wordCount <= 65) {
+                wordScore = 3.0;
+                wordComment = `Độ dài bài viết hoàn hảo (${wordCount} từ), đạt chuẩn quy định 40 - 60 từ.`;
+            } else if ((wordCount >= 30 && wordCount < 40) || (wordCount > 65 && wordCount <= 80)) {
+                wordScore = 2.0;
+                wordComment = wordCount < 40 ? 
+                    `Bài viết hơi ngắn (${wordCount} từ). Bạn nên viết thêm để đạt từ 40 đến 60 từ.` : 
+                    `Bài viết hơi dài (${wordCount} từ). Nên cô đọng nội dung trong khoảng 40 đến 60 từ.`;
+            } else {
+                wordScore = 1.0;
+                wordComment = wordCount < 30 ? 
+                    `Bài viết quá ngắn (${wordCount} từ). Cần bổ sung thêm ý để đạt tối thiểu 40 từ.` : 
+                    `Bài viết quá dài (${wordCount} từ). Bạn nên thu gọn lại khoảng 40 đến 60 từ.`;
+            }
+
+            // 2. Keyword Topic Coverage
+            const textLower = text.toLowerCase();
+            const currTopic = topicKeywords.unit3;
+            let groupsMatched = 0;
+            let matchedWords = [];
+            let missingGroups = [];
+
+            for (const key in currTopic) {
+                const grp = currTopic[key];
+                let found = false;
+                for (const w of grp.words) {
+                    if (textLower.includes(w)) {
+                        found = true;
+                        if (!matchedWords.includes(w)) matchedWords.push(w);
+                    }
+                }
+                if (found) {
+                    groupsMatched++;
+                } else {
+                    missingGroups.push(grp.name);
+                }
+            }
+
+            let topicScore = 0;
+            if (groupsMatched === 4) topicScore = 4.0;
+            else if (groupsMatched === 3) topicScore = 3.2;
+            else if (groupsMatched === 2) topicScore = 2.2;
+            else topicScore = 1.2;
+
+            let topicComment = `Bài viết đã phủ được ${groupsMatched}/4 nhóm ý chính của chủ đề. Từ vựng nổi bật: <b>${matchedWords.slice(0, 6).join(", ") || "Chưa phát hiện từ vựng chuẩn"}</b>.`;
+            if (missingGroups.length > 0) {
+                topicComment += `<br>💡 <i>Gợi ý bổ sung thêm nội dung:</i> ${missingGroups.join(", ")}.`;
+            }
+
+            // 3. Grammar, Capitalization & Mechanics
+            let grammarScore = 3.0;
+            let grammarComments = [];
+
+            // Check standalone lowercase 'i'
+            const standaloneI = text.match(/\bi\b/g);
+            if (standaloneI && standaloneI.length > 0) {
+                grammarScore -= 0.5;
+                grammarComments.push(`Có ${standaloneI.length} chữ 'i' viết thường khi xưng đại từ nhân xưng -> Cần sửa thành 'I'.`);
+            }
+
+            // Check ending punctuation
+            const lastChar = text.slice(-1);
+            if (!['.', '!', '?'].includes(lastChar)) {
+                grammarScore -= 0.5;
+                grammarComments.push("Đoạn văn chưa có dấu chấm (.) hoặc dấu kết thúc ở cuối.");
+            }
+
+            // Check capitalization after periods
+            const sentencesInText = text.split(/[.!?]+/).filter(s => s.trim().length > 0);
+            let uncapitalizedSentences = 0;
+            sentencesInText.forEach(s => {
+                const trimmed = s.trim();
+                if (trimmed.length > 0 && trimmed[0] !== trimmed[0].toUpperCase() && !/^[0-9]/.test(trimmed)) {
+                    uncapitalizedSentences++;
+                }
+            });
+
+            if (uncapitalizedSentences > 0) {
+                grammarScore -= 0.5;
+                grammarComments.push(`Phát hiện ${uncapitalizedSentences} câu chưa viết hoa chữ cái đầu tiên.`);
+            }
+
+            if (grammarScore < 1.0) grammarScore = 1.0;
+
+            let grammarCommentText = "";
+            if (grammarComments.length === 0) {
+                grammarCommentText = "Trình bày chuẩn xác: Viết hoa chữ cái đầu câu, viết hoa đại từ 'I' và có dấu kết thúc câu đầy đủ.";
+            } else {
+                grammarCommentText = grammarComments.join("<br>");
+            }
+
+            // Calculate total score
+            const totalScore = (wordScore + topicScore + grammarScore).toFixed(1);
+
+            // Update UI
+            document.getElementById('scoreBadge').innerText = `${totalScore} / 10`;
+
+            const levelTag = document.getElementById('levelTag');
+            if (totalScore >= 8.5) {
+                levelTag.innerText = "🌟 Xuất sắc";
+                levelTag.className = "level-tag tag-excellent";
+            } else if (totalScore >= 7.0) {
+                levelTag.innerText = "👍 Khá / Đạt yêu cầu";
+                levelTag.className = "level-tag tag-good";
+            } else if (totalScore >= 5.0) {
+                levelTag.innerText = "⚡ Trung bình";
+                levelTag.className = "level-tag tag-average";
+            } else {
+                levelTag.innerText = "⚠️ Cần cố gắng";
+                levelTag.className = "level-tag tag-poor";
+            }
+
+            const criteriaHtml = `
+                <div class="criteria-item">
+                    <div class="criteria-title">
+                        <span>1. Số lượng từ (Word Count)</span>
+                        <span style="color:#2e7d32;">${wordScore.toFixed(1)} / 3.0 điểm</span>
+                    </div>
+                    <div style="font-size:0.92rem;">${wordComment}</div>
+                </div>
+
+                <div class="criteria-item">
+                    <div class="criteria-title">
+                        <span>2. Từ vựng & Mạch nội dung chủ đề</span>
+                        <span style="color:#1976d2;">${topicScore.toFixed(1)} / 4.0 điểm</span>
+                    </div>
+                    <div style="font-size:0.92rem;">${topicComment}</div>
+                </div>
+
+                <div class="criteria-item">
+                    <div class="criteria-title">
+                        <span>3. Viết hoa & Dấu câu (Mechanics)</span>
+                        <span style="color:#f57c00;">${grammarScore.toFixed(1)} / 3.0 điểm</span>
+                    </div>
+                    <div style="font-size:0.92rem;">${grammarCommentText}</div>
+                </div>
+            `;
+            document.getElementById('criteriaList').innerHTML = criteriaHtml;
+
+            let overallList = [];
+            if (wordScore >= 2.5) overallList.push("<li class='pos-comment'><b>Độ dài:</b> Bài viết đạt chuẩn số lượng từ yêu cầu.</li>");
+            if (topicScore >= 3.0) overallList.push("<li class='pos-comment'><b>Chủ đề:</b> Sử dụng phong phú từ vựng thuộc bài học.</li>");
+            if (grammarScore >= 2.5) overallList.push("<li class='pos-comment'><b>Trình bày:</b> Dùng dấu chấm và viết hoa chuẩn xác.</li>");
+            if (missingGroups.length > 0) overallList.push(`<li class='sug-comment'><b>Gợi ý phát triển ý:</b> Bạn có thể viết thêm thông tin về <i>${missingGroups.join(", ")}</i> để đoạn văn hoàn thiện hơn.</li>`);
+            if (grammarComments.length > 0) overallList.push("<li class='sug-comment'><b>Sửa lỗi ngữ pháp:</b> Lưu ý các điểm cần sửa đã nêu ở phần 3 ở trên.</li>");
+
+            document.getElementById('overallComments').innerHTML = overallList.join("");
+
+            // Show feedback & model boxes
+            document.getElementById('feedbackBox').style.display = 'block';
             document.getElementById('modelAnswerBox').style.display = 'block';
+
+            // Scroll smoothly
+            document.getElementById('feedbackBox').scrollIntoView({ behavior: 'smooth' });
         }
 
         if ('speechSynthesis' in window) {
