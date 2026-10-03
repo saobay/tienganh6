@@ -3,108 +3,264 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unit 1 - Đề Kiểm Tra Số 1 (20 Câu Chuyên Sâu)</title>
+    <title>Unit 1 - Đề 1: Luyện Phát Âm & Từ Vựng (Phonetics & Vocabulary)</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #f9fbfd; padding: 20px; color: #333; line-height: 1.5; }
-        h1 { color: #0d47a1; font-size: 1.5rem; margin-bottom: 20px; border-bottom: 2px solid #1e88e5; padding-bottom: 8px; }
-        
-        .question-card {
-            background: white;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            padding: 18px;
-            margin-bottom: 18px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.03);
-            transition: all 0.3s ease;
+        :root {
+            --primary-color: #1e88e5;
+            --secondary-color: #0d47a1;
+            --correct-color: #2e7d32;
+            --wrong-color: #c62828;
+            --bg-card: #ffffff;
         }
 
-        .question-card.status-correct { border-left: 6px solid #2e7d32; background-color: #f1f8e9; }
-        .question-card.status-wrong { border-left: 6px solid #c62828; background-color: #fbe9e7; }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            padding: 20px; 
+            background: #f4f6f9; 
+            color: #333; 
+            line-height: 1.6; 
+        }
 
-        .q-title { font-weight: bold; color: #1565c0; margin-bottom: 10px; font-size: 1.02rem; }
-        .options { margin: 10px 0; }
-        .options label { display: block; background: #f5f5f5; padding: 8px 12px; margin: 5px 0; border-radius: 5px; cursor: pointer; border: 1px solid #ddd; }
-        .options label:hover { background: #e3f2fd; }
+        h2, h3 { color: var(--secondary-color); margin-top: 0; }
 
-        .input-fill { width: 70%; padding: 8px 12px; border: 1px solid #ccc; border-radius: 4px; font-size: 0.98rem; margin-top: 5px; }
+        .note-card {
+            background: #e3f2fd;
+            border-left: 5px solid var(--primary-color);
+            padding: 12px 16px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+
+        .question-card {
+            background: var(--bg-card);
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            transition: all 0.2s ease;
+        }
+
+        .question-card.status-correct { border-left: 6px solid var(--correct-color); background: #f1f8e9; }
+        .question-card.status-wrong { border-left: 6px solid var(--wrong-color); background: #fbe9e7; }
+
+        .opt-row {
+            display: flex;
+            align-items: center;
+            margin: 6px 0;
+        }
+
+        .opt-label {
+            cursor: pointer;
+            margin-right: 8px;
+        }
+
+        .btn-audio {
+            background: #e3f2fd;
+            color: #1565c0;
+            border: 1px solid #bbdefb;
+            padding: 3px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+
+        .btn-audio:hover {
+            background: #bbdefb;
+            color: #0d47a1;
+        }
 
         .btn-submit-q {
-            background: #1e88e5;
+            background: var(--primary-color);
             color: white;
             border: none;
             padding: 7px 16px;
             font-weight: bold;
-            border-radius: 5px;
+            border-radius: 4px;
             cursor: pointer;
-            margin-top: 10px;
-        }
-        .btn-submit-q:hover { background: #0d47a1; }
-
-        .explanation {
-            display: none;
-            margin-top: 12px;
-            padding: 12px;
-            border-radius: 6px;
-            font-size: 0.93rem;
-            line-height: 1.5;
+            margin-top: 8px;
         }
 
-        .explanation.correct { background: #e8f5e9; color: #1b5e20; border: 1px solid #a5d6a7; }
-        .explanation.wrong { background: #ffebee; color: #b71c1c; border: 1px solid #ef9a9a; }
+        .btn-submit-q:hover { background: var(--secondary-color); }
+
+        .explanation { display: none; margin-top: 10px; padding: 10px; border-radius: 5px; font-size: 0.93rem; }
+        .explanation.correct { background: #e8f5e9; color: #1b5e20; }
+        .explanation.wrong { background: #ffebee; color: #b71c1c; }
+
+        .input-fill {
+            width: 80%;
+            max-width: 500px;
+            padding: 8px 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
     </style>
 </head>
 <body>
 
-    <h1>ĐỀ KIỂM TRA SỐ 1 - UNIT 1: MY NEW SCHOOL (20 CÂU TƯƠNG TÁC)</h1>
+    <h2>ĐỀ KIỂM TRA SỐ 1 - UNIT 1: BÀI TẬP PHÁT ÂM & TỪ VỰNG</h2>
 
-    <div id="quizList"></div>
+    <div class="note-card">
+        <b>💡 Hướng dẫn:</b> Bấm vào nút <b>🔊 Nghe</b> ngay bên cạnh từng phương án A, B, C, D để nghe phát âm giọng chuẩn trước khi chọn đáp án!
+    </div>
+
+    <!-- PHẦN 1: BÀI TẬP PHÁT ÂM CÓ NÚT NGHE KẾ BÊN -->
+    <h3>PART 1: PHONETICS (Luyện Nghe & Chọn Phát Âm)</h3>
+    <div id="part1Quiz"></div>
+
+    <!-- PHẦN 2: BÀI TẬP TỪ VỰNG & ĐIỀN TỪ -->
+    <h3 style="margin-top: 30px;">PART 2: VOCABULARY & GRAMMAR (Từ Vựng & Ngữ Pháp)</h3>
+    <div id="part2Quiz"></div>
 
     <script>
-        const quizData = [
-            // PART 1: MULTIPLE CHOICE (CÂU 1 - 10)
-            { id: 1, type: "mc", q: "Câu 1 (Phát âm -s/es): Choose the word whose underlined part is pronounced differently.", opts: ["A. books", "B. lamps", "C. hats", "D. bags"], ans: "D", exp: "D đúng vì 'bags' có đuôi -s phát âm là /z/ (do tận cùng bằng phụ âm hữu thanh /ɡ/). Các đáp án A, B, C đều có đuôi -s phát âm là /s/ (tận cùng bằng âm vô thanh /k/, /p/, /t/)." },
-            { id: 2, type: "mc", q: "Câu 2 (Từ vựng): Phong is very _____. He always invents new games and draws beautiful pictures.", opts: ["A. shy", "B. creative", "C. lazy", "D. quiet"], ans: "B", exp: "B (creative - sáng tạo) phù hợp ngữ cảnh 'phát minh trò chơi mới và vẽ tranh đẹp'. Shy = nhút nhát, Lazy = lười biếng, Quiet = yên lặng." },
-            { id: 3, type: "mc", q: "Câu 3 (Động từ kết hợp): Every Tuesday afternoon, Vy _____ judo with her close friends in the club.", opts: ["A. plays", "B. does", "C. studies", "D. has"], correct: "B", ans: "B", exp: "B (does) đúng vì 'do judo' là cụm từ cố định cho môn võ. 'Play' đi với bóng/nhạc cụ, 'study' đi với môn học." },
-            { id: 4, type: "mc", q: "Câu 4 (Ngữ pháp): My younger brother _____ up early to cycle to school every morning.", opts: ["A. get", "B. gets", "C. is getting", "D. getting"], ans: "B", exp: "B (gets) đúng. Dấu hiệu 'every morning' diễn tả thói quen ở Hiện tại đơn. Chủ ngữ số ít 'My younger brother' chia động từ thêm -s." },
-            { id: 5, type: "mc", q: "Câu 5 (Dụng cụ học tập): I need a _____ to draw circles for my Geometry class tomorrow.", opts: ["A. rubber", "B. calculator", "C. compass", "D. pencil sharpener"], ans: "C", exp: "C (compass - com-pa) dùng để vẽ hình tròn (draw circles). Rubber = cục tẩy, Calculator = máy tính, Pencil sharpener = gọt bút chì." },
-            { id: 6, type: "mc", q: "Câu 6 (Trạng từ tần suất): Minh is a hard-working student. He _____ does his homework before going to bed.", opts: ["A. never", "B. rarely", "C. always", "D. seldom"], ans: "C", exp: "C (always - luôn luôn) thể hiện thói quen của một học sinh chăm chỉ (hard-working). Never/rarely/seldom đều mang nghĩa hiếm khi/không bao giờ." },
-            { id: 7, type: "mc", q: "Câu 7 (Loại hình trường): At a _____, students live, eat and study there during the school term.", opts: ["A. international school", "B. boarding school", "C. primary school", "D. secondary school"], ans: "B", exp: "B (boarding school - trường nội trú) là nơi học sinh sinh sống, ăn uống và học tập tại trường." },
-            { id: 8, type: "mc", q: "Câu 8 (Giao tiếp): - 'How is your first day at school, Linh?' - '_____'", opts: ["A. Yes, it is.", "B. It's wonderful, thanks!", "C. I go to school by bus.", "D. She is my new classmate."], ans: "B", exp: "B ('Nó rất tuyệt vời, cảm ơn!') trả lời phù hợp cho câu hỏi cảm nhận về ngày đầu đi học." },
-            { id: 9, type: "mc", q: "Câu 9 (Ngữ pháp To Be): _____ Mai and Hoa in the school library right now?", opts: ["A. Is", "B. Are", "C. Do", "D. Does"], ans: "B", exp: "B (Are) đúng vì chủ ngữ là hai người 'Mai and Hoa' (số nhiều) và 'in the library' là cụm giới từ chỉ nơi chốn đi với To Be." },
-            { id: 10, type: "mc", q: "Câu 10 (Thời khóa biểu): We usually _____ History and Geography on Thursday mornings.", opts: ["A. study", "B. play", "C. do", "D. make"], ans: "A", exp: "A (study) đi kèm tên các môn học (History, Geography)." },
-
-            // PART 2: FILL-IN-THE-BLANK / CHIA ĐỘNG TỪ (CÂU 11 - 20)
-            { id: 11, type: "fill", q: "Câu 11 (Chia động từ): My sister (watch) _____ TV with our family after dinner.", ans: "watches", exp: "Chia 'watches'. Chủ ngữ 'My sister' (số ít) ở hiện tại đơn, động từ tận cùng bằng 'ch' nên thêm '-es'." },
-            { id: 12, type: "fill", q: "Câu 12 (Chia động từ phủ định): They (not have) _____ English lessons on Saturday.", ans: "don't have", exp: "Chia 'don't have' hoặc 'do not have'. Dạng phủ định hiện tại đơn với chủ ngữ số nhiều 'They' dùng trợ động từ 'don't' + V-bare." },
-            { id: 13, type: "fill", q: "Câu 13 (Điền từ): Students wear their school _____ on Mondays and Fridays.", ans: "uniform", exp: "Điền 'uniform' (đồng phục). Cụm từ: wear school uniform (mặc đồng phục trường)." },
-            { id: 14, type: "fill", q: "Câu 14 (Chia động từ): Look! Phong (do) _____ his homework in the classroom.", ans: "is doing", exp: "Chia 'is doing'. Dấu hiệu 'Look!' mở đầu câu mệnh lệnh nhận biết thì Hiện tại tiếp diễn (S + am/is/are + V-ing)." },
-            { id: 15, type: "fill", q: "Câu 15 (Chia dạng từ - Word Formation): Hoa is very _____ (CREATE) and usually makes nice handicrafts.", ans: "creative", exp: "Điền 'creative' (tính từ của động từ create). Sau To Be 'is' và trạng từ 'very' cần một tính từ." },
-            { id: 16, type: "fill", q: "Câu 16 (Điền từ): Do you often play _____ with your friends during break time? (bóng đá)", ans: "football", exp: "Điền 'football' hoặc 'soccer' (môn bóng đá đi với động từ play)." },
-            { id: 17, type: "fill", q: "Câu 17 (Trạng từ vị trí): She is _____ (NEVER) late for her English classes.", ans: "never", exp: "Điền 'never'. Trạng từ chỉ tần suất 'never' đứng SAU động từ To Be 'is'." },
-            { id: 18, type: "fill", q: "Câu 18 (Chia động từ): Mr. Robert (teach) _____ us Physics every Wednesday.", ans: "teaches", exp: "Chia 'teaches'. Chủ ngữ Mr. Robert (ngôi thứ 3 số ít), động từ 'teach' kết thúc bằng 'ch' thêm '-es'." },
-            { id: 19, type: "fill", q: "Câu 19 (Viết lại câu): Lan walks to school every day. ➔ Lan goes to school _____ foot every day.", ans: "on", exp: "Điền giới từ 'on'. Cụm giới từ 'on foot' = walk (đi bộ)." },
-            { id: 20, type: "fill", q: "Câu 20 (Điền từ): Can I borrow your pencil _____ to sharpen my wooden pencil?", ans: "sharpener", exp: "Điền 'sharpener'. Pencil sharpener = cái gọt bút chì." }
+        // Dữ liệu Phần 1: Phát âm có nút nghe riêng từng từ
+        const part1Data = [
+            {
+                id: 1,
+                type: "mc_audio",
+                q: "Câu 1: Choose the word whose underlined part is pronounced differently (-s / -es).",
+                opts: [
+                    { char: "A", text: "A. books", word: "books" },
+                    { char: "B", text: "B. lamps", word: "lamps" },
+                    { char: "C", text: "C. hats", word: "hats" },
+                    { char: "D", text: "D. bags", word: "bags" }
+                ],
+                ans: "D",
+                exp: "Đáp án D (bags) phát âm đuôi -s là /z/. Các từ A, B, C có tận cùng là âm vô thanh (/k/, /p/, /t/) nên phát âm đuôi -s là /s/."
+            },
+            {
+                id: 2,
+                type: "mc_audio",
+                q: "Câu 2: Choose the word whose underlined part is pronounced differently (-es).",
+                opts: [
+                    { char: "A", text: "A. watches", word: "watches" },
+                    { char: "B", text: "B. pencil cases", word: "pencil cases" },
+                    { char: "C", text: "C. boxes", word: "boxes" },
+                    { char: "D", text: "D. pens", word: "pens" }
+                ],
+                ans: "D",
+                exp: "Đáp án D (pens) phát âm đuôi -s là /z/. Các từ A, B, C phát âm đuôi -es là /ɪz/."
+            },
+            {
+                id: 3,
+                type: "mc_audio",
+                q: "Câu 3: Choose the word with a different vowel sound.",
+                opts: [
+                    { char: "A", text: "A. rubber", word: "rubber" },
+                    { char: "B", text: "B. compass", word: "compass" },
+                    { char: "C", text: "C. club", word: "club" },
+                    { char: "D", text: "D. ruler", word: "ruler" }
+                ],
+                ans: "D",
+                exp: "Đáp án D (ruler) phát âm 'u' là /uː/. Các từ A, B, C phát âm là /ʌ/."
+            },
+            {
+                id: 4,
+                type: "mc_audio",
+                q: "Câu 4: Choose the word whose underlined part is pronounced differently.",
+                opts: [
+                    { char: "A", text: "A. class", word: "class" },
+                    { char: "B", text: "B. smart", word: "smart" },
+                    { char: "C", text: "C. father", word: "father" },
+                    { char: "D", text: "D. activity", word: "activity" }
+                ],
+                ans: "D",
+                exp: "Đáp án D (activity) phát âm 'a' là /æ/. Các từ A, B, C phát âm 'a' là /ɑː/."
+            },
+            {
+                id: 5,
+                type: "mc_audio",
+                q: "Câu 5: Choose the word with a different -s / -es pronunciation.",
+                opts: [
+                    { char: "A", text: "A. students", word: "students" },
+                    { char: "B", text: "B. notebooks", word: "notebooks" },
+                    { char: "C", text: "C. cooks", word: "cooks" },
+                    { char: "D", text: "D. rubbers", word: "rubbers" }
+                ],
+                ans: "D",
+                exp: "Đáp án D (rubbers) phát âm đuôi -s là /z/. Các từ A, B, C phát âm đuôi -s là /s/."
+            }
         ];
 
-        function renderQuiz() {
-            const container = document.getElementById('quizList');
-            container.innerHTML = '';
+        // Dữ liệu Phần 2: Từ vựng & Điền từ
+        const part2Data = [
+            {
+                id: 6,
+                type: "mc",
+                q: "Câu 6: Phong is very _____. He always invents new ideas in class.",
+                opts: ["A. shy", "B. creative", "C. lazy", "D. quiet"],
+                ans: "B",
+                exp: "Creative (sáng tạo) phù hợp với việc sáng tạo ý tưởng mới."
+            },
+            {
+                id: 7,
+                type: "mc",
+                q: "Câu 7: Vy and Lan _____ judo in the gym after school.",
+                opts: ["A. play", "B. do", "C. study", "D. have"],
+                ans: "B",
+                exp: "Môn võ judo dùng động từ 'do' (do judo)."
+            },
+            {
+                id: 8,
+                type: "fill",
+                q: "Câu 8 (Điền từ): My sister (watch) _____ TV with our family after dinner.",
+                ans: "watches",
+                exp: "Thì Hiện tại đơn, chủ ngữ số ít 'My sister', động từ tận cùng 'ch' thêm '-es' thành 'watches'."
+            },
+            {
+                id: 9,
+                type: "fill",
+                q: "Câu 9 (Điền từ): I forgot my _____ so I cannot calculate these difficult math problems.",
+                ans: "calculator",
+                exp: "Calculator (máy tính cầm tay) dùng để tính toán bài tập toán."
+            },
+            {
+                id: 10,
+                type: "fill",
+                q: "Câu 10 (Điền từ): Students wear their school _____ on Mondays.",
+                ans: "uniform",
+                exp: "Uniform (đồng phục). Cụm từ: wear school uniform."
+            }
+        ];
 
-            quizData.forEach(item => {
-                let optionsHtml = '';
-                if(item.type === 'mc') {
-                    item.opts.forEach((opt, idx) => {
-                        const val = opt.charAt(0);
-                        optionsHtml += `<label><input type="radio" name="q_${item.id}" value="${val}"> ${opt}</label>`;
-                    });
-                } else {
-                    optionsHtml = `<input type="text" id="input_q_${item.id}" class="input-fill" placeholder="Nhập đáp án của bạn vào đây...">`;
-                }
+        const allQuestions = [...part1Data, ...part2Data];
+
+        // Hàm phát âm từ tiếng Anh qua Web Speech API
+        function speak(text) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const u = new SpeechSynthesisUtterance(text);
+                u.lang = 'en-US';
+                u.rate = 0.85;
+                window.speechSynthesis.speak(u);
+            } else {
+                alert("Trình duyệt của bạn không hỗ trợ phát âm thanh.");
+            }
+        }
+
+        // Render Phần 1 (Có nút nghe kề bên từng phương án)
+        function renderPart1() {
+            const container = document.getElementById('part1Quiz');
+            part1Data.forEach(item => {
+                let optsHtml = '';
+                item.opts.forEach(opt => {
+                    optsHtml += `
+                        <div class="opt-row">
+                            <label class="opt-label">
+                                <input type="radio" name="q_${item.id}" value="${opt.char}"> ${opt.text}
+                            </label>
+                            <button type="button" class="btn-audio" onclick="speak('${opt.word}')">🔊 Nghe</button>
+                        </div>
+                    `;
+                });
 
                 container.innerHTML += `
                     <div class="question-card" id="card_q_${item.id}">
-                        <div class="q-title">${item.q}</div>
-                        <div class="options">${optionsHtml}</div>
+                        <div style="font-weight:bold; color:#1565c0; margin-bottom:8px;">${item.q}</div>
+                        <div>${optsHtml}</div>
                         <button type="button" class="btn-submit-q" onclick="checkQuestion(${item.id})">Nộp câu này</button>
                         <div id="explain_q_${item.id}" class="explanation"></div>
                     </div>
@@ -112,45 +268,76 @@
             });
         }
 
+        // Render Phần 2
+        function renderPart2() {
+            const container = document.getElementById('part2Quiz');
+            part2Data.forEach(item => {
+                let optsHtml = '';
+                if (item.type === 'mc') {
+                    item.opts.forEach(opt => {
+                        const char = opt.charAt(0);
+                        optsHtml += `
+                            <label style="display:block; margin:6px 0; cursor:pointer;">
+                                <input type="radio" name="q_${item.id}" value="${char}"> ${opt}
+                            </label>
+                        `;
+                    });
+                } else {
+                    optsHtml = `<input type="text" id="input_q_${item.id}" class="input-fill" placeholder="Nhập đáp án vào đây...">`;
+                }
+
+                container.innerHTML += `
+                    <div class="question-card" id="card_q_${item.id}">
+                        <div style="font-weight:bold; color:#1565c0; margin-bottom:8px;">${item.q}</div>
+                        <div>${optsHtml}</div>
+                        <button type="button" class="btn-submit-q" onclick="checkQuestion(${item.id})">Nộp câu này</button>
+                        <div id="explain_q_${item.id}" class="explanation"></div>
+                    </div>
+                `;
+            });
+        }
+
+        // Kiểm tra đáp án theo ID
         function checkQuestion(qId) {
-            const item = quizData.find(x => x.id === qId);
+            const item = allQuestions.find(x => x.id === qId);
+            if (!item) return;
+
             const card = document.getElementById(`card_q_${qId}`);
             const explainDiv = document.getElementById(`explain_q_${qId}`);
             explainDiv.style.display = 'block';
 
             let isCorrect = false;
-            let userAns = '';
 
-            if(item.type === 'mc') {
-                const selected = document.querySelector(`input[name="q_${qId}"]:checked`);
-                if(selected) {
-                    userAns = selected.value;
-                    if(userAns === item.ans) isCorrect = true;
+            if (item.type === 'mc' || item.type === 'mc_audio') {
+                const sel = document.querySelector(`input[name="q_${qId}"]:checked`);
+                if (sel && sel.value === item.ans) {
+                    isCorrect = true;
                 }
             } else {
-                const inputVal = document.getElementById(`input_q_${qId}`).value.trim();
-                userAns = inputVal;
-                // Flexible check for case insensitivity and alternate spaces
-                if(inputVal.toLowerCase() === item.ans.toLowerCase()) {
+                const userAns = document.getElementById(`input_q_${qId}`).value.trim();
+                const cleanUser = userAns.toLowerCase().replace(/[.,/#!\$%^&*;:{}=\-_`~()]/g, "").replace(/\s+/g, " ");
+                const cleanCorrect = item.ans.toLowerCase().replace(/[.,/#!$%^&*;:{}=\-_`~()]/g, "").replace(/\s+/g, " ");
+
+                if (cleanUser === cleanCorrect) {
                     isCorrect = true;
                 }
             }
 
-            if(isCorrect) {
+            if (isCorrect) {
                 card.className = "question-card status-correct";
                 explainDiv.className = "explanation correct";
                 explainDiv.innerHTML = `<b>✓ CHÍNH XÁC!</b><br>${item.exp}`;
             } else {
                 card.className = "question-card status-wrong";
                 explainDiv.className = "explanation wrong";
-                explainDiv.innerHTML = `
-                    <b>✗ CHƯA CHÍNH XÁC!</b> (Bạn nhập/chọn: <b>${userAns || 'Chưa trả lời'}</b> | Đáp án chuẩn: <b>${item.ans}</b>)<br>
-                    <b>Phân tích chi tiết:</b> ${item.exp}
-                `;
+                explainDiv.innerHTML = `<b>✗ CHƯA CHÍNH XÁC!</b> (Đáp án chuẩn: <b>${item.ans}</b>)<br><b>Giải thích:</b> ${item.exp}`;
             }
         }
 
-        window.onload = renderQuiz;
+        window.onload = function() {
+            renderPart1();
+            renderPart2();
+        };
     </script>
 </body>
 </html>
