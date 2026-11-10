@@ -1,0 +1,68 @@
+name: Thu tieng ten hoc sinh (SB_NAMEAUDIO)
+
+# Ban GitHub cua bo thu ten hoc sinh: quet hoc sinh con thieu tieng ten
+# trong kho ten duy nhat tren R2 roi thu bo sung (giong Mau 3).
+# Nhịp 10 phut/luot la du (ten khong gap nhu clip bai hoc).
+
+on:
+  schedule:
+    - cron: '*/10 * * * *'
+  workflow_dispatch:
+    inputs:
+      only_name:
+        description: 'Chi thu ten hoc sinh nay (de trong = quet het)'
+        required: false
+        default: ''
+
+concurrency:
+  group: saobay-name-recorder
+  cancel-in-progress: false
+
+jobs:
+  record-names:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Kiem tra secrets R2
+        id: gate
+        env:
+          K1: ${{ secrets.R2_ACCESS_KEY_ID }}
+          K2: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          K3: ${{ secrets.R2_ENDPOINT }}
+        run: |
+          if [ -n "$K1" ] && [ -n "$K2" ] && [ -n "$K3" ]; then
+            echo "ok=1" >> "$GITHUB_OUTPUT"
+          else
+            echo "Chua cai secrets R2 — bo qua luot nay (khong danh dau loi)."
+            echo "ok=0" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: actions/checkout@v4
+        if: steps.gate.outputs.ok == '1'
+
+      - uses: actions/setup-python@v5
+        if: steps.gate.outputs.ok == '1'
+        with:
+          python-version: '3.11'
+          cache: pip
+
+      - name: Cai thu vien va ffmpeg
+        if: steps.gate.outputs.ok == '1'
+        working-directory: audio-worker
+        run: |
+          pip install -r requirements.txt
+          command -v ffmpeg >/dev/null || (sudo apt-get update && sudo apt-get install -y ffmpeg)
+
+      - name: Thu ten con thieu
+        if: steps.gate.outputs.ok == '1'
+        working-directory: audio-worker
+        env:
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          R2_ENDPOINT: ${{ secrets.R2_ENDPOINT }}
+          R2_BUCKET: saobay-data
+          # Khong bat buoc: co secret nay thi quet du hoc sinh tu D1;
+          # khong co thi chi quet theo ban sao users.json tren R2.
+          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+          NAMEAUDIO_ONLY: ${{ inputs.only_name }}
+        run: python name_recorder.py

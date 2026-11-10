@@ -1,0 +1,71 @@
+name: Thu tieng Module 14 (SB_M14AUDIO)
+
+# Bo thu tieng SAOBAY chay tren GitHub Actions:
+# tu doc hang cho tren R2 (data/mod14-drafts/), thu bang Edge TTS
+# (giong Mau 3 Hoai My -20% + cac giong HS phan vai), day MP3 ve R2
+# va lat trang thai ready — dung giao thuc cua ban thu cuc bo
+# tools/mod14_audio_recorder.py nen phia web khong phai sua gi.
+
+on:
+  schedule:
+    - cron: '*/10 * * * *'
+  workflow_dispatch:
+    inputs:
+      only_uid:
+        description: 'Chi thu cho uid nay (de trong = tat ca)'
+        required: false
+        default: ''
+  push:
+    branches: [main]
+    paths:
+      - 'audio-worker/**'
+      - '.github/workflows/record.yml'
+
+concurrency:
+  group: saobay-audio-recorder
+  cancel-in-progress: false
+
+jobs:
+  record:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    defaults:
+      run:
+        working-directory: audio-worker
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Kiem tra ffmpeg
+        run: which ffmpeg ffprobe || (sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg)
+
+      - name: Cai thu vien
+        run: pip install -r requirements.txt
+
+      - name: Kiem tra cau hinh R2
+        id: cfg
+        env:
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          R2_ENDPOINT: ${{ secrets.R2_ENDPOINT }}
+        run: |
+          if [ -n "$R2_ACCESS_KEY_ID" ] && [ -n "$R2_SECRET_ACCESS_KEY" ] && [ -n "$R2_ENDPOINT" ]; then
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+            echo "CHUA CAU HINH secrets R2 (R2_ACCESS_KEY_ID / R2_SECRET_ACCESS_KEY / R2_ENDPOINT) — bo qua luot nay."
+          fi
+
+      - name: Thu tieng
+        if: steps.cfg.outputs.ready == 'true'
+        env:
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          R2_ENDPOINT: ${{ secrets.R2_ENDPOINT }}
+          R2_BUCKET: saobay-data
+          MOD14_ONLY_UID: ${{ inputs.only_uid }}
+        run: python recorder.py
