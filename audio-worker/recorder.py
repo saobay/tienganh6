@@ -1292,6 +1292,18 @@ def main():
             errs.append('%s: %s' % (uid, str(e)[:200]))
     if total:
         log('XONG luot: %d bang da thu' % total)
+    # SB_TTS_20261110: nhanh thu cho cong cu "Chuyen van ban thanh giong
+    # noi" (phieu data/tts-tickets/) chay ngay trong cung luot
+    # record.yml — file workflow rieng tts.yml chua day qua API duoc
+    # (app GitHub thieu quyen Workflows, phai day bang trinh duyet);
+    # khi tts.yml da len thi go nhanh nay. Loi nhanh TTS khong duoc lam
+    # hong luot thu Module 14.
+    try:
+        import tts_recorder
+        tts_recorder.main()
+    except Exception as e:
+        log('TTS LOI: %s' % e)
+        errs.append('tts: %s' % str(e)[:200])
     # Tom tat luot chay -> R2 de kiem tra tu ben ngoai (khong co quyen
     # xem trang Actions cung thay duoc trang thai bo thu).
     try:

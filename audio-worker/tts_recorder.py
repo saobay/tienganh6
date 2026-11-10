@@ -8,7 +8,7 @@ cung luot chay record.yml).
 GIAO THUC HANG CHO:
 - Phieu nam o R2 data/tts-tickets/<id>.json do trang cong cu
   (tools/tts.html) ghi qua POST /api/v2/teacher/upload:
-  {id, uid, name, text, voice: "hoaimy"|"namminh", rate: "-20%".." +20%",
+  {id, uid, name, text, voice: "mau1"|"mau2"|"mau3"|"mau4", rate: "-20%".."+20%",
    status: "pending", audio_key: "data/tts-audio/<id>.mp3",
    created_at, done_at, error, parts, duration_sec}
 - Bo thu quet phieu status == "pending" (cu nhat truoc), nhan phieu bang
@@ -16,10 +16,11 @@ GIAO THUC HANG CHO:
   elearn/edge_tts_raw.py voi DUNG chuoi luat doc cua Lop hoc Co Sao
   (elearn/gen_pack_audio.py: so am doc "am", viet tat, don vi, phan so,
   goc...) — cung mot chuoi spoken_text() nhu recorder.py cua Module 14.
-- Giong: hoaimy -> vi-VN-HoaiMyNeural; namminh -> vi-VN-NamMinhNeural
-  (hai giong dat theo TEN do thay chot 22:26 10/11/2026; khong dung ten
-  "Mau 1/Mau 3" trong cong cu nay). Toc do lay theo phieu, mac dinh 0%,
-  kep trong khoang -20%..+20%.
+- Giong: phieu ghi voice = mau1|mau2|mau3|mau4 (thay chot 22:29
+  10/11/2026): mau1 = Hoai My chuan; mau2 = Nam Minh chuan;
+  mau3 = Hoai My TANG TONE +40Hz; mau4 = Nam Minh TANG TONE +35Hz
+  (ep pitch tai nguon qua TTSConfig nhu co che giong HS phan vai cua
+  recorder.py). Toc do lay theo phieu, mac dinh 0%, kep -20%..+20%.
 - Van ban dai duoc cat theo CAU thanh tung doan <= 700 ky tu, thu tung
   doan roi noi lai thanh MOT file MP3 (chen 0,3s im lang giua cac doan)
   tai dung khoa audio_key cua phieu; xong lat status = "done" kem
@@ -50,11 +51,14 @@ CHUNK = 700              # moi doan thu <= 700 ky tu, cat theo cau
 MAX_TICKETS_PER_RUN = 10
 STALE_RECORDING_SEC = 20 * 60
 
+# voice cua phieu -> (giong Edge TTS, pitch ep tai nguon)
 VOICES = {
-    'hoaimy': 'vi-VN-HoaiMyNeural',
-    'namminh': 'vi-VN-NamMinhNeural',
+    'mau1': ('vi-VN-HoaiMyNeural', '+0Hz'),
+    'mau2': ('vi-VN-NamMinhNeural', '+0Hz'),
+    'mau3': ('vi-VN-HoaiMyNeural', '+40Hz'),
+    'mau4': ('vi-VN-NamMinhNeural', '+35Hz'),
 }
-DEFAULT_VOICE = 'hoaimy'
+DEFAULT_VOICE = 'mau1'
 
 try:
     import requests  # noqa: F401
@@ -77,6 +81,19 @@ except ImportError:
 
 sys.path.insert(0, os.path.join(BASE, 'elearn'))
 import edge_tts_raw  # noqa: E402
+
+# Ep pitch SSML tai nguon (cung co che _KID_FORCED cua recorder.py):
+# edge_tts_raw.synth luon dung pitch +0Hz nen phai boc TTSConfig.
+_FORCED = {'pitch': '+0Hz'}
+try:
+    from edge_tts.data_classes import TTSConfig as _RealCfg
+
+    def _tts_cfg(voice, rate, volume, pitch, boundary):
+        return _RealCfg(voice, rate, volume, _FORCED['pitch'], boundary)
+
+    edge_tts_raw.TTSConfig = _tts_cfg
+except Exception:
+    pass
 
 _spec = importlib.util.spec_from_file_location('gpa', os.path.join(BASE, 'elearn/gen_pack_audio.py'))
 gpa = importlib.util.module_from_spec(_spec)
@@ -282,7 +299,7 @@ def process_ticket(key, tk):
         text = (cut[:m + 1] if m > MAX_TEXT // 2 else cut).strip()
         truncated = True
     voice_name = str(tk.get('voice') or DEFAULT_VOICE).strip().lower()
-    voice = VOICES.get(voice_name, VOICES[DEFAULT_VOICE])
+    voice, pitch = VOICES.get(voice_name, VOICES[DEFAULT_VOICE])
     rate = clamp_rate(tk.get('rate'))
     audio_key = str(tk.get('audio_key') or ('data/tts-audio/' + tid + '.mp3'))
 
@@ -311,6 +328,7 @@ def process_ticket(key, tk):
         fail('Khong cat duoc doan doc')
         return False
     parts = []
+    _FORCED['pitch'] = pitch
     try:
         for i, ch in enumerate(chunks):
             out = '/tmp/tts_%s_%d.mp3' % (tid, i)
@@ -349,6 +367,7 @@ def process_ticket(key, tk):
             % (tid, len(parts), dur, voice_name, rate, audio_key))
         return True
     finally:
+        _FORCED['pitch'] = '+0Hz'
         for p in parts:
             try:
                 os.remove(p)
