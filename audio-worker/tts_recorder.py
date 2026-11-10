@@ -337,10 +337,24 @@ def process_ticket(key, tk):
     try:
         for i, ch in enumerate(chunks):
             out = '/tmp/tts_%s_%d.mp3' % (tid, i)
-            try:
-                n = edge_tts_raw.synth(ch, voice, rate, out)
-            except Exception as e:
-                fail('Thu loi doan %d: %s' % (i + 1, str(e)[:150]))
+            # SB_TTS_KEYFIX_20261110: edge-tts hay dut "socket closed" giua
+            # chung — thu lai toi 4 lan/co doan nhu bo thu cuc bo, tranh
+            # lat ca phieu thanh error chi vi mot lan dut mang.
+            n = None
+            last_err = None
+            for attempt in range(4):
+                try:
+                    n = edge_tts_raw.synth(ch, voice, rate, out)
+                    if n and mp3_ok(out):
+                        break
+                    last_err = Exception('ra file khong hop le')
+                except Exception as e:
+                    last_err = e
+                n = None
+                if attempt < 3:
+                    time.sleep(3 * (attempt + 1))
+            if not n:
+                fail('Thu loi doan %d: %s' % (i + 1, str(last_err)[:150]))
                 return False
             if not n or not mp3_ok(out):
                 fail('Doan %d khong ra tieng hop le' % (i + 1))
