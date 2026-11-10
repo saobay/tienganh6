@@ -1293,7 +1293,8 @@ def main():
     if total:
         log('XONG luot: %d bang da thu' % total)
     # SB_TTS_20261110: nhanh thu cho cong cu "Chuyen van ban thanh giong
-    # noi" (phieu data/tts-tickets/) chay ngay trong cung luot
+    # noi" (phieu data/giang-day/<uid>/tts-tickets/ — SB_TTS_KEYFIX_20261110)
+    # chay ngay trong cung luot
     # record.yml — file workflow rieng tts.yml chua day qua API duoc
     # (app GitHub thieu quyen Workflows, phai day bang trinh duyet);
     # khi tts.yml da len thi go nhanh nay. Loi nhanh TTS khong duoc lam

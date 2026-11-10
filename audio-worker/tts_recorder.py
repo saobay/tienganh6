@@ -6,8 +6,12 @@ rieng chua co thi recorder.py goi truc tiep main() cua module nay trong
 cung luot chay record.yml).
 
 GIAO THUC HANG CHO:
-- Phieu nam o R2 data/tts-tickets/<id>.json do trang cong cu
-  (tools/tts.html) ghi qua POST /api/v2/teacher/upload:
+- Phieu nam o R2 data/giang-day/<uid>/tts-tickets/<id>.json do trang
+  cong cu (tools/tts.html) ghi qua POST /api/v2/teacher/upload
+  (SB_TTS_KEYFIX_20261110: www chi cho GV ghi .json vao thu muc
+  giang-day cua chinh minh; bo thu quet LIST data/giang-day/ roi loc
+  khoa chua '/tts-tickets/', cap nhat trang thai NGUOC LAI dung khoa
+  phieu do):
   {id, uid, name, text, voice: "mau1"|"mau2"|"mau3"|"mau4", rate: "-20%".."+20%",
    status: "pending", audio_key: "data/tts-audio/<id>.mp3",
    created_at, done_at, error, parts, duration_sec}
@@ -27,9 +31,9 @@ GIAO THUC HANG CHO:
   done_at + duration_sec. Loi thi lat status = "error" kem thong diep
   ngan. Phieu "recording" treo qua 20 phut bi danh dau error de nguoi
   dung gui lai.
-- Hang cho tach rieng data/tts-tickets/ nen bo thu CUC BO
-  (tools/mod14_audio_recorder.py, chi doc data/mod14-drafts/) khong bao
-  gio cham vao phieu cua cong cu nay.
+- Hang cho nam duoi data/giang-day/<uid>/tts-tickets/ cua tung GV nen
+  bo thu CUC BO (tools/mod14_audio_recorder.py, chi doc
+  data/mod14-drafts/) khong bao gio cham vao phieu cua cong cu nay.
 """
 import html as htmlmod
 import importlib.util
@@ -45,7 +49,8 @@ import edge_tts  # noqa: F401 — requirements.txt cai san
 BASE = os.path.dirname(os.path.abspath(__file__))
 LOGF = os.environ.get('TTS_RECORDER_LOG') or os.path.join(BASE, 'tts_recorder.log')
 
-TICKET_PREFIX = 'data/tts-tickets/'
+SCAN_PREFIX = 'data/giang-day/'   # loc tiep khoa chua '/tts-tickets/'
+TICKET_MARK = '/tts-tickets/'
 MAX_TEXT = 1500          # gioi han ky tu moi phieu (trang cong cu cung ep muc nay)
 CHUNK = 700              # moi doan thu <= 700 ky tu, cat theo cau
 MAX_TICKETS_PER_RUN = 10
@@ -379,9 +384,16 @@ def process_ticket(key, tk):
             pass
 
 
+def ticket_keys():
+    """Kham pha phieu TTS: LIST data/giang-day/, loc khoa chua
+    '/tts-tickets/' va ket thuc .json (SB_TTS_KEYFIX_20261110)."""
+    return [k for k in r2_list(SCAN_PREFIX)
+            if TICKET_MARK in k and k.endswith('.json')]
+
+
 def main():
     only = (os.environ.get('TTS_ONLY_ID') or '').strip()
-    keys = [k for k in r2_list(TICKET_PREFIX) if k.endswith('.json')]
+    keys = ticket_keys()
     tickets = []
     now = time.time()
     for k in keys:
